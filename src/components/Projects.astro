@@ -1,0 +1,18 @@
+---
+import ProjectSection from "./ProjectSection.astro";
+import { projects } from "../data/shaka";
+---
+
+<div id="projects">
+  <div class="wrap">
+    <div class="section-head reveal" style="padding-top: 96px">
+      <span class="eyebrow">The projects</span>
+      <h2>Each layer, up close.</h2>
+      <p>
+        Open source, production-tested, and maintained by the ShakaCode team.
+        Use one, use all four.
+      </p>
+    </div>
+  </div>
+  {projects.map((p, i) => <ProjectSection project={p} index={i} />)}
+</div>

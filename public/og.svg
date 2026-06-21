@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="dusk" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1d2138"/>
+      <stop offset="0.42" stop-color="#3a2a55"/>
+      <stop offset="0.8" stop-color="#9b4a4a"/>
+      <stop offset="1.12" stop-color="#d99a4f"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.88" cy="0.1" r="0.5">
+      <stop offset="0" stop-color="#f4c878" stop-opacity="0.85"/>
+      <stop offset="0.5" stop-color="#e08a4a" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#e08a4a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b3b8c"/>
+      <stop offset="1" stop-color="#e89a4f"/>
+    </linearGradient>
+    <linearGradient id="fast" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f4d79a"/>
+      <stop offset="1" stop-color="#f0a86a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#dusk)"/>
+  <rect width="1200" height="630" fill="url(#sun)"/>
+
+  <g transform="translate(96 110)">
+    <rect width="66" height="66" rx="18" fill="url(#mark)"/>
+    <text x="33" y="35" font-size="36" text-anchor="middle" dominant-baseline="central">🤙</text>
+    <text x="86" y="44" font-family="'Bricolage Grotesque', system-ui, sans-serif" font-size="40" font-weight="800" letter-spacing="-1.5" fill="#ffffff">ShakaStack</text>
+  </g>
+
+  <text x="96" y="300" font-family="'Bricolage Grotesque', system-ui, sans-serif" font-size="78" font-weight="800" letter-spacing="-3" fill="#ffffff">Ship modern React in Rails —</text>
+  <text x="96" y="392" font-family="'Bricolage Grotesque', system-ui, sans-serif" font-size="78" font-weight="800" letter-spacing="-3"><tspan fill="url(#fast)">fast</tspan><tspan fill="#ffffff">, and prove it.</tspan></text>
+
+  <text x="96" y="470" font-family="system-ui, sans-serif" font-size="30" fill="#f1e9dd" opacity="0.88">Four open-source projects from ShakaCode for Rails + React apps.</text>
+
+  <text x="96" y="556" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="26" letter-spacing="2" fill="#f4d79a" opacity="0.92">build → bundle → deploy → prove</text>
+</svg>

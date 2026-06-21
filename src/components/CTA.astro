@@ -1,0 +1,27 @@
+---
+import Icon from "./Icon.astro";
+import { BOOK_A_CALL, SHAKACODE_URL } from "../data/shaka";
+---
+
+<section class="cta">
+  <div class="hero-grain"></div>
+  <div class="wrap cta-inner">
+    <span class="eyebrow hero-eyebrow" style="justify-content: center; display: inline-flex">
+      Built by ShakaCode
+    </span>
+    <h2 style="margin-top: 18px">Talk to the maintainers.</h2>
+    <p>
+      ShakaCode builds and maintains every project in the stack — and helps
+      teams ship with SSR, RSC, bundling, deploys, and performance. Book a free
+      30-minute call.
+    </p>
+    <div class="cta-actions">
+      <a class="btn btn-white" href={BOOK_A_CALL} target="_blank" rel="noreferrer">
+        Book a free call <Icon name="arrow" />
+      </a>
+      <a class="btn btn-light" href={SHAKACODE_URL} target="_blank" rel="noreferrer">
+        Learn about ShakaCode
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+---
+import Icon from "./Icon.astro";
+import HeroStackCard from "./islands/HeroStackCard.tsx";
+import { projects, BOOK_A_CALL } from "../data/shaka";
+---
+
+<header class="hero" id="top">
+  <div class="hero-sun"></div>
+  <div class="hero-grain"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow hero-eyebrow">ShakaCode open source</span>
+      <h1>Ship modern React in Rails — <span class="grad">fast</span>, and prove it.</h1>
+      <p class="hero-sub">
+        ShakaStack is four open-source projects from ShakaCode that take your
+        Rails&nbsp;+&nbsp;React app from idea to proven-fast in production —
+        build, deploy, and prove — without the frontend chaos.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-white" href="#stack">
+          Explore the stack <Icon name="arrow" />
+        </a>
+        <a class="btn btn-light" href={BOOK_A_CALL} target="_blank" rel="noreferrer">
+          Book a free call
+        </a>
+      </div>
+      <div class="hero-meta">
+        <div class="stat"><b>4</b><span>open-source projects</span></div>
+        <div class="stat"><b>2013</b><span>shipping React in Rails since</span></div>
+        <div class="stat"><b>RSC</b><span>React 19 &amp; Server Components</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <HeroStackCard client:visible projects={projects} />
+    </div>
+  </div>
+  <svg class="hero-waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path
+      d="M0 64 C 240 110 480 18 720 52 C 960 86 1200 24 1440 60 L1440 120 L0 120 Z"
+      fill="oklch(0.985 0.008 85)"
+      opacity="0.55"></path>
+    <path
+      d="M0 86 C 240 50 520 116 760 84 C 1010 52 1230 104 1440 78 L1440 120 L0 120 Z"
+      fill="oklch(0.985 0.008 85)"></path>
+  </svg>
+</header>

@@ -1,0 +1,32 @@
+---
+import { problems } from "../data/shaka";
+---
+
+<section class="section problem-sec" id="problem">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The problem</span>
+      <h2>Modern React on Rails is harder than it should be.</h2>
+      <p>
+        You picked Rails because it’s productive and joyful. Then the frontend
+        got complicated — and somewhere along the way your app got slow, your
+        config got fragile, and your bills went up.
+      </p>
+    </div>
+    <div class="problem-grid reveal">
+      {
+        problems.map(([title, desc], i) => (
+          <div class="problem-card">
+            <span class="pc-n">0{i + 1}</span>
+            <h3>{title}</h3>
+            <p>{desc}</p>
+          </div>
+        ))
+      }
+    </div>
+    <p class="problem-philosophy reveal">
+      You shouldn’t have to choose between the joy of Rails and a fast, modern
+      React frontend.
+    </p>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/islands/Nav.tsx";
+import Hero from "../components/Hero.astro";
+import Problem from "../components/Problem.astro";
+import Guide from "../components/Guide.astro";
+import Stack from "../components/Stack.astro";
+import Projects from "../components/Projects.astro";
+import Examples from "../components/Examples.astro";
+import Stakes from "../components/Stakes.astro";
+import Proof from "../components/Proof.astro";
+import CTA from "../components/CTA.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout>
+  <Nav client:load />
+  <Hero />
+  <Problem />
+  <Guide />
+  <Stack />
+  <Projects />
+  <Examples />
+  <Stakes />
+  <Proof />
+  <CTA />
+  <Footer />
+</Layout>

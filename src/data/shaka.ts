@@ -1,0 +1,271 @@
+/**
+ * ShakaStack content model.
+ *
+ * NOTE: ShakaPerf copy is provisional — verify against shakaperf.com.
+ * Ported from the design prototype's `window.SHAKA` object into typed constants.
+ */
+
+export type ProjectId = "ror" | "shakapacker" | "cpflow" | "shakaperf";
+export type IconName =
+  | "build"
+  | "bundle"
+  | "deploy"
+  | "prove"
+  | "arrow"
+  | "arrowUR"
+  | "check"
+  | "play"
+  | "spark"
+  | "layers"
+  | "surf";
+
+/** [title, description] */
+export type Benefit = [title: string, description: string];
+/** [label, href] */
+export type ProjectLink = [label: string, href: string];
+
+export interface Project {
+  id: ProjectId;
+  stage: string;
+  phase: "Build" | "Deploy" | "Prove";
+  name: string;
+  domain: string;
+  url: string;
+  accent: ProjectId;
+  icon: IconName;
+  tagline: string;
+  blurb: string;
+  benefits: Benefit[];
+  install: string;
+  altInstall?: string;
+  links: ProjectLink[];
+}
+
+export interface Example {
+  name: string;
+  tag: string;
+  projects: ProjectId[];
+  blurb: string;
+  stack: string[];
+  live: string | null;
+  source: string;
+}
+
+export interface Stakes {
+  without: string[];
+  withStack: string[];
+}
+
+export interface ShakaContent {
+  projects: Project[];
+  examples: Example[];
+  problems: Benefit[];
+  guideStats: Benefit[];
+  stakes: Stakes;
+  logos: string[];
+}
+
+/** Primary CTA — HubSpot scheduling link, used across the page. */
+export const BOOK_A_CALL =
+  "https://meetings.hubspot.com/justingordon/30-minute-consultation";
+export const SHAKACODE_URL = "https://www.shakacode.com";
+export const SHAKACODE_CONTACT = "https://www.shakacode.com/contact/";
+export const GITHUB_ORG = "https://github.com/shakacode";
+export const GITHUB_SPONSOR = "https://github.com/sponsors/shakacode";
+export const ALL_DEMOS = "https://www.reactonrails.com/examples";
+
+export const projects: Project[] = [
+  {
+    id: "ror",
+    stage: "Build",
+    phase: "Build",
+    name: "React on Rails",
+    domain: "reactonrails.com",
+    url: "https://www.reactonrails.com",
+    accent: "ror",
+    icon: "build",
+    tagline: "Render React inside Rails — SSR, hydration, and RSC.",
+    blurb:
+      "Mount React components straight from Rails views and controllers. Server-side rendering, hydration, streaming, and React Server Components — without splitting your product into a separate frontend app.",
+    benefits: [
+      ["Rails-first React", "Render components from views & controllers. Keep Rails routes, conventions, and your team."],
+      ["Production SSR", "Server rendering, hydration, and streaming paths built for mature Rails deployments."],
+      ["OSS → Pro path", "Start free. Add Pro for RSC, higher SSR throughput, and guided support when you need it."],
+    ],
+    install: "bundle exec rails generate react_on_rails:install",
+    altInstall: "npx create-react-on-rails-app@latest my-app",
+    links: [
+      ["Website", "https://www.reactonrails.com"],
+      ["Docs", "https://www.reactonrails.com/docs/"],
+      ["GitHub", "https://github.com/shakacode/react_on_rails"],
+    ],
+  },
+  {
+    id: "shakapacker",
+    stage: "Bundle",
+    phase: "Build",
+    name: "Shakapacker",
+    domain: "shakapacker.com",
+    url: "https://www.shakapacker.com",
+    accent: "shakapacker",
+    icon: "bundle",
+    tagline: "Webpack, the Rails way. The maintained successor to Webpacker.",
+    blurb:
+      "Use webpack to bundle JavaScript and CSS with Rails conventions intact. Shakapacker picks up where rails/webpacker left off — actively maintained, modern defaults, and a smooth upgrade path.",
+    benefits: [
+      ["Rails-native bundling", "Asset compilation that follows Rails conventions — manifests, fingerprinting, and the asset pipeline."],
+      ["Modern webpack", "Up-to-date webpack with sensible defaults so you configure less and ship more."],
+      ["Easy migration", "A clear, supported path off the deprecated rails/webpacker."],
+    ],
+    install: "bundle add shakapacker --strict",
+    altInstall: "bin/rails shakapacker:install",
+    links: [
+      ["Website", "https://www.shakapacker.com"],
+      ["GitHub", "https://github.com/shakacode/shakapacker"],
+    ],
+  },
+  {
+    id: "cpflow",
+    stage: "Deploy",
+    phase: "Deploy",
+    name: "Control Plane Flow",
+    domain: "controlplaneflow.com",
+    url: "https://www.controlplaneflow.com",
+    accent: "cpflow",
+    icon: "deploy",
+    tagline: "A Heroku-style workflow on Control Plane infrastructure.",
+    blurb:
+      "cpflow brings a Heroku-like developer experience — review apps, one-off tasks, releases, and scaling — to Control Plane. Migrate off Heroku without throwing away the workflow your team already knows.",
+    benefits: [
+      ["Heroku-like commands", "Familiar deploy, run, and scale commands plus review apps for every pull request."],
+      ["Control Plane power", "Run on flexible, cost-efficient infrastructure with room to scale well past Heroku."],
+      ["Migrate, don't rewrite", "Keep your release flow. Move the runtime underneath it with minimal disruption."],
+    ],
+    install: "gem install cpflow",
+    altInstall: "cpflow setup-app -a my-app",
+    links: [
+      ["Website", "https://www.controlplaneflow.com"],
+      ["Docs", "https://www.shakacode.com/control-plane-flow/docs/"],
+      ["GitHub", "https://github.com/shakacode/control-plane-flow"],
+    ],
+  },
+  {
+    id: "shakaperf",
+    stage: "Prove",
+    phase: "Prove",
+    name: "ShakaPerf",
+    domain: "shakaperf.com",
+    url: "https://www.shakaperf.com",
+    accent: "shakaperf",
+    icon: "prove",
+    tagline: "ShakaCode’s own framework for proving performance — rigorously.",
+    blurb:
+      "Containerize your app, run control-vs-experiment A/B tests, and let ShakaPerf prove which changes actually make pages faster — across desktop and mobile, with regressions caught automatically.",
+    benefits: [
+      ["Rigorous A/B testing", "Real control-vs-experiment perf testing across screen types — not flaky one-off Lighthouse runs."],
+      ["Automatic regression detection", "Catches performance regressions and visual changes on your main branch before users do."],
+      ["Stack agnostic", "Works with any web stack, with accessibility and SEO checks built in."],
+    ],
+    install: "# Bring rigorous perf testing to your app",
+    altInstall: "# Get started at shakaperf.com",
+    links: [
+      ["Website", "https://www.shakaperf.com"],
+      ["GitHub", "https://github.com/shakacode/shakaperf"],
+    ],
+  },
+];
+
+export const examples: Example[] = [
+  {
+    name: "Marketplace",
+    tag: "Flagship",
+    projects: ["ror"],
+    blurb: "A marketplace performance demo for React on Rails Pro, React 19, and React Server Components.",
+    stack: ["React on Rails Pro", "React 19", "RSC"],
+    live: "https://rsc.reactonrails.com",
+    source: "https://github.com/shakacode/react-on-rails-demo-marketplace-rsc",
+  },
+  {
+    name: "Hacker News",
+    tag: "Flagship",
+    projects: ["ror"],
+    blurb: "A Hacker News reader built on React on Rails Pro with React 19 and React Server Components.",
+    stack: ["React on Rails Pro", "React 19", "RSC"],
+    live: "https://hn.reactonrails.com",
+    source: "https://github.com/shakacode/react-on-rails-demo-hacker-news-rsc",
+  },
+  {
+    name: "Gumroad",
+    tag: "Flagship",
+    projects: ["ror"],
+    blurb: "A Gumroad-style creator dashboard comparing Inertia and React on Rails Pro with React 19 and RSC.",
+    stack: ["React on Rails Pro", "Inertia", "RSC"],
+    live: null,
+    source: "https://github.com/shakacode/react-on-rails-demo-gumroad-rsc",
+  },
+  {
+    name: "TanStack Starter",
+    tag: "Starter",
+    projects: ["ror", "shakapacker"],
+    blurb: "A minimal React on Rails + TanStack starter template to build your next app from.",
+    stack: ["React on Rails", "TanStack", "Starter"],
+    live: "https://starter.reactonrails.com",
+    source: "https://github.com/shakacode/react-on-rails-starter-tanstack",
+  },
+  {
+    name: "Legacy Tutorial App",
+    tag: "Production",
+    projects: ["ror", "shakapacker"],
+    blurb: "The original full-app React on Rails tutorial demo — running in production for years on Shakapacker.",
+    stack: ["React on Rails", "Shakapacker", "SSR"],
+    live: "https://www.reactrails.com",
+    source: "https://github.com/shakacode/react-webpack-rails-tutorial",
+  },
+];
+
+export const problems: Benefit[] = [
+  ["Bolting React onto Rails", "Webpacker’s deprecated, SSR is fiddly, and React 19 / RSC feel out of reach. You’re duct-taping a frontend instead of shipping features."],
+  ["Pages that lost their speed", "Slow LCP and hydration drag down SEO and conversions — and you’ve no rigorous way to measure it or prove a fix actually worked."],
+  ["The infra & config tax", "Heroku bills climb, build configs rot, and every upgrade is a gamble. The stack fights you instead of working for you."],
+];
+
+export const guideStats: Benefit[] = [
+  ["2013", "Shipping React in Rails since"],
+  ["Only", "Rails framework with React Server Components"],
+  ["80–90%", "Faster pages for clients like HVMN & Popmenu"],
+  ["Paia, HI", "Open-source maintainers — not a faceless vendor"],
+];
+
+export const stakes: Stakes = {
+  without: [
+    "A frontend you dread touching",
+    "Guessing whether a change made things faster",
+    "Rising infra bills and brittle build config",
+    "Quietly falling behind on React (RSC, React 19)",
+  ],
+  withStack: [
+    "Modern React, rendered the Rails way",
+    "Performance you can prove, run after run",
+    "Lower infra cost with a Heroku-style flow",
+    "A stack the maintainers stand behind",
+  ],
+};
+
+export const logos: string[] = [
+  "Popmenu", "HVMN", "Printivity", "Simply Business", "User Interviews",
+  "Jewlr", "AirRobe", "SkyVerge", "Datacenters.com", "The Information",
+];
+
+export const shaka: ShakaContent = {
+  projects,
+  examples,
+  problems,
+  guideStats,
+  stakes,
+  logos,
+};
+
+/** Helper: phase · stage label (collapses when identical), used in badges. */
+export function phaseStage(p: Pick<Project, "phase" | "stage">): string {
+  return p.phase === p.stage ? p.phase : `${p.phase} · ${p.stage}`;
+}

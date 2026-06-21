@@ -1,0 +1,25 @@
+---
+import StackExplorer from "./islands/StackExplorer.tsx";
+import { projects } from "../data/shaka";
+---
+
+<section
+  class="section"
+  id="stack"
+  style="background: var(--sand-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line)"
+>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The plan</span>
+      <h2>Build → deploy → prove.</h2>
+      <p>
+        Three phases, four open-source projects — because bundling is part of
+        building. Tap a layer to see how it moves your app forward.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <StackExplorer client:visible projects={projects} />
+    </div>
+  </div>
+</section>

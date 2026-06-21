@@ -1,0 +1,37 @@
+---
+import Icon from "./Icon.astro";
+import { guideStats, BOOK_A_CALL, SHAKACODE_URL } from "../data/shaka";
+---
+
+<section class="section guide-sec" id="guide">
+  <div class="wrap guide-grid">
+    <div class="guide-copy reveal">
+      <span class="eyebrow" style="color: oklch(0.85 0.04 300)">Your guide</span>
+      <h2>We’ve shipped React in Rails since 2013.</h2>
+      <p>
+        ShakaCode has been a performance-obsessed consultancy since 2011 — and
+        we felt every one of these pains first-hand. So we built, open-sourced,
+        and still maintain the tools that fix them, from our home base in Paia,
+        Hawai‘i. We make slow web apps fast.
+      </p>
+      <div class="guide-actions">
+        <a class="btn btn-white" href={BOOK_A_CALL} target="_blank" rel="noreferrer">
+          Book a free call <Icon name="arrow" />
+        </a>
+        <a class="link-arrow" style="color: #fff" href={SHAKACODE_URL} target="_blank" rel="noreferrer">
+          About ShakaCode <Icon name="arrowUR" />
+        </a>
+      </div>
+    </div>
+    <div class="guide-stats reveal">
+      {
+        guideStats.map(([big, label]) => (
+          <div class="gstat">
+            <b>{big}</b>
+            <span>{label}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
