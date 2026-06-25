@@ -8,17 +8,17 @@
   --sand:        oklch(0.985 0.008 85);
   --sand-2:      oklch(0.965 0.012 80);
   --sand-3:      oklch(0.935 0.014 78);
-  --ink:         oklch(0.24 0.035 250);
-  --ink-2:       oklch(0.40 0.03 250);
-  --ink-3:       oklch(0.56 0.022 250);
+  --ink:         oklch(0.23 0.016 235);  /* near-black slate — matches shakacode.com #181e1f */
+  --ink-2:       oklch(0.40 0.02 240);
+  --ink-3:       oklch(0.56 0.016 240);
   --line:        oklch(0.90 0.014 80);
   --line-2:      oklch(0.84 0.018 78);
 
-  /* dusk hero gradient stops */
-  --dusk-1: oklch(0.22 0.055 262);
-  --dusk-2: oklch(0.30 0.085 310);
-  --dusk-3: oklch(0.46 0.125 18);
-  --dusk-4: oklch(0.66 0.135 52);
+  /* dusk hero gradient stops — slate -> ShakaCode red -> warm coral (no violet) */
+  --dusk-1: oklch(0.21 0.022 245);
+  --dusk-2: oklch(0.29 0.075 22);
+  --dusk-3: oklch(0.52 0.205 27);
+  --dusk-4: oklch(0.71 0.150 50);
 
   /* per-project accents — shared chroma/lightness, varied hue */
   --ror:         oklch(0.64 0.135 232);
@@ -30,9 +30,9 @@
   --shakaperf:   oklch(0.63 0.155 18);
   --shakaperf-deep: oklch(0.50 0.15 18);
 
-  --accent:      oklch(0.52 0.16 300);  /* shaka violet — matches shakacode.com #663399 */
-  --accent-deep: oklch(0.43 0.17 305);
-  --warm:        oklch(0.63 0.155 38);   /* sunset coral */
+  --accent:      oklch(0.585 0.213 28);  /* ShakaCode red — matches shakacode.com #ee2b16 */
+  --accent-deep: oklch(0.50 0.20 27);
+  --warm:        oklch(0.66 0.16 45);     /* warm coral/orange secondary */
 
   --maxw: 1200px;
   --r:   18px;
@@ -42,8 +42,9 @@
   --shadow:    0 4px 14px oklch(0.4 0.04 250 / 0.08), 0 18px 50px oklch(0.4 0.04 250 / 0.10);
   --shadow-lg: 0 10px 30px oklch(0.3 0.06 250 / 0.14), 0 40px 90px oklch(0.3 0.06 250 / 0.16);
 
-  --ff-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --ff-body:    "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  /* ShakaCode brand fonts (shakacode.com): Montserrat display + Open Sans body. */
+  --ff-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --ff-body:    "Open Sans", ui-sans-serif, system-ui, sans-serif;
   --ff-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
@@ -59,7 +60,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-h1, h2, h3, h4 { font-family: var(--ff-display); font-weight: 700; line-height: 1.04; letter-spacing: -0.02em; margin: 0; }
+h1, h2, h3, h4 { font-family: var(--ff-display); font-weight: 800; line-height: 1.06; letter-spacing: -0.02em; margin: 0; }
 p { margin: 0; }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
@@ -91,8 +92,8 @@ img { max-width: 100%; display: block; }
 .btn svg { width: 17px; height: 17px; }
 .btn-primary { background: var(--ink); color: var(--sand); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-.btn-accent { background: var(--accent); color: oklch(0.99 0.01 300); }
-.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 10px 26px oklch(0.52 0.16 300 / 0.4); }
+.btn-accent { background: var(--accent); color: oklch(0.99 0.01 40); }
+.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 10px 26px oklch(0.585 0.213 28 / 0.4); }
 .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
 .btn-ghost:hover { background: var(--sand-2); border-color: var(--ink-3); transform: translateY(-2px); }
 .btn-light { background: oklch(1 0 0 / 0.12); color: #fff; border-color: oklch(1 0 0 / 0.25); backdrop-filter: blur(6px); }
@@ -427,11 +428,11 @@ img { max-width: 100%; display: block; }
   color: #fff; position: relative; overflow: hidden;
   background:
     radial-gradient(90% 120% at 90% 10%, color-mix(in oklch, var(--accent) 45%, transparent) 0%, transparent 55%),
-    linear-gradient(155deg, var(--dusk-1), oklch(0.24 0.06 290) 70%, var(--dusk-2));
+    linear-gradient(155deg, var(--dusk-1), oklch(0.27 0.10 24) 70%, var(--dusk-2));
 }
 .guide-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
 .guide-copy h2 { font-size: clamp(30px, 3.8vw, 46px); margin: 16px 0 0; }
-.guide-copy > p { color: oklch(0.95 0.02 300 / 0.82); font-size: 18px; margin-top: 20px; max-width: 520px; text-wrap: pretty; }
+.guide-copy > p { color: oklch(0.95 0.015 60 / 0.82); font-size: 18px; margin-top: 20px; max-width: 520px; text-wrap: pretty; }
 .guide-actions { display: flex; align-items: center; gap: 22px; margin-top: 34px; flex-wrap: wrap; }
 .guide-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .gstat {
@@ -439,8 +440,8 @@ img { max-width: 100%; display: block; }
   padding: 26px 24px; backdrop-filter: blur(4px);
 }
 .gstat b { font-family: var(--ff-display); font-weight: 700; font-size: clamp(28px, 3.4vw, 38px); display: block; letter-spacing: -0.02em;
-  background: linear-gradient(100deg, #fff, oklch(0.86 0.07 300)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.gstat span { display: block; margin-top: 8px; font-size: 14px; color: oklch(0.95 0.02 300 / 0.7); line-height: 1.4; text-wrap: pretty; }
+  background: linear-gradient(100deg, #fff, oklch(0.88 0.09 48)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.gstat span { display: block; margin-top: 8px; font-size: 14px; color: oklch(0.95 0.015 60 / 0.7); line-height: 1.4; text-wrap: pretty; }
 
 /* ============================================================
    STAKES — without vs with
