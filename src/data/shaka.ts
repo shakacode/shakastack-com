@@ -121,6 +121,7 @@ export const projects: Project[] = [
     altInstall: "bin/rails shakapacker:install",
     links: [
       ["Website", "https://www.shakapacker.com"],
+      ["Docs", "https://www.shakapacker.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakapacker"],
     ],
   },
@@ -170,6 +171,7 @@ export const projects: Project[] = [
     altInstall: "# Get started at shakaperf.com",
     links: [
       ["Website", "https://www.shakaperf.com"],
+      ["Docs", "https://www.shakaperf.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakaperf"],
     ],
   },
