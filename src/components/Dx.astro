@@ -1,0 +1,68 @@
+---
+import Icon from "./Icon.astro";
+import {
+  onRamps,
+  agentCapable,
+  railsGoodness,
+  STARTER_AGENTS_MD,
+  AI_CONSULTING,
+} from "../data/shaka";
+---
+
+<section class="section dx" id="dx">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Developer experience</span>
+      <h2>Mix the best of Rails and React. Stay flexible.</h2>
+      <p>
+        ShakaStack blends the developer experiences teams love — Rails'
+        conventions and productivity with modern React 19, RSC, and TanStack.
+        It's also the most agent-capable way to build, so whether a human or an
+        AI agent writes the code, it lands on a foundation that keeps it fast
+        and maintainable.
+      </p>
+    </div>
+
+    <div class="onramps reveal">
+      {
+        onRamps.map((o) => (
+          <div class={`onramp onramp-${o.kind}`}>
+            <span class="onramp-ic"><Icon name={o.icon} /></span>
+            <span class="onramp-eyebrow">{o.eyebrow}</span>
+            <h3>{o.title}</h3>
+            <p>{o.body}</p>
+            <ul>
+              {o.points.map((pt) => (
+                <li><Icon name="check" />{pt}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="agent reveal">
+      <div class="agent-copy">
+        <span class="agent-badge">{agentCapable.badge}</span>
+        <h3>{agentCapable.title}</h3>
+        <p>{agentCapable.body}</p>
+        <p class="agent-proof">{agentCapable.proof}</p>
+        <div class="agent-actions">
+          <a class="link-arrow" href={STARTER_AGENTS_MD} target="_blank" rel="noreferrer">
+            See the starter's AGENTS.md <Icon name="arrowUR" />
+          </a>
+          <a class="link-arrow" href={AI_CONSULTING} target="_blank" rel="noreferrer">
+            AI consulting <Icon name="arrowUR" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="rails-goodness reveal">
+      <span class="rg-label">…and all the great things about Rails</span>
+      <div class="rg-chips">
+        {railsGoodness.map((g) => <span>{g}</span>)}
+      </div>
+    </div>
+  </div>
+</section>
