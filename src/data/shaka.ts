@@ -121,6 +121,7 @@ export const projects: Project[] = [
     altInstall: "bin/rails shakapacker:install",
     links: [
       ["Website", "https://www.shakapacker.com"],
+      ["Docs", "https://www.shakapacker.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakapacker"],
     ],
   },
@@ -170,6 +171,7 @@ export const projects: Project[] = [
     altInstall: "# Get started at shakaperf.com",
     links: [
       ["Website", "https://www.shakaperf.com"],
+      ["Docs", "https://www.shakaperf.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakaperf"],
     ],
   },
@@ -200,7 +202,7 @@ export const examples: Example[] = [
     projects: ["ror"],
     blurb: "A Gumroad-style creator dashboard comparing Inertia and React on Rails Pro with React 19 and RSC.",
     stack: ["React on Rails Pro", "Inertia", "RSC"],
-    live: null,
+    live: "https://gumroad.reactonrails.com/public_product/rsc_demo",
     source: "https://github.com/shakacode/react-on-rails-demo-gumroad-rsc",
   },
   {
