@@ -374,3 +374,69 @@ export const faq: Faq[] = [
     a: "No. Add TanStack Query against your Rails JSON API and stop there if you like. Router and Table are there when you want type-safe routing and URL-owned table state. You never need TanStack Start.",
   },
 ];
+
+/* ============================================================
+   Developer experience — the lead message: mix the best DX,
+   stay flexible (two on-ramps), most agent-capable, plus all of Rails.
+   ============================================================ */
+
+export const AI_CONSULTING = "https://www.shakacode.com/services/ai-consulting";
+export const STARTER_AGENTS_MD =
+  "https://github.com/shakacode/react-on-rails-starter-tanstack/blob/main/AGENTS.md";
+
+export interface OnRamp {
+  kind: "add" | "start";
+  icon: IconName;
+  eyebrow: string;
+  title: string;
+  body: string;
+  points: string[];
+}
+
+export const onRamps: OnRamp[] = [
+  {
+    kind: "add",
+    icon: "layers",
+    eyebrow: "Already have Rails?",
+    title: "Add TanStack incrementally",
+    body: "Drop React on Rails Pro and TanStack Router, Query & Table into the app you already have. Keep your routes, conventions, and team — no rewrite, no separate frontend deploy.",
+    points: [
+      "Adopt it page by page, alongside your existing Rails views",
+      "Great performance out of the box — SSR, hydration, streaming",
+      "Your Rails API stays the single source of truth",
+    ],
+  },
+  {
+    kind: "start",
+    icon: "spark",
+    eyebrow: "Starting fresh?",
+    title: "Spin up with full flexibility",
+    body: "Begin a new Rails app and mix exactly what you want, per page: classic Rails views, React on Rails components, React 19 + RSC, and TanStack. Use as much or as little as you need.",
+    points: [
+      "Classic Rails, React components, RSC, or TanStack — your call",
+      "The official starter gives you a deployable baseline on day one",
+      "Scale from a sprinkle of React to a full TanStack app",
+    ],
+  },
+];
+
+/** Agent-capability is a DX proof point, not a separate pitch. Copy stays within
+ *  what ShakaCode publicly claims: experts pick the best AI proposals; ShakaPerf's
+ *  A/B loop keeps only provably-faster changes. Verify before broadening. */
+export const agentCapable = {
+  badge: "Agent-ready",
+  title: "The most agent-capable stack",
+  body: "AI agents thrive on convention. Rails' structure, explicit typed JSON contracts, and the starter's AGENTS.md guardrails give an agent a map it can't sprawl outside of — so AI-written changes stay reviewable and maintainable instead of turning into slop.",
+  proof: "It doesn't stop at writing code: ShakaCode's AI optimization loop runs proposed changes through ShakaPerf's A/B testing and keeps only the ones that are provably faster — with experts picking the best proposals.",
+};
+
+export const railsGoodness: string[] = [
+  "ActiveRecord",
+  "Migrations",
+  "Background jobs",
+  "Mailers",
+  "Sessions & auth",
+  "CSRF protection",
+  "Convention over configuration",
+  "The gem ecosystem",
+];
