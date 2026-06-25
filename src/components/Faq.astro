@@ -1,0 +1,22 @@
+---
+import { faq } from "../data/shaka";
+---
+
+<section class="section faq-sec" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal" style="max-width: none; text-align: center; margin-inline: auto; margin-bottom: 44px">
+      <span class="eyebrow" style="justify-content: center; display: inline-flex">Honest answers</span>
+      <h2 style="margin-top: 16px">Questions you should be asking.</h2>
+    </div>
+    <div class="faq-list reveal">
+      {
+        faq.map((item) => (
+          <details class="faq-item">
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

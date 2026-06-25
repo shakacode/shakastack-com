@@ -500,3 +500,76 @@ img { max-width: 100%; display: block; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   .hero-meta { gap: 18px; }
 }
+
+/* ============================================================
+   LEAVING NEXT.JS — positioning (React on Rails Pro + TanStack)
+   ============================================================ */
+.vsnext { background: var(--sand-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+.roads { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.road { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 30px 28px 32px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+.road-stay { border-color: color-mix(in oklch, var(--accent) 42%, var(--line)); box-shadow: var(--shadow);
+  background: linear-gradient(165deg, color-mix(in oklch, var(--accent) 6%, #fff), #fff); }
+.road-label { font-family: var(--ff-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.road-stay .road-label { color: var(--accent-deep); }
+.road h3 { font-size: 24px; margin: 12px 0 0; }
+.road > p { color: var(--ink-2); font-size: 15.5px; margin-top: 12px; text-wrap: pretty; }
+.road ul { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.road li { display: grid; grid-template-columns: 22px 1fr; gap: 11px; align-items: start; font-size: 15px; color: var(--ink); }
+.road li svg { width: 18px; height: 18px; margin-top: 2px; }
+.road-leave li svg { color: var(--ink-3); }
+.road-stay li svg { color: var(--accent); }
+
+.tanstack-split { margin-top: 30px; }
+.ts-head h3 { font-size: 22px; }
+.ts-head p { color: var(--ink-3); font-size: 15px; margin-top: 4px; margin-bottom: 16px; }
+.ts-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ts-card { border-radius: var(--r-sm); padding: 22px 22px 24px; border: 1px solid var(--line); background: #fff; }
+.ts-embrace { border-color: color-mix(in oklch, var(--cpflow) 40%, var(--line)); }
+.ts-substitute { border-color: color-mix(in oklch, var(--warm) 35%, var(--line)); background: color-mix(in oklch, var(--warm) 5%, #fff); }
+.ts-tag { display: inline-flex; align-items: center; gap: 7px; font-family: var(--ff-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
+.ts-tag svg { width: 14px; height: 14px; }
+.ts-embrace .ts-tag { background: color-mix(in oklch, var(--cpflow) 16%, var(--sand)); color: var(--cpflow-deep); }
+.ts-substitute .ts-tag { background: color-mix(in oklch, var(--warm) 18%, var(--sand)); color: color-mix(in oklch, var(--warm) 78%, black); }
+.ts-card h4 { font-size: 17px; margin: 12px 0 0; }
+.ts-card p { color: var(--ink-2); font-size: 14.5px; margin-top: 8px; text-wrap: pretty; }
+
+.rsc-note { margin-top: 30px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; padding: 24px 26px; border-radius: var(--r);
+  background: color-mix(in oklch, var(--accent) 7%, var(--sand)); border: 1px solid color-mix(in oklch, var(--accent) 26%, var(--line)); }
+.rsc-badge { font-family: var(--ff-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; white-space: nowrap; padding: 7px 12px; border-radius: 999px; background: var(--accent); color: #fff; }
+.rsc-note p { color: var(--ink); font-size: 16px; text-wrap: pretty; }
+
+.boundary { margin: 30px auto 0; max-width: 820px; text-align: center; font-family: var(--ff-display); font-weight: 600; font-size: clamp(18px, 2vw, 22px); line-height: 1.4; letter-spacing: -0.01em; color: var(--ink); text-wrap: balance; }
+
+.starter { margin-top: 40px; border-radius: var(--r); overflow: hidden; color: #fff; padding: 40px; position: relative;
+  background: radial-gradient(100% 120% at 90% 0%, color-mix(in oklch, var(--accent) 40%, transparent), transparent 55%),
+    linear-gradient(155deg, var(--dusk-1), oklch(0.26 0.07 24) 75%, var(--dusk-2));
+  border: 1px solid oklch(1 0 0 / 0.12); box-shadow: var(--shadow); }
+.starter .eyebrow { color: oklch(0.9 0.05 45); }
+.starter .eyebrow::before { background: oklch(0.85 0.12 40); }
+.starter h3 { font-size: clamp(24px, 3vw, 32px); margin: 14px 0 0; }
+.starter-copy > p { color: oklch(0.95 0.015 60 / 0.85); font-size: 16px; margin-top: 14px; max-width: 760px; text-wrap: pretty; }
+.starter-guardrail { font-size: 14.5px !important; color: oklch(0.92 0.02 60 / 0.72) !important; border-left: 2px solid var(--accent); padding-left: 14px; }
+.starter-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 26px; }
+.starter-actions .btn-ghost { color: #fff; border-color: oklch(1 0 0 / 0.3); }
+.starter-actions .btn-ghost:hover { background: oklch(1 0 0 / 0.12); border-color: oklch(1 0 0 / 0.5); }
+.starter-actions .link-arrow { color: #fff; }
+.starter-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.starter-chips span { font-family: var(--ff-mono); font-size: 11.5px; padding: 5px 11px; border-radius: 999px; background: oklch(1 0 0 / 0.1); color: oklch(0.96 0.01 60 / 0.9); border: 1px solid oklch(1 0 0 / 0.16); }
+
+@media (max-width: 940px) {
+  .roads, .ts-cols { grid-template-columns: 1fr; }
+  .rsc-note { grid-template-columns: 1fr; gap: 12px; }
+  .starter { padding: 30px 24px; }
+}
+
+/* ============================================================
+   FAQ (objections) — native <details>, zero-JS
+   ============================================================ */
+.faq-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { border: 1px solid var(--line); border-radius: var(--r-sm); background: #fff; box-shadow: var(--shadow-sm); overflow: hidden; }
+.faq-item summary { cursor: pointer; list-style: none; padding: 20px 24px; font-family: var(--ff-display); font-weight: 700; font-size: 17.5px; color: var(--ink); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; font-family: var(--ff-mono); font-size: 24px; font-weight: 400; color: var(--accent); transition: transform .2s ease; line-height: 0.8; }
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p { color: var(--ink-2); font-size: 15.5px; padding: 0 24px 22px; text-wrap: pretty; }

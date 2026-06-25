@@ -24,6 +24,7 @@ export default function Nav() {
           <a href="#problem">Why</a>
           <a href="#stack">The Stack</a>
           <a href="#projects">Projects</a>
+          <a href="#vs-nextjs">vs Next.js</a>
           <a href="#examples">Examples</a>
         </div>
         <div className="nav-cta">

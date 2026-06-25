@@ -1,0 +1,100 @@
+---
+import Icon from "./Icon.astro";
+import GitHubMark from "./GitHubMark.astro";
+import {
+  roads,
+  exodusEvidence,
+  tanstackSplit,
+  starter,
+  STARTER_REPO,
+  STARTER_DEMO,
+  RSC_VS_NEXTJS_DOC,
+} from "../data/shaka";
+---
+
+<section class="section vsnext" id="vs-nextjs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Leaving Next.js?</span>
+      <h2>The Next.js era is cracking. Two roads out.</h2>
+      <p>{exodusEvidence}</p>
+    </div>
+
+    <div class="roads reveal">
+      {
+        roads.map((r) => (
+          <div class={`road road-${r.kind}`}>
+            <span class="road-label">{r.label}</span>
+            <h3>{r.title}</h3>
+            <p>{r.body}</p>
+            <ul>
+              {r.points.map((pt) => (
+                <li><Icon name="check" />{pt}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="tanstack-split reveal">
+      <div class="ts-head">
+        <h3>“TanStack” is two different things.</h3>
+        <p>Keep them separate — embrace the client libraries, skip the framework.</p>
+      </div>
+      <div class="ts-cols">
+        {
+          tanstackSplit.map((t) => (
+            <div class={`ts-card ts-${t.kind}`}>
+              <span class="ts-tag">
+                <Icon name={t.kind === "embrace" ? "check" : "arrowUR"} />
+                {t.kind === "embrace" ? "Embrace" : "Substitute"}
+              </span>
+              <h4>{t.title}</h4>
+              <p>{t.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="rsc-note reveal">
+      <span class="rsc-badge">Demoable &amp; maturing · RC, not GA</span>
+      <p>
+        React on Rails Pro runs <b>React Server Components with your Rails models
+        as the server source</b> — the “server code next to your component”
+        experience of Next.js and TanStack Start, without moving business logic
+        into TypeScript.
+      </p>
+    </div>
+
+    <p class="boundary reveal">
+      Greenfield, no Rails, one language, optimizing raw velocity? TanStack Start
+      is a fine choice — and we'll say so. ShakaStack is for teams with Rails, or
+      who want it, and real business logic.
+    </p>
+
+    <div class="starter reveal">
+      <div class="starter-copy">
+        <span class="eyebrow">The proof</span>
+        <h3>The official React on Rails × TanStack starter.</h3>
+        <p>{starter.blurb}</p>
+        <p class="starter-guardrail">{starter.guardrail}</p>
+        <div class="starter-actions">
+          <a class="btn btn-accent" href={STARTER_REPO} target="_blank" rel="noreferrer">
+            <GitHubMark width={16} height={16} /> Get the starter
+          </a>
+          <a class="btn btn-ghost" href={STARTER_DEMO} target="_blank" rel="noreferrer">
+            Live demo <Icon name="arrowUR" />
+          </a>
+          <a class="link-arrow" href={RSC_VS_NEXTJS_DOC} target="_blank" rel="noreferrer">
+            RSC vs Next.js <Icon name="arrowUR" />
+          </a>
+        </div>
+        <div class="starter-chips">
+          {starter.stack.map((s) => <span>{s}</span>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -74,6 +74,17 @@ export const GITHUB_ORG = "https://github.com/shakacode";
 export const GITHUB_SPONSOR = "https://github.com/sponsors/shakacode";
 export const ALL_DEMOS = "https://www.reactonrails.com/examples";
 
+/* React on Rails Pro + TanStack positioning — official starter & docs (all verified live). */
+export const STARTER_REPO =
+  "https://github.com/shakacode/react-on-rails-starter-tanstack";
+export const STARTER_DEMO = "https://starter.reactonrails.com";
+export const RSC_VS_NEXTJS_DOC =
+  "https://reactonrails.com/docs/pro/react-server-components/nextjs-comparison";
+export const MIGRATE_FROM_NEXTJS_DOC =
+  "https://reactonrails.com/docs/migrating/migrating-from-nextjs";
+export const TANSTACK_ROUTER_DOC =
+  "https://reactonrails.com/docs/building-features/tanstack-router";
+
 export const projects: Project[] = [
   {
     id: "ror",
@@ -207,10 +218,10 @@ export const examples: Example[] = [
   },
   {
     name: "TanStack Starter",
-    tag: "Starter",
+    tag: "Official",
     projects: ["ror", "shakapacker"],
-    blurb: "A minimal React on Rails + TanStack starter template to build your next app from.",
-    stack: ["React on Rails", "TanStack", "Starter"],
+    blurb: "The official Rails 8 + React on Rails Pro starter with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase — leave Next.js without leaving your Rails backend.",
+    stack: ["Rails 8", "React on Rails Pro", "TanStack", "RSC"],
     live: "https://starter.reactonrails.com",
     source: "https://github.com/shakacode/react-on-rails-starter-tanstack",
   },
@@ -271,3 +282,95 @@ export const shaka: ShakaContent = {
 export function phaseStage(p: Pick<Project, "phase" | "stage">): string {
   return p.phase === p.stage ? p.phase : `${p.phase} · ${p.stage}`;
 }
+
+/* ============================================================
+   "Leaving Next.js? The fork in the road" — positioning content.
+   Accuracy guardrails: RSC is demoable/maturing (RC), NOT GA. We never claim
+   the Query-backed data is server-rendered/SEO-crawlable — only the shell +
+   router state are SSR'd; data is fast client fetch. See README before edits.
+   ============================================================ */
+
+export interface Road {
+  kind: "leave" | "stay";
+  label: string;
+  title: string;
+  body: string;
+  points: string[];
+}
+
+/** The Next.js exodus is a tailwind — the critique went mainstream. */
+export const exodusEvidence =
+  "Teams are leaving Next.js. Lovable made TanStack Start its default for new projects this year; Inngest migrated off Next.js and cut local dev load times by roughly 83%. The reasons they give — complexity, slow local dev, fighting the network — are exactly the critique ShakaCode has made for years.";
+
+export const roads: Road[] = [
+  {
+    kind: "leave",
+    label: "Road A — another JS framework",
+    title: "Swap Next.js for TanStack Start",
+    body: "A new vendor, but the same all-JavaScript backend. TanStack Start's server functions put your data access, auth, and business logic into TypeScript on a Node server.",
+    points: [
+      "New framework, same architecture: JavaScript owns the server",
+      "Business logic migrates into TypeScript server functions",
+      "Fine for greenfield, one-language teams — but it isn't Rails",
+    ],
+  },
+  {
+    kind: "stay",
+    label: "Road B — ShakaStack",
+    title: "Keep a real backend",
+    body: "Rails owns data, business logic, and auth. React renders the view. TanStack Query owns the client. You leave Next.js without giving up your backend — and nobody else is evangelizing this path.",
+    points: [
+      "Rails: ActiveRecord, validations, jobs, mailers, sessions, CSRF",
+      "React on Rails Pro: SSR, streaming, and React Server Components",
+      "TanStack Query, Router & Table on the client, against a Rails JSON API",
+    ],
+  },
+];
+
+/** "TanStack" is two different things — keep them separate. */
+export const tanstackSplit: { kind: "embrace" | "substitute"; title: string; body: string }[] = [
+  {
+    kind: "embrace",
+    title: "Embrace — TanStack Query, Router & Table",
+    body: "Backend-agnostic client libraries. TanStack Query is the single best companion to a Rails JSON API: caching, mutations, and URL-synced state on the client.",
+  },
+  {
+    kind: "substitute",
+    title: "Substitute — TanStack Start",
+    body: "The full-stack framework. Its server functions pull business logic into TypeScript — the one thing you don't want if you have, or want, Rails.",
+  },
+];
+
+/** Official starter — the proof. Copy reflects what it genuinely demonstrates. */
+export const starter = {
+  title: "The official starter",
+  blurb:
+    "A deployable Rails 8 + React on Rails Pro app with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase. Rails owns data, logic, and auth and exposes explicit JSON; React on Rails Pro server-renders the TanStack shell and hydrates router state; TanStack Query owns the client data lifecycle — CSRF-aware fetch, URL-synced query keys, mutations and invalidation.",
+  guardrail:
+    "Its AGENTS.md encodes the thesis as an engineering guardrail: “do not add TanStack Start, Vite, or file-based routing.”",
+  stack: ["Rails 8", "React on Rails Pro", "TanStack Router", "TanStack Query", "TanStack Table", "shadcn/ui", "RSC showcase"],
+};
+
+export interface Faq {
+  q: string;
+  a: string;
+}
+
+export const faq: Faq[] = [
+  {
+    q: "Isn't TanStack Start the future?",
+    a: "TanStack Query, Router, and Table are excellent — we use them every day. TanStack Start, the full-stack framework, is a different decision: it puts your business logic in TypeScript on a Node server. If you have Rails, that's the part you don't want to give up.",
+  },
+  {
+    q: "Is RSC on Rails actually ready?",
+    a: "React Server Components in React on Rails Pro are demoable and maturing — running today in the starter and demos on a release-candidate build, not yet GA. You get the “server code next to your component” experience now, with Rails models as the server source; we're upfront that the spec is still stabilizing.",
+  },
+  {
+    q: "When is Next.js (or TanStack Start) the right call?",
+    a: "Greenfield, no Rails, a one-language team optimizing raw velocity, and little server-side business logic? A JavaScript meta-framework is a fine choice — and we'll tell you so. ShakaStack is for teams with Rails, or who want it, and real business logic.",
+  },
+  {
+    q: "Do I have to adopt all of TanStack?",
+    a: "No. Add TanStack Query against your Rails JSON API and stop there if you like. Router and Table are there when you want type-safe routing and URL-owned table state. You never need TanStack Start.",
+  },
+];
