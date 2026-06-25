@@ -6,6 +6,10 @@ import {
   exodusEvidence,
   tanstackSplit,
   starter,
+  perfLead,
+  perfColumns,
+  perfMatrix,
+  perfNote,
   STARTER_REPO,
   STARTER_DEMO,
   RSC_VS_NEXTJS_DOC,
@@ -58,14 +62,47 @@ import {
       </div>
     </div>
 
-    <div class="rsc-note reveal">
-      <span class="rsc-badge">Demoable &amp; maturing · RC, not GA</span>
-      <p>
-        React on Rails Pro runs <b>React Server Components with your Rails models
-        as the server source</b> — the “server code next to your component”
-        experience of Next.js and TanStack Start, without moving business logic
-        into TypeScript.
-      </p>
+    <div class="perf reveal">
+      <div class="perf-lead">
+        <h3>{perfLead.title}</h3>
+        <p>{perfLead.body}</p>
+      </div>
+      <div class="cmp-wrap">
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th></th>
+              {
+                perfColumns.map((c, i) => (
+                  <th class={i === 0 ? "col-ror" : ""}>{c}</th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              perfMatrix.map((row) => (
+                <tr>
+                  <th scope="row">{row.feature}</th>
+                  {row.cells.map((cell, i) => (
+                    <td class={i === 0 ? "col-ror" : ""}>
+                      {cell === "no" ? (
+                        <span class="cell no" aria-label="Not supported">–</span>
+                      ) : (
+                        <span class="cell yes" aria-label={cell === "rc" ? "Supported (release candidate)" : "Supported"}>
+                          <Icon name="check" />
+                          {cell === "rc" && <i class="rc">RC</i>}
+                        </span>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="cmp-note">{perfNote}</p>
     </div>
 
     <p class="boundary reveal">

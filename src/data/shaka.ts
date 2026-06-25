@@ -440,3 +440,34 @@ export const railsGoodness: string[] = [
   "Convention over configuration",
   "The gem ecosystem",
 ];
+
+/* ============================================================
+   Performance parity — React 19.2 / Next.js-class features, in Rails.
+   Differentiator: only React on Rails Pro pairs the React server-performance
+   features with a real Rails backend. Inertia renders on the client (no
+   streaming SSR / RSC / selective hydration). RSC stays annotated as RC.
+   ============================================================ */
+
+export type CmpCell = "yes" | "no" | "rc";
+export interface CmpRow {
+  feature: string;
+  /** cells align 1:1 with perfColumns. */
+  cells: CmpCell[];
+}
+
+export const perfLead = {
+  title: "Next.js-class React performance — only in Rails.",
+  body: "React on Rails Pro fully supports React 19.2 and brings the performance features Next.js is known for — streaming SSR, React Server Components, and selective hydration — to a real Rails backend, with your Rails models as the server source. Inertia and other Rails + React adapters render on the client; they can't.",
+};
+
+export const perfColumns = ["React on Rails Pro", "Inertia", "Next.js"];
+
+export const perfMatrix: CmpRow[] = [
+  { feature: "Streaming SSR", cells: ["yes", "no", "yes"] },
+  { feature: "React Server Components", cells: ["rc", "no", "yes"] },
+  { feature: "Selective hydration", cells: ["yes", "no", "yes"] },
+  { feature: "Real Rails backend", cells: ["yes", "yes", "no"] },
+];
+
+export const perfNote =
+  "React Server Components in React on Rails Pro are demoable & maturing (RC), not yet GA — React 19.2 itself is fully supported.";
