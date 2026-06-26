@@ -1,7 +1,7 @@
 /**
  * ShakaStack content model.
  *
- * NOTE: ShakaPerf copy is provisional — verify against shakaperf.com.
+ * NOTE: ShakaPerf copy is provisional - verify against shakaperf.com.
  * Ported from the design prototype's `window.SHAKA` object into typed constants.
  */
 
@@ -65,7 +65,7 @@ export interface ShakaContent {
   logos: string[];
 }
 
-/** Primary CTA — HubSpot scheduling link, used across the page. */
+/** Primary CTA - HubSpot scheduling link, used across the page. */
 export const BOOK_A_CALL =
   "https://meetings.hubspot.com/justingordon/30-minute-consultation";
 export const SHAKACODE_URL = "https://www.shakacode.com";
@@ -74,7 +74,7 @@ export const GITHUB_ORG = "https://github.com/shakacode";
 export const GITHUB_SPONSOR = "https://github.com/sponsors/shakacode";
 export const ALL_DEMOS = "https://www.reactonrails.com/examples";
 
-/* React on Rails Pro + TanStack positioning — official starter & docs (all verified live). */
+/* React on Rails Pro + TanStack positioning - official starter & docs (all verified live). */
 export const STARTER_REPO =
   "https://github.com/shakacode/react-on-rails-starter-tanstack";
 export const STARTER_DEMO = "https://starter.reactonrails.com";
@@ -95,9 +95,9 @@ export const projects: Project[] = [
     url: "https://www.reactonrails.com",
     accent: "ror",
     icon: "build",
-    tagline: "Render React inside Rails — SSR, hydration, and RSC.",
+    tagline: "Render React inside Rails - SSR, hydration, and RSC.",
     blurb:
-      "Mount React components straight from Rails views and controllers. Server-side rendering, hydration, streaming, and React Server Components — without splitting your product into a separate frontend app.",
+      "Mount React components straight from Rails views and controllers. Server-side rendering, hydration, streaming, and React Server Components - without splitting your product into a separate frontend app.",
     benefits: [
       ["Rails-first React", "Render components from views & controllers. Keep Rails routes, conventions, and your team."],
       ["Production SSR", "Server rendering, hydration, and streaming paths built for mature Rails deployments."],
@@ -122,9 +122,9 @@ export const projects: Project[] = [
     icon: "bundle",
     tagline: "Webpack, the Rails way. The maintained successor to Webpacker.",
     blurb:
-      "Use webpack to bundle JavaScript and CSS with Rails conventions intact. Shakapacker picks up where rails/webpacker left off — actively maintained, modern defaults, and a smooth upgrade path.",
+      "Use webpack to bundle JavaScript and CSS with Rails conventions intact. Shakapacker picks up where rails/webpacker left off - actively maintained, modern defaults, and a smooth upgrade path.",
     benefits: [
-      ["Rails-native bundling", "Asset compilation that follows Rails conventions — manifests, fingerprinting, and the asset pipeline."],
+      ["Rails-native bundling", "Asset compilation that follows Rails conventions - manifests, fingerprinting, and the asset pipeline."],
       ["Modern webpack", "Up-to-date webpack with sensible defaults so you configure less and ship more."],
       ["Easy migration", "A clear, supported path off the deprecated rails/webpacker."],
     ],
@@ -147,7 +147,7 @@ export const projects: Project[] = [
     icon: "deploy",
     tagline: "A Heroku-style workflow on Control Plane infrastructure.",
     blurb:
-      "cpflow brings a Heroku-like developer experience — review apps, one-off tasks, releases, and scaling — to Control Plane. Migrate off Heroku without throwing away the workflow your team already knows.",
+      "cpflow brings a Heroku-like developer experience - review apps, one-off tasks, releases, and scaling - to Control Plane. Migrate off Heroku without throwing away the workflow your team already knows.",
     benefits: [
       ["Heroku-like commands", "Familiar deploy, run, and scale commands plus review apps for every pull request."],
       ["Control Plane power", "Run on flexible, cost-efficient infrastructure with room to scale well past Heroku."],
@@ -170,11 +170,11 @@ export const projects: Project[] = [
     url: "https://www.shakaperf.com",
     accent: "shakaperf",
     icon: "prove",
-    tagline: "ShakaCode’s own framework for proving performance — rigorously.",
+    tagline: "ShakaCode’s own framework for proving performance - rigorously.",
     blurb:
-      "Containerize your app, run control-vs-experiment A/B tests, and let ShakaPerf prove which changes actually make pages faster — across desktop and mobile, with regressions caught automatically.",
+      "Containerize your app, run control-vs-experiment A/B tests, and let ShakaPerf prove which changes actually make pages faster - across desktop and mobile, with regressions caught automatically.",
     benefits: [
-      ["Rigorous A/B testing", "Real control-vs-experiment perf testing across screen types — not flaky one-off Lighthouse runs."],
+      ["Rigorous A/B testing", "Real control-vs-experiment perf testing across screen types - not flaky one-off Lighthouse runs."],
       ["Automatic regression detection", "Catches performance regressions and visual changes on your main branch before users do."],
       ["Stack agnostic", "Works with any web stack, with accessibility and SEO checks built in."],
     ],
@@ -220,7 +220,7 @@ export const examples: Example[] = [
     name: "TanStack Starter",
     tag: "Official",
     projects: ["ror", "shakapacker"],
-    blurb: "The official Rails 8 + React on Rails Pro starter with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase — leave Next.js without leaving your Rails backend.",
+    blurb: "The official Rails 8 + React on Rails Pro starter with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase - leave Next.js without leaving your Rails backend.",
     stack: ["Rails 8", "React on Rails Pro", "TanStack", "RSC"],
     live: "https://starter.reactonrails.com",
     source: "https://github.com/shakacode/react-on-rails-starter-tanstack",
@@ -229,7 +229,7 @@ export const examples: Example[] = [
     name: "Legacy Tutorial App",
     tag: "Production",
     projects: ["ror", "shakapacker"],
-    blurb: "The original full-app React on Rails tutorial demo — running in production for years on Shakapacker.",
+    blurb: "The original full-app React on Rails tutorial demo - running in production for years on Shakapacker.",
     stack: ["React on Rails", "Shakapacker", "SSR"],
     live: "https://www.reactrails.com",
     source: "https://github.com/shakacode/react-webpack-rails-tutorial",
@@ -238,15 +238,15 @@ export const examples: Example[] = [
 
 export const problems: Benefit[] = [
   ["Bolting React onto Rails", "Webpacker’s deprecated, SSR is fiddly, and React 19 / RSC feel out of reach. You’re duct-taping a frontend instead of shipping features."],
-  ["Pages that lost their speed", "Slow LCP and hydration drag down SEO and conversions — and you’ve no rigorous way to measure it or prove a fix actually worked."],
+  ["Pages that lost their speed", "Slow LCP and hydration drag down SEO and conversions - and you’ve no rigorous way to measure it or prove a fix actually worked."],
   ["The infra & config tax", "Heroku bills climb, build configs rot, and every upgrade is a gamble. The stack fights you instead of working for you."],
 ];
 
 export const guideStats: Benefit[] = [
   ["2013", "Shipping React in Rails since"],
   ["Only", "Rails framework with React Server Components"],
-  ["80–90%", "Faster pages for clients like HVMN & Popmenu"],
-  ["Paia, HI", "Open-source maintainers — not a faceless vendor"],
+  ["80-90%", "Faster pages for clients like HVMN & Popmenu"],
+  ["Paia, HI", "Open-source maintainers - not a faceless vendor"],
 ];
 
 export const stakes: Stakes = {
@@ -284,9 +284,9 @@ export function phaseStage(p: Pick<Project, "phase" | "stage">): string {
 }
 
 /* ============================================================
-   "Leaving Next.js? The fork in the road" — positioning content.
+   "Leaving Next.js? The fork in the road" - positioning content.
    Accuracy guardrails: RSC is demoable/maturing (RC), NOT GA. We never claim
-   the Query-backed data is server-rendered/SEO-crawlable — only the shell +
+   the Query-backed data is server-rendered/SEO-crawlable - only the shell +
    router state are SSR'd; data is fast client fetch. See README before edits.
    ============================================================ */
 
@@ -298,27 +298,27 @@ export interface Road {
   points: string[];
 }
 
-/** The Next.js exodus is a tailwind — the critique went mainstream. */
+/** The Next.js exodus is a tailwind - the critique went mainstream. */
 export const exodusEvidence =
-  "Teams are leaving Next.js. Lovable made TanStack Start its default for new projects this year; Inngest migrated off Next.js and cut local dev load times by roughly 83%. The reasons they give — complexity, slow local dev, fighting the network — are exactly the critique ShakaCode has made for years.";
+  "Teams are leaving Next.js. Lovable made TanStack Start its default for new projects this year; Inngest migrated off Next.js and cut local dev load times by roughly 83%. The reasons they give - complexity, slow local dev, fighting the network - are exactly the critique ShakaCode has made for years.";
 
 export const roads: Road[] = [
   {
     kind: "leave",
-    label: "Road A — another JS framework",
+    label: "Road A - another JS framework",
     title: "Swap Next.js for TanStack Start",
     body: "A new vendor, but the same all-JavaScript backend. TanStack Start's server functions put your data access, auth, and business logic into TypeScript on a Node server.",
     points: [
       "New framework, same architecture: JavaScript owns the server",
       "Business logic migrates into TypeScript server functions",
-      "Fine for greenfield, one-language teams — but it isn't Rails",
+      "Fine for greenfield, one-language teams - but it isn't Rails",
     ],
   },
   {
     kind: "stay",
-    label: "Road B — ShakaStack",
+    label: "Road B - ShakaStack",
     title: "Keep a real backend",
-    body: "Rails owns data, business logic, and auth. React renders the view. TanStack Query owns the client. You leave Next.js without giving up your backend — and nobody else is evangelizing this path.",
+    body: "Rails owns data, business logic, and auth. React renders the view. TanStack Query owns the client. You leave Next.js without giving up your backend - and nobody else is evangelizing this path.",
     points: [
       "Rails: ActiveRecord, validations, jobs, mailers, sessions, CSRF",
       "React on Rails Pro: SSR, streaming, and React Server Components",
@@ -327,25 +327,25 @@ export const roads: Road[] = [
   },
 ];
 
-/** "TanStack" is two different things — keep them separate. */
+/** "TanStack" is two different things - keep them separate. */
 export const tanstackSplit: { kind: "embrace" | "substitute"; title: string; body: string }[] = [
   {
     kind: "embrace",
-    title: "Embrace — TanStack Query, Router & Table",
+    title: "Embrace - TanStack Query, Router & Table",
     body: "Backend-agnostic client libraries. TanStack Query is the single best companion to a Rails JSON API: caching, mutations, and URL-synced state on the client.",
   },
   {
     kind: "substitute",
-    title: "Substitute — TanStack Start",
-    body: "The full-stack framework. Its server functions pull business logic into TypeScript — the one thing you don't want if you have, or want, Rails.",
+    title: "Substitute - TanStack Start",
+    body: "The full-stack framework. Its server functions pull business logic into TypeScript - the one thing you don't want if you have, or want, Rails.",
   },
 ];
 
-/** Official starter — the proof. Copy reflects what it genuinely demonstrates. */
+/** Official starter - the proof. Copy reflects what it genuinely demonstrates. */
 export const starter = {
   title: "The official starter",
   blurb:
-    "A deployable Rails 8 + React on Rails Pro app with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase. Rails owns data, logic, and auth and exposes explicit JSON; React on Rails Pro server-renders the TanStack shell and hydrates router state; TanStack Query owns the client data lifecycle — CSRF-aware fetch, URL-synced query keys, mutations and invalidation.",
+    "A deployable Rails 8 + React on Rails Pro app with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase. Rails owns data, logic, and auth and exposes explicit JSON; React on Rails Pro server-renders the TanStack shell and hydrates router state; TanStack Query owns the client data lifecycle - CSRF-aware fetch, URL-synced query keys, mutations and invalidation.",
   guardrail:
     "Its AGENTS.md encodes the thesis as an engineering guardrail: “do not add TanStack Start, Vite, or file-based routing.”",
   stack: ["Rails 8", "React on Rails Pro", "TanStack Router", "TanStack Query", "TanStack Table", "shadcn/ui", "RSC showcase"],
@@ -359,15 +359,15 @@ export interface Faq {
 export const faq: Faq[] = [
   {
     q: "Isn't TanStack Start the future?",
-    a: "TanStack Query, Router, and Table are excellent — we use them every day. TanStack Start, the full-stack framework, is a different decision: it puts your business logic in TypeScript on a Node server. If you have Rails, that's the part you don't want to give up.",
+    a: "TanStack Query, Router, and Table are excellent - we use them every day. TanStack Start, the full-stack framework, is a different decision: it puts your business logic in TypeScript on a Node server. If you have Rails, that's the part you don't want to give up.",
   },
   {
     q: "Is RSC on Rails actually ready?",
-    a: "React Server Components in React on Rails Pro are demoable and maturing — running today in the starter and demos on a release-candidate build, not yet GA. You get the “server code next to your component” experience now, with Rails models as the server source; we're upfront that the spec is still stabilizing.",
+    a: "React Server Components in React on Rails Pro are demoable and maturing - running today in the starter and demos on a release-candidate build, not yet GA. You get the “server code next to your component” experience now, with Rails models as the server source; we're upfront that the spec is still stabilizing.",
   },
   {
     q: "When is Next.js (or TanStack Start) the right call?",
-    a: "Greenfield, no Rails, a one-language team optimizing raw velocity, and little server-side business logic? A JavaScript meta-framework is a fine choice — and we'll tell you so. ShakaStack is for teams with Rails, or who want it, and real business logic.",
+    a: "Greenfield, no Rails, a one-language team optimizing raw velocity, and little server-side business logic? A JavaScript meta-framework is a fine choice - and we'll tell you so. ShakaStack is for teams with Rails, or who want it, and real business logic.",
   },
   {
     q: "Do I have to adopt all of TanStack?",
@@ -376,7 +376,7 @@ export const faq: Faq[] = [
 ];
 
 /* ============================================================
-   Developer experience — the lead message: mix the best DX,
+   Developer experience - the lead message: mix the best DX,
    stay flexible (two on-ramps), most agent-capable, plus all of Rails.
    ============================================================ */
 
@@ -399,10 +399,10 @@ export const onRamps: OnRamp[] = [
     icon: "layers",
     eyebrow: "Already have Rails?",
     title: "Add TanStack incrementally",
-    body: "Drop React on Rails Pro and TanStack Router, Query & Table into the app you already have. Keep your routes, conventions, and team — no rewrite, no separate frontend deploy.",
+    body: "Drop React on Rails Pro and TanStack Router, Query & Table into the app you already have. Keep your routes, conventions, and team - no rewrite, no separate frontend deploy.",
     points: [
       "Adopt it page by page, alongside your existing Rails views",
-      "Great performance out of the box — SSR, hydration, streaming",
+      "Great performance out of the box - SSR, hydration, streaming",
       "Your Rails API stays the single source of truth",
     ],
   },
@@ -413,7 +413,7 @@ export const onRamps: OnRamp[] = [
     title: "Spin up with full flexibility",
     body: "Begin a new Rails app and mix exactly what you want, per page: classic Rails views, React on Rails components, React 19 + RSC, and TanStack. Use as much or as little as you need.",
     points: [
-      "Classic Rails, React components, RSC, or TanStack — your call",
+      "Classic Rails, React components, RSC, or TanStack - your call",
       "The official starter gives you a deployable baseline on day one",
       "Scale from a sprinkle of React to a full TanStack app",
     ],
@@ -426,8 +426,8 @@ export const onRamps: OnRamp[] = [
 export const agentCapable = {
   badge: "Agent-ready",
   title: "The most agent-capable stack",
-  body: "AI agents thrive on convention. Rails' structure, explicit typed JSON contracts, and the starter's AGENTS.md guardrails give an agent a map it can't sprawl outside of — so AI-written changes stay reviewable and maintainable instead of turning into slop.",
-  proof: "It doesn't stop at writing code: ShakaCode's AI optimization loop runs proposed changes through ShakaPerf's A/B testing and keeps only the ones that are provably faster — with experts picking the best proposals.",
+  body: "AI agents thrive on convention. Rails' structure, explicit typed JSON contracts, and the starter's AGENTS.md guardrails give an agent a map it can't sprawl outside of - so AI-written changes stay reviewable and maintainable instead of turning into slop.",
+  proof: "It doesn't stop at writing code: ShakaCode's AI optimization loop runs proposed changes through ShakaPerf's A/B testing and keeps only the ones that are provably faster - with experts picking the best proposals.",
 };
 
 export const railsGoodness: string[] = [
@@ -442,7 +442,7 @@ export const railsGoodness: string[] = [
 ];
 
 /* ============================================================
-   Performance parity — React 19.2 / Next.js-class features, in Rails.
+   Performance parity - React 19.2 / Next.js-class features, in Rails.
    Differentiator: only React on Rails Pro pairs the React server-performance
    features with a real Rails backend. Inertia renders on the client (no
    streaming SSR / RSC / selective hydration). RSC stays annotated as RC.
@@ -456,8 +456,8 @@ export interface CmpRow {
 }
 
 export const perfLead = {
-  title: "Next.js-class React performance — only in Rails.",
-  body: "React on Rails Pro fully supports React 19.2 and brings the performance features Next.js is known for — streaming SSR, React Server Components, and selective hydration — to a real Rails backend, with your Rails models as the server source. Inertia and other Rails + React adapters render on the client; they can't.",
+  title: "Next.js-class React performance - only in Rails.",
+  body: "React on Rails Pro fully supports React 19.2 and brings the performance features Next.js is known for - streaming SSR, React Server Components, and selective hydration - to a real Rails backend, with your Rails models as the server source. Inertia and other Rails + React adapters render on the client; they can't.",
 };
 
 export const perfColumns = ["React on Rails Pro", "Inertia", "Next.js"];
@@ -470,4 +470,4 @@ export const perfMatrix: CmpRow[] = [
 ];
 
 export const perfNote =
-  "React Server Components in React on Rails Pro are demoable & maturing (RC), not yet GA — React 19.2 itself is fully supported.";
+  "React Server Components in React on Rails Pro are demoable & maturing (RC), not yet GA - React 19.2 itself is fully supported.";

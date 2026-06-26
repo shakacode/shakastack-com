@@ -1,26 +1,26 @@
 /* ============================================================
-   ShakaStack — design system
+   ShakaStack - design system
    Surf / dusk aesthetic: ocean ink, sand light, sunset accents.
    ============================================================ */
 
 :root {
-  /* neutrals — warm sand */
+  /* neutrals - warm sand */
   --sand:        oklch(0.985 0.008 85);
   --sand-2:      oklch(0.965 0.012 80);
   --sand-3:      oklch(0.935 0.014 78);
-  --ink:         oklch(0.23 0.016 235);  /* near-black slate — matches shakacode.com #181e1f */
+  --ink:         oklch(0.23 0.016 235);  /* near-black slate - matches shakacode.com #181e1f */
   --ink-2:       oklch(0.40 0.02 240);
   --ink-3:       oklch(0.56 0.016 240);
   --line:        oklch(0.90 0.014 80);
   --line-2:      oklch(0.84 0.018 78);
 
-  /* dusk hero gradient stops — slate -> ShakaCode red -> warm coral (no violet) */
+  /* dusk hero gradient stops - slate -> ShakaCode red -> warm coral (no violet) */
   --dusk-1: oklch(0.21 0.022 245);
   --dusk-2: oklch(0.29 0.075 22);
   --dusk-3: oklch(0.52 0.205 27);
   --dusk-4: oklch(0.71 0.150 50);
 
-  /* per-project accents — shared chroma/lightness, varied hue */
+  /* per-project accents - shared chroma/lightness, varied hue */
   --ror:         oklch(0.64 0.135 232);
   --ror-deep:    oklch(0.50 0.12 240);
   --shakapacker: oklch(0.71 0.14 72);
@@ -30,7 +30,7 @@
   --shakaperf:   oklch(0.63 0.155 18);
   --shakaperf-deep: oklch(0.50 0.15 18);
 
-  --accent:      oklch(0.585 0.213 28);  /* ShakaCode red — matches shakacode.com #ee2b16 */
+  --accent:      oklch(0.585 0.213 28);  /* ShakaCode red - matches shakacode.com #ee2b16 */
   --accent-deep: oklch(0.50 0.20 27);
   --warm:        oklch(0.66 0.16 45);     /* warm coral/orange secondary */
 
@@ -422,7 +422,7 @@ img { max-width: 100%; display: block; }
   background: var(--accent); margin: 0 auto 28px; }
 
 /* ============================================================
-   GUIDE (ShakaCode) — dark authority band
+   GUIDE (ShakaCode) - dark authority band
    ============================================================ */
 .guide-sec {
   color: #fff; position: relative; overflow: hidden;
@@ -444,7 +444,7 @@ img { max-width: 100%; display: block; }
 .gstat span { display: block; margin-top: 8px; font-size: 14px; color: oklch(0.95 0.015 60 / 0.7); line-height: 1.4; text-wrap: pretty; }
 
 /* ============================================================
-   STAKES — without vs with
+   STAKES - without vs with
    ============================================================ */
 .stakes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 980px; margin: 0 auto; }
 .stakes-col { border-radius: var(--r); padding: 32px 30px 34px; border: 1px solid var(--line); }
@@ -502,7 +502,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
-   LEAVING NEXT.JS — positioning (React on Rails Pro + TanStack)
+   LEAVING NEXT.JS - positioning (React on Rails Pro + TanStack)
    ============================================================ */
 .vsnext { background: var(--sand-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 
@@ -576,7 +576,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
-   FAQ (objections) — native <details>, zero-JS
+   FAQ (objections) - native <details>, zero-JS
    ============================================================ */
 .faq-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
 .faq-item { border: 1px solid var(--line); border-radius: var(--r-sm); background: #fff; box-shadow: var(--shadow-sm); overflow: hidden; }
@@ -587,7 +587,7 @@ img { max-width: 100%; display: block; }
 .faq-item p { color: var(--ink-2); font-size: 15.5px; padding: 0 24px 22px; text-wrap: pretty; }
 
 /* ============================================================
-   DEVELOPER EXPERIENCE — flexibility, agent-capable, Rails goodness
+   DEVELOPER EXPERIENCE - flexibility, agent-capable, Rails goodness
    ============================================================ */
 .onramps { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
 .onramp { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 30px 28px 32px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }

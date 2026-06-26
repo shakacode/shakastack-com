@@ -7,7 +7,7 @@ interface Props {
 }
 
 /**
- * The hero "stack card" — auto-cycles the highlighted layer so it's alive on
+ * The hero "stack card" - auto-cycles the highlighted layer so it's alive on
  * every device. Purely decorative; paused under prefers-reduced-motion.
  */
 export default function HeroStackCard({ projects }: Props) {
