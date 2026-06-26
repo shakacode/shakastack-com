@@ -3,7 +3,7 @@ import ProjectSection from "./ProjectSection.astro";
 import { projects } from "../data/shaka";
 ---
 
-<div id="projects">
+<section id="projects" aria-label="The projects">
   <div class="wrap">
     <div class="section-head reveal" style="padding-top: 96px">
       <span class="eyebrow">The projects</span>
@@ -15,4 +15,4 @@ import { projects } from "../data/shaka";
     </div>
   </div>
   {projects.map((p, i) => <ProjectSection project={p} index={i} />)}
-</div>
+</section>

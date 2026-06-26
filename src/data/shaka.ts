@@ -170,7 +170,7 @@ export const projects: Project[] = [
     url: "https://www.shakaperf.com",
     accent: "shakaperf",
     icon: "prove",
-    tagline: "ShakaCode’s own framework for proving performance - rigorously.",
+    tagline: "ShakaCode’s own tool for proving performance - rigorously.",
     blurb:
       "Containerize your app, run control-vs-experiment A/B tests, and let ShakaPerf prove which changes actually make pages faster - across desktop and mobile, with regressions caught automatically.",
     benefits: [
@@ -238,13 +238,13 @@ export const examples: Example[] = [
 
 export const problems: Benefit[] = [
   ["Bolting React onto Rails", "Webpacker’s deprecated, SSR is fiddly, and React 19 / RSC feel out of reach. You’re duct-taping a frontend instead of shipping features."],
-  ["Pages that lost their speed", "Slow LCP and hydration drag down SEO and conversions - and you’ve no rigorous way to measure it or prove a fix actually worked."],
+  ["Pages that lost their speed", "Slow LCP and hydration drag down SEO and conversions - and you have no rigorous way to measure it or prove a fix actually worked."],
   ["The infra & config tax", "Heroku bills climb, build configs rot, and every upgrade is a gamble. The stack fights you instead of working for you."],
 ];
 
 export const guideStats: Benefit[] = [
   ["2013", "Shipping React in Rails since"],
-  ["Only", "Rails framework with React Server Components"],
+  ["First", "Rails framework with React Server Components"],
   ["80-90%", "Faster pages for clients like HVMN & Popmenu"],
   ["Paia, HI", "Open-source maintainers - not a faceless vendor"],
 ];
@@ -300,7 +300,7 @@ export interface Road {
 
 /** The Next.js exodus is a tailwind - the critique went mainstream. */
 export const exodusEvidence =
-  "Teams are leaving Next.js. Lovable made TanStack Start its default for new projects this year; Inngest migrated off Next.js and cut local dev load times by roughly 83%. The reasons they give - complexity, slow local dev, fighting the network - are exactly the critique ShakaCode has made for years.";
+  "Teams are leaving Next.js. Lovable made TanStack Start its default for new projects this year; Inngest reported cutting local dev load times by roughly 83% after migrating off Next.js. The reasons they give - complexity, slow local dev, fighting the network - are exactly the critique ShakaCode has made for years.";
 
 export const roads: Road[] = [
   {
