@@ -147,7 +147,7 @@ export const projects: Project[] = [
     icon: "deploy",
     tagline: "A Heroku-style workflow on Control Plane infrastructure.",
     blurb:
-      "cpflow brings a Heroku-like developer experience - review apps, one-off tasks, releases, and scaling - to Control Plane. Migrate off Heroku without throwing away the workflow your team already knows.",
+      "Control Plane Flow brings a Heroku-like developer experience - review apps, one-off tasks, releases, and scaling - to Control Plane. Its cpflow CLI moves you off Heroku without throwing away the workflow your team already knows.",
     benefits: [
       ["Heroku-like commands", "Familiar deploy, run, and scale commands plus review apps for every pull request."],
       ["Control Plane power", "Run on flexible, cost-efficient infrastructure with room to scale well past Heroku."],
@@ -457,7 +457,7 @@ export interface CmpRow {
 
 export const perfLead = {
   title: "Next.js-class React performance - only in Rails.",
-  body: "React on Rails Pro fully supports React 19.2 and brings the performance features Next.js is known for - streaming SSR, React Server Components, and selective hydration - to a real Rails backend, with your Rails models as the server source. Inertia and other Rails + React adapters render on the client; they can't.",
+  body: "React on Rails Pro fully supports React 19.2 and brings the performance features Next.js is known for - streaming SSR, React Server Components, and selective hydration - to a real Rails backend, with your Rails models as the server source. Inertia and other Rails + React adapters do plain server rendering at best, with no streaming SSR, no React Server Components, and no selective hydration.",
 };
 
 export const perfColumns = ["React on Rails Pro", "Inertia", "Next.js"];
