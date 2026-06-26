@@ -149,7 +149,8 @@ img { max-width: 100%; display: block; }
 .hero-waves { position: absolute; left: 0; right: 0; bottom: -2px; width: 100%; height: auto; pointer-events: none; }
 .hero-grain { position: absolute; inset: 0; opacity: 0.5; pointer-events: none;
   background-image: radial-gradient(oklch(1 0 0 / 0.05) 1px, transparent 1px); background-size: 4px 4px; }
-.hero-inner { position: relative; z-index: 2; padding: 92px 0 150px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+/* block axis only, so .wrap's horizontal padding survives (a padding shorthand here would reset it to 0) */
+.hero-inner { position: relative; z-index: 2; padding-block: 92px 150px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
 .hero h1 { font-size: clamp(38px, 4.5vw, 55px); letter-spacing: -0.03em; max-width: 520px; text-wrap: balance; text-shadow: 0 1px 16px oklch(0.2 0.05 270 / 0.28); }
 .hero h1 .grad { background: linear-gradient(100deg, oklch(0.93 0.06 70), oklch(0.85 0.13 35)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero-sub { font-size: clamp(18px, 1.8vw, 21px); color: oklch(0.95 0.02 80 / 0.86); margin-top: 24px; max-width: 540px; text-wrap: pretty; }
@@ -178,11 +179,10 @@ img { max-width: 100%; display: block; }
 .layer {
   --c: var(--ror);
   display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 14px;
-  padding: 15px 16px; border-radius: 13px; cursor: pointer;
+  padding: 15px 16px; border-radius: 13px;
   background: oklch(1 0 0 / 0.06); border: 1px solid oklch(1 0 0 / 0.1);
   transition: transform .22s cubic-bezier(.2,.8,.2,1), background .22s, border-color .22s;
 }
-.layer:hover { transform: translateX(6px); background: oklch(1 0 0 / 0.1); }
 .layer.active { background: oklch(1 0 0 / 0.13); border-color: color-mix(in oklch, var(--c) 70%, white); transform: translateX(6px); }
 .layer .ic { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; background: color-mix(in oklch, var(--c) 30%, transparent); color: #fff; }
 .layer .ic svg { width: 22px; height: 22px; }
@@ -482,7 +482,7 @@ img { max-width: 100%; display: block; }
    responsive
    ============================================================ */
 @media (max-width: 940px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 64px 0 120px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; padding-block: 64px 120px; }
   .hero-visual { max-width: 460px; }
   .proj-grid, .proj.flip .proj-grid { grid-template-columns: 1fr; gap: 36px; }
   .proj.flip .proj-visual { order: 0; }

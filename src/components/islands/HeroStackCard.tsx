@@ -8,8 +8,7 @@ interface Props {
 
 /**
  * The hero "stack card" — auto-cycles the highlighted layer so it's alive on
- * every device (no hover required). Hover also sets the active layer on desktop.
- * Purely decorative motion; paused under prefers-reduced-motion.
+ * every device. Purely decorative; paused under prefers-reduced-motion.
  */
 export default function HeroStackCard({ projects }: Props) {
   const [active, setActive] = useState(0);
@@ -35,7 +34,6 @@ export default function HeroStackCard({ projects }: Props) {
             key={p.id}
             className={"layer" + (i === active ? " active" : "")}
             style={{ "--c": `var(--${p.accent})` } as CSSProperties}
-            onMouseEnter={() => setActive(i)}
           >
             <span className="ic">
               <Icon name={p.icon} />
