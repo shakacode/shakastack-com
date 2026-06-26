@@ -20,7 +20,7 @@ interface PhaseGroup {
 /**
  * Interactive stack explorer (tablist / tabpanel). Click/tap (and keyboard
  * focus) selects a layer; the detail panel re-themes and re-renders. No hover
- * dependency — fully keyboard- and touch-accessible.
+ * dependency - fully keyboard- and touch-accessible.
  */
 export default function StackExplorer({ projects }: Props) {
   const [active, setActive] = useState(0);

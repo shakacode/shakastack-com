@@ -1,5 +1,5 @@
 /**
- * Inline icon set — simple geometric strokes only.
+ * Inline icon set - simple geometric strokes only.
  * Each entry is the raw inner SVG markup for a 24×24 stroke icon
  * (rendered inside `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ...>`).
  * Shared by both the Astro `<Icon>` and the React `<Icon>` so paths never drift.
@@ -25,6 +25,6 @@ export const ICON_PATHS: Record<IconName, string> = {
     '<path d="M3 18c3 0 3-2 6-2s3 2 6 2 3-2 6-2"/><path d="M5 14C5 8 9 4 19 4c0 8-5 10-10 10"/>',
 };
 
-/** Solid (filled) GitHub mark — single path, rendered with fill="currentColor". */
+/** Solid (filled) GitHub mark - single path, rendered with fill="currentColor". */
 export const GITHUB_MARK_PATH =
   '<path d="M12 1.5A10.5 10.5 0 0 0 8.7 22c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.4-3.5-1.4-.5-1.2-1.2-1.5-1.2-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.3-.3-4.7-1.2-4.7-5.2 0-1.1.4-2.1 1-2.8-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 2.8 1.1a9.6 9.6 0 0 1 5 0c1.9-1.4 2.8-1.1 2.8-1.1.6 1.5.2 2.6.1 2.9.7.7 1 1.7 1 2.8 0 4-2.4 4.9-4.7 5.2.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.5 10.5 0 0 0 12 1.5z"/>';

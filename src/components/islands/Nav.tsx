@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { GitHubMark } from "../Icon";
 import { BOOK_A_CALL, GITHUB_ORG } from "../../data/shaka";
 
-/** Sticky nav — fades in its bottom border after the page scrolls past 12px. */
+/** Sticky nav - fades in its bottom border after the page scrolls past 12px. */
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
 
