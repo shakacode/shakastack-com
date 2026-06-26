@@ -387,7 +387,7 @@ img { max-width: 100%; display: block; }
 .cta-inner { padding: 92px 0; position: relative; z-index: 2; text-align: center; }
 .cta h2 { font-size: clamp(32px, 4.6vw, 56px); }
 .cta p { color: oklch(0.95 0.02 80 / 0.82); font-size: 19px; margin: 20px auto 0; max-width: 560px; }
-.cta-actions { display: flex; gap: 14px; justify-content: center; margin-top: 38px; flex-wrap: wrap; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 38px; flex-wrap: wrap; }
 
 .footer { background: var(--ink); color: oklch(0.92 0.02 80 / 0.7); padding: 70px 0 40px; }
 .footer-grid { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 40px; }
