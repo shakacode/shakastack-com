@@ -84,6 +84,10 @@ export const MIGRATE_FROM_NEXTJS_DOC =
   "https://reactonrails.com/docs/migrating/migrating-from-nextjs";
 export const TANSTACK_ROUTER_DOC =
   "https://reactonrails.com/docs/building-features/tanstack-router";
+export const TANSTACK_QUERY_DOC =
+  "https://reactonrails.com/docs/building-features/tanstack-query";
+export const BLOG_POST =
+  "https://www.shakacode.com/blog/tanstack-with-react-on-rails";
 
 export const projects: Project[] = [
   {
