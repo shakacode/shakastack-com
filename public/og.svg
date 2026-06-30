@@ -26,14 +26,18 @@
 
   <g transform="translate(96 110)">
     <rect width="66" height="66" rx="18" fill="url(#mark)"/>
-    <text x="33" y="35" font-size="36" text-anchor="middle" dominant-baseline="central">🤙</text>
-    <text x="86" y="44" font-family="'Bricolage Grotesque', system-ui, sans-serif" font-size="40" font-weight="800" letter-spacing="-1.5" fill="#ffffff">ShakaStack</text>
+    <g transform="translate(12 14)" fill="#ffffff">
+      <path d="M21 0 42 10.5 21 21 0 10.5Z" opacity="0.95"/>
+      <path d="M0 20 21 30.5 42 20v8L21 38.5 0 28Z" opacity="0.82"/>
+      <path d="M7 15.5 21 22.5l14-7v5L21 27.5 7 20.5Z" opacity="0.62"/>
+    </g>
+    <text x="86" y="44" font-family="system-ui, sans-serif" font-size="40" font-weight="800" letter-spacing="0" fill="#ffffff">ShakaStack</text>
   </g>
 
-  <text x="96" y="300" font-family="'Bricolage Grotesque', system-ui, sans-serif" font-size="78" font-weight="800" letter-spacing="-3" fill="#ffffff">Ship modern React in Rails -</text>
-  <text x="96" y="392" font-family="'Bricolage Grotesque', system-ui, sans-serif" font-size="78" font-weight="800" letter-spacing="-3"><tspan fill="url(#fast)">fast</tspan><tspan fill="#ffffff">, and prove it.</tspan></text>
+  <text x="96" y="300" font-family="system-ui, sans-serif" font-size="78" font-weight="800" letter-spacing="0" fill="#ffffff">Ship modern React in Rails -</text>
+  <text x="96" y="392" font-family="system-ui, sans-serif" font-size="78" font-weight="800" letter-spacing="0"><tspan fill="url(#fast)">fast</tspan><tspan fill="#ffffff">, and prove it.</tspan></text>
 
   <text x="96" y="470" font-family="system-ui, sans-serif" font-size="30" fill="#f1e9dd" opacity="0.88">Four open-source projects from ShakaCode for Rails + React apps.</text>
 
-  <text x="96" y="556" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="26" letter-spacing="2" fill="#f4d79a" opacity="0.92">build → bundle → deploy → prove</text>
+  <text x="96" y="556" font-family="ui-monospace, monospace" font-size="26" letter-spacing="2" fill="#f4d79a" opacity="0.92">build -> bundle -> deploy -> prove</text>
 </svg>
