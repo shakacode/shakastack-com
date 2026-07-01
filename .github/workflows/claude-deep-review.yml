@@ -1,12 +1,12 @@
 name: Claude Deep Review
 
 on:
-  pull_request:
-    types: [labeled, synchronize, ready_for_review, reopened]
+  issue_comment:
+    types: [created]
 
 jobs:
   claude-deep-review:
-    if: contains(github.event.pull_request.labels.*.name, 'claude-deep-review')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/claude-deep-review')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -27,4 +27,4 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           plugin_marketplaces: "https://github.com/anthropics/claude-code.git"
           plugins: "code-review@claude-code-plugins"
-          prompt: "/code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
+          prompt: "/code-review:code-review ${{ github.repository }}/pull/${{ github.event.issue.number }}"
