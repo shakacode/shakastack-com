@@ -37,9 +37,18 @@ pnpm dev        # http://localhost:4321
 pnpm build      # static build → dist/
 pnpm preview    # preview the production build
 pnpm check      # astro check (type + template diagnostics)
+pnpm test:mobile # Playwright check for page-level mobile overflow
 ```
 
 Requires Node 18.20.8+, 20.3.0+, or 22+ (Astro 6). Built with Node 24.
+
+## Mobile layout guardrail
+
+Before shipping responsive/layout changes, run `pnpm test:mobile`. The
+Playwright check loads the homepage at 375px, 393px, and 430px widths and fails
+if the document is wider than the viewport. Treat any page-level horizontal
+overflow as a release blocker; use contained scroll regions for wide tables or
+code samples instead of allowing the whole page to sideways-scroll.
 
 ## Deploy
 
