@@ -31,4 +31,6 @@ design_handoff_shakastack/
 
 # playwright test artifacts
 .playwright-mcp/
+playwright-report/
+test-results/
 *.jpeg

@@ -28,8 +28,15 @@ export default function Nav() {
           <a href="#examples">Examples</a>
         </div>
         <div className="nav-cta">
-          <a className="btn btn-ghost" href={GITHUB_ORG} target="_blank" rel="noreferrer">
-            <GitHubMark width={16} height={16} /> GitHub
+          <a
+            className="btn btn-ghost"
+            href={GITHUB_ORG}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
+            <GitHubMark width={16} height={16} />
+            <span className="nav-cta-label">GitHub</span>
           </a>
           <a className="btn btn-primary" href={BOOK_A_CALL} target="_blank" rel="noreferrer">
             Book a free call
