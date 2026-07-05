@@ -6,12 +6,15 @@ on:
 
 jobs:
   claude-deep-review:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/claude-deep-review')
+    if: |
+      github.event.issue.pull_request &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association) &&
+      contains(github.event.comment.body, '/claude-deep-review')
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
-      issues: read
+      pull-requests: write
+      issues: write
       id-token: write
 
     steps:
@@ -19,6 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          persist-credentials: false
 
       - name: Run Claude Code deep review
         id: claude-deep-review
@@ -28,3 +32,32 @@ jobs:
           plugin_marketplaces: "https://github.com/anthropics/claude-code.git"
           plugins: "code-review@claude-code-plugins"
           prompt: "/code-review:code-review ${{ github.repository }}/pull/${{ github.event.issue.number }}"
+
+      - name: Verify Claude deep review completed
+        if: steps.claude-deep-review.outcome == 'success'
+        env:
+          EXECUTION_FILE: ${{ steps.claude-deep-review.outputs.execution_file }}
+        run: |
+          set -euo pipefail
+          TOKEN_HINT="Rotate CLAUDE_CODE_OAUTH_TOKEN with 'claude setup-token' and update the repo secret."
+
+          if [ -z "${EXECUTION_FILE:-}" ] || [ ! -f "$EXECUTION_FILE" ]; then
+            echo "::error::Claude deep review produced no execution output. This usually means the run did not actually start. $TOKEN_HINT"
+            exit 1
+          fi
+
+          result=$(jq -s 'flatten | map(select(type == "object" and .type == "result")) | last' "$EXECUTION_FILE" 2>/dev/null || echo null)
+          if [ "$result" = "null" ] || [ -z "$result" ]; then
+            echo "::error::No result record in Claude deep review execution output. $TOKEN_HINT"
+            exit 1
+          fi
+
+          is_error=$(echo "$result" | jq -r '.is_error // false')
+          cost=$(echo "$result" | jq -r '.total_cost_usd // 0')
+          turns=$(echo "$result" | jq -r '.num_turns // 0')
+          echo "Claude deep review result: is_error=$is_error total_cost_usd=$cost num_turns=$turns"
+
+          if [ "$is_error" = "true" ]; then
+            echo "::error::Claude deep review failed (is_error=true, cost=$cost, turns=$turns). This usually means the token is invalid or expired. $TOKEN_HINT"
+            exit 1
+          fi
