@@ -77,12 +77,16 @@ should render the actual logo/lockup instead of the generic icon placeholder.
 ## E2E Docs Repository
 
 The empty `shakacode/e2eonrails-com` repo should be bootstrapped as a small
-static docs site. The initial site should include:
+static docs site that mirrors the React on Rails documentation publication
+model. Source documentation should remain in the gem repo, and the website repo
+should sync, prepare, audit, build, and deploy those source docs.
+
+The site should include:
 
 - Home page introducing Cypress Playwright on Rails.
 - Quick start for Cypress.
 - Quick start for Playwright.
-- Documentation links adapted from the current gem repo README and `docs/`
+- Synced documentation adapted from the current gem repo README and `docs/`
   folder.
 - Links back to GitHub, RubyGems, ShakaStack, ShakaCode, Cypress, and
   Playwright.
@@ -91,6 +95,34 @@ static docs site. The initial site should include:
 The first commit to `main` is an approved empty-repo bootstrap exception. Future
 changes should use feature branches and pull requests.
 
+## Documentation Publication Workflow
+
+Mirror the React on Rails model:
+
+- The gem repo owns canonical docs source files, including a Docusaurus-compatible
+  `docs/sidebars.ts` table of contents.
+- The gem repo validates docs additions against the sidebar, so newly added
+  published docs cannot silently miss navigation.
+- The gem repo includes a `trigger-docs-site.yml` workflow that runs on `master`
+  when docs or machine-readable docs files change. It uses a GitHub App token
+  from `DOCS_DISPATCH_APP_ID` and `DOCS_DISPATCH_APP_KEY`, then sends a
+  `docs-updated` repository-dispatch event to `shakacode/e2eonrails-com`.
+- The docs-site repo listens for `repository_dispatch` event type
+  `docs-updated`, syncs docs from `shakacode/cypress-playwright-on-rails`, builds
+  the site, and deploys to Cloudflare Pages.
+- If the GitHub App secrets or Cloudflare secrets are not configured yet, the
+  workflows should be present and documented, and verification should cover local
+  sync/build plus the expected secret names.
+
+React on Rails references inspected for this pattern:
+
+- `shakacode/react_on_rails/.github/workflows/trigger-docs-site.yml`
+- `shakacode/react_on_rails/docs/sidebars.ts`
+- `shakacode/react_on_rails/script/check-docs-sidebar`
+- `shakacode/reactonrails.com/.github/workflows/site-build-deploy.yml`
+- `shakacode/reactonrails.com/scripts/sync-docs.mjs`
+- `shakacode/reactonrails.com/scripts/prepare-docs.mjs`
+
 ## GitHub Repo Update
 
 For `shakacode/cypress-playwright-on-rails`:
@@ -98,9 +130,12 @@ For `shakacode/cypress-playwright-on-rails`:
 - Set homepage URL to `https://e2eonrails.com`.
 - Add or retain relevant topics, including `cypress`, `playwright`, `rails`,
   `ruby-on-rails`, and `end-to-end-testing` if GitHub accepts them.
-- Update README near the top with the docs-site link and new social/brand
-  positioning.
+- Update README near the top with the docs-site link and new E2E on Rails brand
+  positioning, while preserving the current repo and gem names until the staged
+  rename/gem flip.
 - Preserve the existing README's substantive usage and support content.
+- Add the docs sidebar and docs publication workflow needed to keep
+  `e2eonrails.com` current whenever docs change.
 
 ## Error Handling
 
@@ -123,6 +158,7 @@ ShakaStack:
 Docs repo:
 
 - Install/build using the selected static-site tool.
+- Run docs sync against `shakacode/cypress-playwright-on-rails` or a local clone.
 - Browser screenshot review for desktop and mobile.
 - Confirm asset paths resolve in the built output.
 
@@ -130,6 +166,8 @@ Gem repo:
 
 - Markdown/link sanity check for README changes.
 - Confirm GitHub metadata reflects the docs homepage.
+- Run the docs sidebar validation script against new docs/sidebars changes.
+- Validate workflow YAML syntax for the docs trigger workflow.
 
 ## Publishing
 
