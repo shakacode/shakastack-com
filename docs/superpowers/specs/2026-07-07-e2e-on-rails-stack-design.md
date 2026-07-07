@@ -46,8 +46,7 @@ Rails. The canonical project order becomes:
 
 The visible copy should update from "four projects" to "five projects" wherever
 the count is user-facing. Stack language should shift from "Build -> Deploy ->
-Prove" to "Build -> Test -> Prove -> Deploy" or the full five-step label when
-space allows.
+Prove" to "Build -> Bundle -> Test -> Prove -> Deploy" wherever space allows.
 
 Cypress Playwright on Rails should be positioned as the Rails-aware end-to-end
 testing layer:
@@ -72,7 +71,7 @@ Use the supplied asset system from:
 
 ShakaStack should copy only the assets it needs into `public/`, preferably under
 `public/projects/cypress-playwright-on-rails/`. The project deep-dive visual
-should render the actual logo/lockup instead of the generic icon placeholder.
+should render the actual logo/lockup instead of the generic icon visual.
 
 ## E2E Docs Repository
 
