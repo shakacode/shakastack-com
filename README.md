@@ -1,6 +1,6 @@
 # shakastack.com
 
-Marketing site for **ShakaStack** - a single entry point into four open-source
+Marketing site for **ShakaStack** - a single entry point into five open-source
 [ShakaCode](https://www.shakacode.com) projects that take a Rails + React app
 from idea to proven-fast in production:
 
@@ -8,11 +8,12 @@ from idea to proven-fast in production:
 |--------|---------|--------------|
 | Build  | [React on Rails](https://www.reactonrails.com) | Render React inside Rails - SSR, hydration, and RSC. |
 | Bundle | [Shakapacker](https://www.shakapacker.com) | Webpack, the Rails way. The maintained successor to Webpacker. |
-| Deploy | [Control Plane Flow](https://www.controlplaneflow.com) | A Heroku-style workflow on Control Plane infrastructure. |
+| Test   | [E2E on Rails](https://e2eonrails.com) | Cypress or Playwright with Rails scenarios, factories, and clean test data. |
 | Prove  | [ShakaPerf](https://www.shakaperf.com) | Rigorously prove which changes actually make pages faster. |
+| Deploy | [Control Plane Flow](https://www.controlplaneflow.com) | A Heroku-style workflow on Control Plane infrastructure. |
 
 The page follows Donald Miller's **StoryBrand (SB7)** framework: the Rails
-engineer is the hero, ShakaCode is the guide, and the four tools are the plan.
+engineer is the hero, ShakaCode is the guide, and the five tools are the plan.
 
 ## Tech stack
 
@@ -53,14 +54,14 @@ required. Set the production domain in [`astro.config.mjs`](astro.config.mjs)
 This site faithfully recreates the design prototype, including its deliberate
 placeholders. Replace before going live:
 
-1. **Project logos** - each deep-dive has a dashed "logo / screenshot" slot.
-   Drop in real React on Rails, Shakapacker, Control Plane Flow, and ShakaPerf
-   logos/screenshots.
+1. **Project logos** - remaining deep-dives have a dashed "logo / screenshot"
+   slot. Drop in real React on Rails, Shakapacker, Control Plane Flow, and
+   ShakaPerf logos/screenshots.
 2. **Example screenshots** - gallery cards use striped name placeholders.
 3. **OG image** - [`public/og.svg`](public/og.svg) is a vector placeholder; most
    social crawlers want a 1200×630 PNG/JPG. Render it to `og.png` and update the
    reference in [`src/layouts/Layout.astro`](src/layouts/Layout.astro).
-4. **Copy to verify:** all **ShakaPerf** copy (least-documented of the four),
+4. **Copy to verify:** all **ShakaPerf** copy (least-documented of the five),
    the **Popmenu pull-quote** attribution & metrics, the client **logo list**,
    and the **"80-90% faster"** guide stat.
 

@@ -5,10 +5,11 @@
  * Ported from the design prototype's `window.SHAKA` object into typed constants.
  */
 
-export type ProjectId = "ror" | "shakapacker" | "cpflow" | "shakaperf";
+export type ProjectId = "ror" | "shakapacker" | "e2e" | "shakaperf" | "cpflow";
 export type IconName =
   | "build"
   | "bundle"
+  | "test"
   | "deploy"
   | "prove"
   | "arrow"
@@ -27,12 +28,16 @@ export type ProjectLink = [label: string, href: string];
 export interface Project {
   id: ProjectId;
   stage: string;
-  phase: "Build" | "Deploy" | "Prove";
+  phase: "Build" | "Bundle" | "Test" | "Prove" | "Deploy";
   name: string;
   domain: string;
   url: string;
   accent: ProjectId;
   icon: IconName;
+  logo?: {
+    src: string;
+    alt: string;
+  };
   tagline: string;
   blurb: string;
   benefits: Benefit[];
@@ -118,7 +123,7 @@ export const projects: Project[] = [
   {
     id: "shakapacker",
     stage: "Bundle",
-    phase: "Build",
+    phase: "Bundle",
     name: "Shakapacker",
     domain: "shakapacker.com",
     url: "https://www.shakapacker.com",
@@ -141,28 +146,33 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "cpflow",
-    stage: "Deploy",
-    phase: "Deploy",
-    name: "Control Plane Flow",
-    domain: "controlplaneflow.com",
-    url: "https://www.controlplaneflow.com",
-    accent: "cpflow",
-    icon: "deploy",
-    tagline: "A Heroku-style workflow on Control Plane infrastructure.",
+    id: "e2e",
+    stage: "Test",
+    phase: "Test",
+    name: "E2E on Rails",
+    domain: "e2eonrails.com",
+    url: "https://e2eonrails.com",
+    accent: "e2e",
+    icon: "test",
+    logo: {
+      src: "/projects/cypress-playwright-on-rails/lockup-dark.svg",
+      alt: "E2E on Rails logo",
+    },
+    tagline: "The Rails test bridge for Cypress and Playwright.",
     blurb:
-      "Control Plane Flow brings a Heroku-like developer experience - review apps, one-off tasks, releases, and scaling - to Control Plane. Its cpflow CLI moves you off Heroku without throwing away the workflow your team already knows.",
+      "Use Cypress or Playwright with your real Rails test setup: FactoryBot, fixtures, database cleanup, scenarios, VCR, and custom app commands.",
     benefits: [
-      ["Heroku-like commands", "Familiar deploy, run, and scale commands plus review apps for every pull request."],
-      ["Control Plane power", "Run on flexible, cost-efficient infrastructure with room to scale well past Heroku."],
-      ["Migrate, don't rewrite", "Keep your release flow. Move the runtime underneath it with minimal disruption."],
+      ["Rails-aware browser tests", "Run Cypress or Playwright against a Rails app without giving up Rails test helpers."],
+      ["Clean app state", "Reset data, load scenarios, and use factories through app commands designed for repeatable E2E tests."],
+      ["One bridge, two runners", "Keep Cypress and Playwright support under the same Rails-native integration layer."],
     ],
-    install: "gem install cpflow",
-    altInstall: "cpflow setup-app -a my-app",
+    install: "gem 'cypress-on-rails'",
+    altInstall: "bin/rails g cypress_on_rails:install --framework playwright",
     links: [
-      ["Website", "https://www.controlplaneflow.com"],
-      ["Docs", "https://www.shakacode.com/control-plane-flow/docs/"],
-      ["GitHub", "https://github.com/shakacode/control-plane-flow"],
+      ["Website", "https://e2eonrails.com"],
+      ["Docs", "https://e2eonrails.com/docs"],
+      ["GitHub", "https://github.com/shakacode/cypress-playwright-on-rails"],
+      ["Gem", "https://rubygems.org/gems/cypress-on-rails"],
     ],
   },
   {
@@ -188,6 +198,31 @@ export const projects: Project[] = [
       ["Website", "https://www.shakaperf.com"],
       ["Docs", "https://www.shakaperf.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakaperf"],
+    ],
+  },
+  {
+    id: "cpflow",
+    stage: "Deploy",
+    phase: "Deploy",
+    name: "Control Plane Flow",
+    domain: "controlplaneflow.com",
+    url: "https://www.controlplaneflow.com",
+    accent: "cpflow",
+    icon: "deploy",
+    tagline: "A Heroku-style workflow on Control Plane infrastructure.",
+    blurb:
+      "Control Plane Flow brings a Heroku-like developer experience - review apps, one-off tasks, releases, and scaling - to Control Plane. Its cpflow CLI moves you off Heroku without throwing away the workflow your team already knows.",
+    benefits: [
+      ["Heroku-like commands", "Familiar deploy, run, and scale commands plus review apps for every pull request."],
+      ["Control Plane power", "Run on flexible, cost-efficient infrastructure with room to scale well past Heroku."],
+      ["Migrate, don't rewrite", "Keep your release flow. Move the runtime underneath it with minimal disruption."],
+    ],
+    install: "gem install cpflow",
+    altInstall: "cpflow setup-app -a my-app",
+    links: [
+      ["Website", "https://www.controlplaneflow.com"],
+      ["Docs", "https://www.shakacode.com/control-plane-flow/docs/"],
+      ["GitHub", "https://github.com/shakacode/control-plane-flow"],
     ],
   },
 ];

@@ -64,9 +64,17 @@ const docs = p.links.find((l) => l[0] === "Docs");
     </div>
 
     <div class="proj-visual">
-      <div class="proj-logo-slot">
-        <span class="glyph"><Icon name={p.icon} /></span>
-        <span class="ph">{p.name} logo / screenshot</span>
+      <div class:list={["proj-logo-slot", p.logo && "has-logo"]}>
+        {
+          p.logo ? (
+            <img src={p.logo.src} alt={p.logo.alt} loading="lazy" decoding="async" />
+          ) : (
+            <>
+              <span class="glyph"><Icon name={p.icon} /></span>
+              <span class="ph">{p.name} logo / screenshot</span>
+            </>
+          )
+        }
       </div>
       <div class="term">
         <div class="term-bar">

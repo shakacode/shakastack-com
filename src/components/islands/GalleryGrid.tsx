@@ -13,6 +13,7 @@ const PROJ_LABEL: Record<Filter, string> = {
   all: "All",
   ror: "React on Rails",
   shakapacker: "Shakapacker",
+  e2e: "E2E on Rails",
   cpflow: "Control Plane Flow",
   shakaperf: "ShakaPerf",
 };
