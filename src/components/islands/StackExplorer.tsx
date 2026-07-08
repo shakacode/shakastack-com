@@ -7,8 +7,7 @@ interface Props {
 }
 
 const PHASE_NOTE: Record<string, string> = {
-  Build: "Render React in Rails.",
-  Bundle: "Bundle modern assets the Rails way.",
+  Build: "Render React in Rails and bundle assets.",
   Test: "Exercise real browser flows with Rails test state.",
   Prove: "Prove every page is faster before it ships.",
   Deploy: "Ship the validated app to production.",

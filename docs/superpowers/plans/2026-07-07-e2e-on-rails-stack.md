@@ -170,7 +170,7 @@ export type IconName =
 export interface Project {
   id: ProjectId;
   stage: string;
-  phase: "Build" | "Bundle" | "Test" | "Prove" | "Deploy";
+  phase: "Build" | "Test" | "Prove" | "Deploy";
   name: string;
   domain: string;
   url: string;
@@ -232,7 +232,7 @@ Then move the existing Control Plane Flow object after ShakaPerf.
 
 Expected: rendered order is React on Rails, Shakapacker, E2E on Rails, ShakaPerf, Control Plane Flow.
 
-Also update the existing Shakapacker object so `phase: "Bundle"` and `stage: "Bundle"` align with the five-step stack language.
+Also update the existing Shakapacker object so `phase: "Build"` and `stage: "Bundle"` align with the four-phase stack language while keeping Shakapacker visible as its own project.
 
 - [ ] **Step 4: Add the test icon path**
 
@@ -300,7 +300,7 @@ Make these copy changes:
 Hero: "ShakaStack is five open-source projects..."
 Hero stat: "5" / "open-source projects"
 Stack heading: "Build -> bundle -> test -> prove -> deploy."
-Stack body: "Five phases, five open-source projects - one path from Rails + React code to validated production."
+Stack body: "Four phases, five open-source projects - one path from Rails + React code to validated production."
 Projects body: "Use one, use all five."
 Footer tagline: "build -> bundle -> test -> prove -> deploy"
 ```
@@ -309,8 +309,7 @@ In `src/components/islands/StackExplorer.tsx`, set:
 
 ```ts
 const PHASE_NOTE: Record<string, string> = {
-  Build: "Render React in Rails.",
-  Bundle: "Bundle modern assets the Rails way.",
+  Build: "Render React in Rails and bundle assets.",
   Test: "Exercise real browser flows with Rails test state.",
   Prove: "Prove every page is faster before it ships.",
   Deploy: "Ship the validated app to production.",

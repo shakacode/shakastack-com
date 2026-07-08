@@ -2,13 +2,16 @@
 
 ## Summary
 
-ShakaStack should present five open-source layers for modern Rails + React teams:
+ShakaStack should present a four-phase path for modern Rails + React teams,
+while still showing five open-source projects:
 
-1. Build: React on Rails
-2. Bundle: Shakapacker
-3. Test: Cypress Playwright on Rails
-4. Prove: ShakaPerf
-5. Deploy: Control Plane Flow
+1. Build: React on Rails + Shakapacker
+2. Test: Cypress Playwright on Rails
+3. Prove: ShakaPerf
+4. Deploy: Control Plane Flow
+
+Shakapacker remains a distinct project, but bundling is part of the Build phase
+rather than its own phase.
 
 Deploy is the final operational step. ShakaPerf belongs before deploy because
 teams should validate functional and performance behavior before shipping
@@ -46,7 +49,9 @@ Rails. The canonical project order becomes:
 
 The visible copy should update from "four projects" to "five projects" wherever
 the count is user-facing. Stack language should shift from "Build -> Deploy ->
-Prove" to "Build -> Bundle -> Test -> Prove -> Deploy" wherever space allows.
+Prove" to "Build -> Test -> Prove -> Deploy" wherever space allows. Shakapacker
+should use `phase: "Build"` and `stage: "Bundle"` so it appears as its own
+project inside the Build group.
 
 Cypress Playwright on Rails should be positioned as the Rails-aware end-to-end
 testing layer:

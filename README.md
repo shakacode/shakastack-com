@@ -1,19 +1,20 @@
 # shakastack.com
 
 Marketing site for **ShakaStack** - a single entry point into five open-source
-[ShakaCode](https://www.shakacode.com) projects that take a Rails + React app
-from idea to proven-fast in production:
+[ShakaCode](https://www.shakacode.com) projects organized into four phases that
+take a Rails + React app from idea to proven-fast in production:
 
 | Phase  | Project | What it does |
 |--------|---------|--------------|
 | Build  | [React on Rails](https://www.reactonrails.com) | Render React inside Rails - SSR, hydration, and RSC. |
-| Bundle | [Shakapacker](https://www.shakapacker.com) | Webpack, the Rails way. The maintained successor to Webpacker. |
+| Build  | [Shakapacker](https://www.shakapacker.com) | Bundle frontend assets with webpack, the Rails way. |
 | Test   | [E2E on Rails](https://e2eonrails.com) | Cypress or Playwright with Rails scenarios, factories, and clean test data. |
 | Prove  | [ShakaPerf](https://www.shakaperf.com) | Rigorously prove which changes actually make pages faster. |
 | Deploy | [Control Plane Flow](https://www.controlplaneflow.com) | A Heroku-style workflow on Control Plane infrastructure. |
 
 The page follows Donald Miller's **StoryBrand (SB7)** framework: the Rails
-engineer is the hero, ShakaCode is the guide, and the five tools are the plan.
+engineer is the hero, ShakaCode is the guide, and the four-phase stack is the
+plan.
 
 ## Tech stack
 

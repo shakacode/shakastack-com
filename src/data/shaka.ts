@@ -28,7 +28,7 @@ export type ProjectLink = [label: string, href: string];
 export interface Project {
   id: ProjectId;
   stage: string;
-  phase: "Build" | "Bundle" | "Test" | "Prove" | "Deploy";
+  phase: "Build" | "Test" | "Prove" | "Deploy";
   name: string;
   domain: string;
   url: string;
@@ -123,7 +123,7 @@ export const projects: Project[] = [
   {
     id: "shakapacker",
     stage: "Bundle",
-    phase: "Bundle",
+    phase: "Build",
     name: "Shakapacker",
     domain: "shakapacker.com",
     url: "https://www.shakapacker.com",
