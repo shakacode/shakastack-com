@@ -26,7 +26,7 @@ export default function HeroStackCard({ projects }: Props) {
     <div className="stack-card">
       <div className="stack-card-head">
         <span className="t">the_shaka_stack.rb</span>
-        <span className="t">▟ build → prove</span>
+        <span className="t">▟ build → deploy</span>
       </div>
       <div className="layers">
         {projects.map((p, i) => (

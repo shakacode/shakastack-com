@@ -7,9 +7,10 @@ interface Props {
 }
 
 const PHASE_NOTE: Record<string, string> = {
-  Build: "Render React in Rails, then bundle the assets.",
-  Deploy: "Ship it to production.",
-  Prove: "Prove every page is faster.",
+  Build: "Render React in Rails and bundle assets.",
+  Test: "Exercise real browser flows with Rails test state.",
+  Prove: "Prove every page is faster before it ships.",
+  Deploy: "Ship the validated app to production.",
 };
 
 interface PhaseGroup {
@@ -26,7 +27,7 @@ export default function StackExplorer({ projects }: Props) {
   const [active, setActive] = useState(0);
   const p = projects[active];
 
-  // Group consecutive projects by phase so Build holds both render + bundle.
+  // Group consecutive projects by phase so the visible order follows the stack.
   const phases: PhaseGroup[] = [];
   projects.forEach((proj, i) => {
     const last = phases[phases.length - 1];

@@ -11,6 +11,8 @@ export const ICON_PATHS: Record<IconName, string> = {
     '<path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/>',
   bundle:
     '<rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/>',
+  test:
+    '<rect x="4" y="5" width="10" height="8" rx="2"/><rect x="10" y="11" width="10" height="8" rx="2"/><path d="M8 17l2.6 2.6L16.5 13"/><path d="M6.5 8h5M12.5 14h5"/>',
   deploy:
     '<path d="M12 3c4 2 6 5 6 9a6 6 0 0 1-12 0c0-4 2-7 6-9z"/><circle cx="12" cy="11" r="2.2"/><path d="M8 19l-2 2M16 19l2 2"/>',
   prove: '<path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/>',
