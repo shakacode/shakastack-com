@@ -166,7 +166,7 @@ export const projects: Project[] = [
       ["Clean app state", "Reset data, load scenarios, and use factories through app commands designed for repeatable E2E tests."],
       ["One bridge, two runners", "Keep Cypress and Playwright support under the same Rails-native integration layer."],
     ],
-    install: "bundle add cypress-on-rails",
+    install: 'bundle add cypress-on-rails --group "development,test"',
     altInstall: "bin/rails g cypress_on_rails:install --framework playwright",
     links: [
       ["Website", "https://e2eonrails.com"],
