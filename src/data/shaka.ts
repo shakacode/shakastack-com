@@ -68,11 +68,11 @@ export interface ShakaContent {
 /** Primary CTA - HubSpot scheduling link, used across the page. */
 export const BOOK_A_CALL =
   "https://meetings.hubspot.com/justingordon/30-minute-consultation";
-export const SHAKACODE_URL = "https://www.shakacode.com";
-export const SHAKACODE_CONTACT = "https://www.shakacode.com/contact/";
+export const SHAKACODE_URL = "https://shakacode.com";
+export const SHAKACODE_CONTACT = "https://shakacode.com/contact/";
 export const GITHUB_ORG = "https://github.com/shakacode";
 export const GITHUB_SPONSOR = "https://github.com/sponsors/shakacode";
-export const ALL_DEMOS = "https://www.reactonrails.com/examples";
+export const ALL_DEMOS = "https://reactonrails.com/examples";
 
 /* React on Rails Pro + TanStack positioning - official starter & docs (all verified live). */
 export const STARTER_REPO =
@@ -87,7 +87,7 @@ export const TANSTACK_ROUTER_DOC =
 export const TANSTACK_QUERY_DOC =
   "https://reactonrails.com/docs/building-features/tanstack-query";
 export const BLOG_POST =
-  "https://www.shakacode.com/blog/tanstack-with-react-on-rails";
+  "https://shakacode.com/blog/tanstack-with-react-on-rails";
 
 export const projects: Project[] = [
   {
@@ -96,7 +96,7 @@ export const projects: Project[] = [
     phase: "Build",
     name: "React on Rails",
     domain: "reactonrails.com",
-    url: "https://www.reactonrails.com",
+    url: "https://reactonrails.com",
     accent: "ror",
     icon: "build",
     tagline: "Render React inside Rails - SSR, hydration, and RSC.",
@@ -110,8 +110,8 @@ export const projects: Project[] = [
     install: "bundle exec rails generate react_on_rails:install",
     altInstall: "npx create-react-on-rails-app@latest my-app",
     links: [
-      ["Website", "https://www.reactonrails.com"],
-      ["Docs", "https://www.reactonrails.com/docs/"],
+      ["Website", "https://reactonrails.com"],
+      ["Docs", "https://reactonrails.com/docs/"],
       ["GitHub", "https://github.com/shakacode/react_on_rails"],
     ],
   },
@@ -121,7 +121,7 @@ export const projects: Project[] = [
     phase: "Build",
     name: "Shakapacker",
     domain: "shakapacker.com",
-    url: "https://www.shakapacker.com",
+    url: "https://shakapacker.com",
     accent: "shakapacker",
     icon: "bundle",
     tagline: "Webpack, the Rails way. The maintained successor to Webpacker.",
@@ -135,8 +135,8 @@ export const projects: Project[] = [
     install: "bundle add shakapacker --strict",
     altInstall: "bin/rails shakapacker:install",
     links: [
-      ["Website", "https://www.shakapacker.com"],
-      ["Docs", "https://www.shakapacker.com/docs/"],
+      ["Website", "https://shakapacker.com"],
+      ["Docs", "https://shakapacker.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakapacker"],
     ],
   },
@@ -146,7 +146,7 @@ export const projects: Project[] = [
     phase: "Deploy",
     name: "Control Plane Flow",
     domain: "controlplaneflow.com",
-    url: "https://www.controlplaneflow.com",
+    url: "https://controlplaneflow.com",
     accent: "cpflow",
     icon: "deploy",
     tagline: "A Heroku-style workflow on Control Plane infrastructure.",
@@ -160,8 +160,8 @@ export const projects: Project[] = [
     install: "gem install cpflow",
     altInstall: "cpflow setup-app -a my-app",
     links: [
-      ["Website", "https://www.controlplaneflow.com"],
-      ["Docs", "https://www.shakacode.com/control-plane-flow/docs/"],
+      ["Website", "https://controlplaneflow.com"],
+      ["Docs", "https://shakacode.com/control-plane-flow/docs/"],
       ["GitHub", "https://github.com/shakacode/control-plane-flow"],
     ],
   },
@@ -171,7 +171,7 @@ export const projects: Project[] = [
     phase: "Prove",
     name: "ShakaPerf",
     domain: "shakaperf.com",
-    url: "https://www.shakaperf.com",
+    url: "https://shakaperf.com",
     accent: "shakaperf",
     icon: "prove",
     tagline: "ShakaCode’s own tool for proving performance - rigorously.",
@@ -185,8 +185,8 @@ export const projects: Project[] = [
     install: "# Bring rigorous perf testing to your app",
     altInstall: "# Get started at shakaperf.com",
     links: [
-      ["Website", "https://www.shakaperf.com"],
-      ["Docs", "https://www.shakaperf.com/docs/"],
+      ["Website", "https://shakaperf.com"],
+      ["Docs", "https://shakaperf.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakaperf"],
     ],
   },
@@ -235,7 +235,7 @@ export const examples: Example[] = [
     projects: ["ror", "shakapacker"],
     blurb: "The original full-app React on Rails tutorial demo - running in production for years on Shakapacker.",
     stack: ["React on Rails", "Shakapacker", "SSR"],
-    live: "https://www.reactrails.com",
+    live: "https://reactrails.com",
     source: "https://github.com/shakacode/react-webpack-rails-tutorial",
   },
 ];
@@ -384,7 +384,7 @@ export const faq: Faq[] = [
    stay flexible (two on-ramps), most agent-capable, plus all of Rails.
    ============================================================ */
 
-export const AI_CONSULTING = "https://www.shakacode.com/services/ai-consulting";
+export const AI_CONSULTING = "https://shakacode.com/services/ai-consulting";
 export const STARTER_AGENTS_MD =
   "https://github.com/shakacode/react-on-rails-starter-tanstack/blob/main/AGENTS.md";
 
