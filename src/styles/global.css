@@ -319,7 +319,7 @@ img { max-width: 100%; display: block; }
 }
 .proj-logo-slot.has-logo img {
   width: min(100%, 520px);
-  max-height: 112px;
+  max-height: 92px;
   object-fit: contain;
 }
 
