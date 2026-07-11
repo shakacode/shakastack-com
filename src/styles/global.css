@@ -507,6 +507,27 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 600px) {
   .wrap { padding: 0 20px; }
+  .nav-inner { gap: 10px; height: 64px; }
+  .brand { gap: 9px; font-size: 18px; min-width: 0; }
+  .brand .mark { width: 32px; height: 32px; border-radius: 9px; flex: 0 0 auto; }
+  .nav-cta { gap: 8px; min-width: 0; }
+  .nav-cta .btn { padding: 10px 15px; font-size: 14px; }
+  .nav-cta .btn-ghost {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+  .nav-cta-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
   .section { padding: 76px 0; }
   .cards { grid-template-columns: 1fr; }
   .flow { grid-template-columns: 1fr; }

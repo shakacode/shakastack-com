@@ -1,0 +1,173 @@
+name: Claude Code
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened]
+
+jobs:
+  authorize_claude_actor:
+    if: |
+      (github.event_name == 'issue_comment' &&
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association) &&
+        contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' &&
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association) &&
+        contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'issues' &&
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
+        (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      authorized: ${{ steps.permission-gate.outputs.authorized }}
+    steps:
+      - name: Verify actor can run Claude
+        id: permission-gate
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const permissionByLogin = new Map();
+
+            function claudeRequester() {
+              if (
+                context.eventName === 'issue_comment' ||
+                context.eventName === 'pull_request_review_comment'
+              ) {
+                return context.payload.comment?.user?.login;
+              }
+
+              if (context.eventName === 'pull_request_review') {
+                return context.payload.review?.user?.login;
+              }
+
+              if (context.eventName === 'issues') {
+                return context.payload.issue?.user?.login;
+              }
+
+              return null;
+            }
+
+            async function hasWriteAccessFor(username) {
+              if (!username) {
+                return false;
+              }
+
+              if (permissionByLogin.has(username)) {
+                return permissionByLogin.get(username);
+              }
+
+              let hasWriteAccess = false;
+              try {
+                const { data: permission } = await github.rest.repos.getCollaboratorPermissionLevel({
+                  owner,
+                  repo,
+                  username
+                });
+                hasWriteAccess = ['admin', 'write'].includes(permission.permission);
+              } catch (error) {
+                core.warning(
+                  `Unable to verify ${username} write permission for Claude; ` +
+                    `treating the Claude request as untrusted: ${error.message || error}`
+                );
+              }
+
+              permissionByLogin.set(username, hasWriteAccess);
+              return hasWriteAccess;
+            }
+
+            const actor = context.actor;
+            const requester = claudeRequester();
+
+            if (!requester) {
+              core.setOutput('authorized', 'false');
+              core.setFailed('Unable to run Claude because the requester could not be determined.');
+              return;
+            }
+
+            if (!(await hasWriteAccessFor(actor))) {
+              core.setOutput('authorized', 'false');
+              core.setFailed(`Unable to run Claude because ${actor} does not have write/admin repository permission.`);
+              return;
+            }
+
+            if (!(await hasWriteAccessFor(requester))) {
+              core.setOutput('authorized', 'false');
+              core.setFailed(
+                `Unable to run Claude because requester ${requester} does not have write/admin repository permission.`
+              );
+              return;
+            }
+
+            core.setOutput('authorized', 'true');
+            core.info(`Authorized ${actor} and Claude requester ${requester} to run Claude.`);
+
+  claude:
+    needs: authorize_claude_actor
+    if: needs.authorize_claude_actor.outputs.authorized == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+      actions: read # Required for Claude to read CI results on PRs
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Run Claude Code
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+          # This is an optional setting that allows Claude to read CI results on PRs
+          additional_permissions: |
+            actions: read
+
+          # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
+          # prompt: 'Update the pull request description to include a summary of changes.'
+
+          # Optional: Add claude_args to customize behavior and configuration
+          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # or https://code.claude.com/docs/en/cli-reference for available options
+          # claude_args: '--allowed-tools Bash(gh pr *)'
+
+      - name: Verify Claude completed
+        if: steps.claude.outcome == 'success'
+        env:
+          EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          set -euo pipefail
+          TOKEN_HINT="Rotate CLAUDE_CODE_OAUTH_TOKEN with 'claude setup-token' and update the repo secret."
+
+          if [ -z "${EXECUTION_FILE:-}" ] || [ ! -f "$EXECUTION_FILE" ]; then
+            echo "::error::Claude produced no execution output. This usually means the run did not actually start. $TOKEN_HINT"
+            exit 1
+          fi
+
+          result=$(jq -s 'flatten | map(select(type == "object" and .type == "result")) | last' "$EXECUTION_FILE" 2>/dev/null || echo null)
+          if [ "$result" = "null" ] || [ -z "$result" ]; then
+            echo "::error::No result record in Claude execution output. $TOKEN_HINT"
+            exit 1
+          fi
+
+          is_error=$(echo "$result" | jq -r '.is_error // false')
+          cost=$(echo "$result" | jq -r '.total_cost_usd // 0')
+          turns=$(echo "$result" | jq -r '.num_turns // 0')
+          echo "Claude result: is_error=$is_error total_cost_usd=$cost num_turns=$turns"
+
+          if [ "$is_error" = "true" ]; then
+            echo "::error::Claude failed (is_error=true, cost=$cost, turns=$turns). This usually means the token is invalid or expired. $TOKEN_HINT"
+            exit 1
+          fi

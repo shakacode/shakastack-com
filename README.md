@@ -1,16 +1,16 @@
 # shakastack.com
 
 Marketing site for **ShakaStack** - a single entry point into five open-source
-[ShakaCode](https://www.shakacode.com) projects organized into four phases that
+[ShakaCode](https://shakacode.com) projects organized into four phases that
 take a Rails + React app from idea to proven-fast in production:
 
 | Phase  | Project | What it does |
 |--------|---------|--------------|
-| Build  | [React on Rails](https://www.reactonrails.com) | Render React inside Rails - SSR, hydration, and RSC. |
-| Build  | [Shakapacker](https://www.shakapacker.com) | Bundle frontend assets with webpack, the Rails way. |
+| Build  | [React on Rails](https://reactonrails.com) | Render React inside Rails - SSR, hydration, and RSC. |
+| Build  | [Shakapacker](https://shakapacker.com) | Bundle frontend assets with webpack, the Rails way. |
 | Test   | [E2E on Rails](https://e2eonrails.com) | Cypress or Playwright with Rails scenarios, factories, and clean test data. |
-| Prove  | [ShakaPerf](https://www.shakaperf.com) | Rigorously prove which changes actually make pages faster. |
-| Deploy | [Control Plane Flow](https://www.controlplaneflow.com) | A Heroku-style workflow on Control Plane infrastructure. |
+| Prove  | [ShakaPerf](https://shakaperf.com) | Rigorously prove which changes actually make pages faster. |
+| Deploy | [Control Plane Flow](https://controlplaneflow.com) | A Heroku-style workflow on Control Plane infrastructure. |
 
 The page follows Donald Miller's **StoryBrand (SB7)** framework: the Rails
 engineer is the hero, ShakaCode is the guide, and the four-phase stack is the
@@ -39,9 +39,18 @@ pnpm dev        # http://localhost:4321
 pnpm build      # static build → dist/
 pnpm preview    # preview the production build
 pnpm check      # astro check (type + template diagnostics)
+pnpm test:mobile # Playwright check for page-level mobile overflow
 ```
 
 Requires Node 18.20.8+, 20.3.0+, or 22+ (Astro 6). Built with Node 24.
+
+## Mobile layout guardrail
+
+Before shipping responsive/layout changes, run `pnpm test:mobile`. The
+Playwright check loads the homepage at 375px, 393px, and 430px widths and fails
+if the document is wider than the viewport. Treat any page-level horizontal
+overflow as a release blocker; use contained scroll regions for wide tables or
+code samples instead of allowing the whole page to sideways-scroll.
 
 ## Deploy
 

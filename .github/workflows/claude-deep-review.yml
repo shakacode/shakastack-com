@@ -1,0 +1,154 @@
+name: Claude Deep Review
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  authorize_claude_actor:
+    if: |
+      github.event.issue.pull_request &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association) &&
+      contains(github.event.comment.body, '/claude-deep-review')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      authorized: ${{ steps.permission-gate.outputs.authorized }}
+    steps:
+      - name: Verify actor can run Claude
+        id: permission-gate
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const permissionByLogin = new Map();
+
+            function claudeRequester() {
+              if (
+                context.eventName === 'issue_comment' ||
+                context.eventName === 'pull_request_review_comment'
+              ) {
+                return context.payload.comment?.user?.login;
+              }
+
+              if (context.eventName === 'pull_request_review') {
+                return context.payload.review?.user?.login;
+              }
+
+              if (context.eventName === 'issues') {
+                return context.payload.issue?.user?.login;
+              }
+
+              return null;
+            }
+
+            async function hasWriteAccessFor(username) {
+              if (!username) {
+                return false;
+              }
+
+              if (permissionByLogin.has(username)) {
+                return permissionByLogin.get(username);
+              }
+
+              let hasWriteAccess = false;
+              try {
+                const { data: permission } = await github.rest.repos.getCollaboratorPermissionLevel({
+                  owner,
+                  repo,
+                  username
+                });
+                hasWriteAccess = ['admin', 'write'].includes(permission.permission);
+              } catch (error) {
+                core.warning(
+                  `Unable to verify ${username} write permission for Claude; ` +
+                    `treating the Claude request as untrusted: ${error.message || error}`
+                );
+              }
+
+              permissionByLogin.set(username, hasWriteAccess);
+              return hasWriteAccess;
+            }
+
+            const actor = context.actor;
+            const requester = claudeRequester();
+
+            if (!requester) {
+              core.setOutput('authorized', 'false');
+              core.setFailed('Unable to run Claude because the requester could not be determined.');
+              return;
+            }
+
+            if (!(await hasWriteAccessFor(actor))) {
+              core.setOutput('authorized', 'false');
+              core.setFailed(`Unable to run Claude because ${actor} does not have write/admin repository permission.`);
+              return;
+            }
+
+            if (!(await hasWriteAccessFor(requester))) {
+              core.setOutput('authorized', 'false');
+              core.setFailed(
+                `Unable to run Claude because requester ${requester} does not have write/admin repository permission.`
+              );
+              return;
+            }
+
+            core.setOutput('authorized', 'true');
+            core.info(`Authorized ${actor} and Claude requester ${requester} to run Claude.`);
+
+  claude-deep-review:
+    needs: authorize_claude_actor
+    if: needs.authorize_claude_actor.outputs.authorized == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Run Claude Code deep review
+        id: claude-deep-review
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          plugin_marketplaces: "https://github.com/anthropics/claude-code.git"
+          plugins: "code-review@claude-code-plugins"
+          prompt: "/code-review:code-review ${{ github.repository }}/pull/${{ github.event.issue.number }}"
+
+      - name: Verify Claude deep review completed
+        if: steps.claude-deep-review.outcome == 'success'
+        env:
+          EXECUTION_FILE: ${{ steps.claude-deep-review.outputs.execution_file }}
+        run: |
+          set -euo pipefail
+          TOKEN_HINT="Rotate CLAUDE_CODE_OAUTH_TOKEN with 'claude setup-token' and update the repo secret."
+
+          if [ -z "${EXECUTION_FILE:-}" ] || [ ! -f "$EXECUTION_FILE" ]; then
+            echo "::error::Claude deep review produced no execution output. This usually means the run did not actually start. $TOKEN_HINT"
+            exit 1
+          fi
+
+          result=$(jq -s 'flatten | map(select(type == "object" and .type == "result")) | last' "$EXECUTION_FILE" 2>/dev/null || echo null)
+          if [ "$result" = "null" ] || [ -z "$result" ]; then
+            echo "::error::No result record in Claude deep review execution output. $TOKEN_HINT"
+            exit 1
+          fi
+
+          is_error=$(echo "$result" | jq -r '.is_error // false')
+          cost=$(echo "$result" | jq -r '.total_cost_usd // 0')
+          turns=$(echo "$result" | jq -r '.num_turns // 0')
+          echo "Claude deep review result: is_error=$is_error total_cost_usd=$cost num_turns=$turns"
+
+          if [ "$is_error" = "true" ]; then
+            echo "::error::Claude deep review failed (is_error=true, cost=$cost, turns=$turns). This usually means the token is invalid or expired. $TOKEN_HINT"
+            exit 1
+          fi
