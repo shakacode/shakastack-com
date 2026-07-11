@@ -314,7 +314,7 @@ img { max-width: 100%; display: block; }
 .proj-logo-slot .ph { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--ink-3); text-transform: uppercase; }
 .proj-logo-slot.has-logo {
   border-style: solid;
-  background: oklch(0.985 0.008 85);
+  background: var(--sand);
   padding: 18px;
 }
 .proj-logo-slot.has-logo img {

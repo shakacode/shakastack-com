@@ -68,11 +68,11 @@ The project section should link to:
 
 ## Visual Assets
 
-Use the supplied asset system from:
+Use the approved asset system from:
 
-- `/Users/justin/Downloads/shakacode-oss-logo-system-with-cypress-playwright-on-rails/cypress-playwright-on-rails`
-- `/Users/justin/Downloads/cypress-playwright-on-rails-logo-concepts/01-dual-test-windows`
-- `/Users/justin/Downloads/shakacode-oss-social-cards-1200x630-with-cypress-playwright`
+- `<asset-source>/cypress-playwright-on-rails`
+- `<asset-source>/logo-concepts/01-dual-test-windows`
+- `<asset-source>/social-cards-1200x630-with-cypress-playwright`
 
 ShakaStack should copy only the assets it needs into `public/`, preferably under
 `public/projects/cypress-playwright-on-rails/`. The project deep-dive visual

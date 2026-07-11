@@ -166,7 +166,7 @@ export const projects: Project[] = [
       ["Clean app state", "Reset data, load scenarios, and use factories through app commands designed for repeatable E2E tests."],
       ["One bridge, two runners", "Keep Cypress and Playwright support under the same Rails-native integration layer."],
     ],
-    install: "gem 'cypress-on-rails'",
+    install: "bundle add cypress-on-rails",
     altInstall: "bin/rails g cypress_on_rails:install --framework playwright",
     links: [
       ["Website", "https://e2eonrails.com"],
@@ -206,7 +206,7 @@ export const projects: Project[] = [
     phase: "Deploy",
     name: "Control Plane Flow",
     domain: "controlplaneflow.com",
-    url: "https://www.controlplaneflow.com",
+    url: "https://controlplaneflow.com",
     accent: "cpflow",
     icon: "deploy",
     tagline: "A Heroku-style workflow on Control Plane infrastructure.",
@@ -220,8 +220,8 @@ export const projects: Project[] = [
     install: "gem install cpflow",
     altInstall: "cpflow setup-app -a my-app",
     links: [
-      ["Website", "https://www.controlplaneflow.com"],
-      ["Docs", "https://www.shakacode.com/control-plane-flow/docs/"],
+      ["Website", "https://controlplaneflow.com"],
+      ["Docs", "https://shakacode.com/control-plane-flow/docs/"],
       ["GitHub", "https://github.com/shakacode/control-plane-flow"],
     ],
   },

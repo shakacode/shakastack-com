@@ -20,6 +20,9 @@ This plan spans three repositories, but the work is one connected release:
 
 Do not split the work into disconnected PRs without keeping the docs URLs and dispatch names consistent.
 
+For portable commands below, replace `<workspace>` with the directory containing
+the checkouts and `<asset-source>` with the approved brand-asset source.
+
 ## File Structure
 
 ### ShakaStack Repo
@@ -80,7 +83,7 @@ Do not split the work into disconnected PRs without keeping the docs URLs and di
 Run:
 
 ```bash
-git -C /Users/justin/.codex/worktrees/4ca4/shakastack-com status --short --branch
+git -C <workspace>/shakastack-com status --short --branch
 ```
 
 Expected: branch `jg-codex/add-e2e-on-rails-layer` with no unstaged changes except the plan while it is being edited.
@@ -90,7 +93,7 @@ Expected: branch `jg-codex/add-e2e-on-rails-layer` with no unstaged changes exce
 Run:
 
 ```bash
-cd /Users/justin/.codex/worktrees/4ca4
+cd <workspace>
 if [ -d cypress-playwright-on-rails/.git ]; then
   git -C cypress-playwright-on-rails fetch origin
 else
@@ -108,7 +111,7 @@ Expected: branch `jg-codex/e2e-docs-site-wiring`.
 Run:
 
 ```bash
-cd /Users/justin/.codex/worktrees/4ca4
+cd <workspace>
 if [ -d e2eonrails-com/.git ]; then
   git -C e2eonrails-com fetch origin
 else
@@ -139,13 +142,11 @@ Expected: if the repo is still empty, `git clone` may warn that it is empty. Con
 Run:
 
 ```bash
-mkdir -p /Users/justin/.codex/worktrees/4ca4/shakastack-com/public/projects/cypress-playwright-on-rails
-cp /Users/justin/Downloads/shakacode-oss-logo-system-with-cypress-playwright-on-rails/cypress-playwright-on-rails/lockup-dark.svg /Users/justin/.codex/worktrees/4ca4/shakastack-com/public/projects/cypress-playwright-on-rails/lockup-dark.svg
-cp /Users/justin/Downloads/shakacode-oss-logo-system-with-cypress-playwright-on-rails/cypress-playwright-on-rails/mark-transparent.svg /Users/justin/.codex/worktrees/4ca4/shakastack-com/public/projects/cypress-playwright-on-rails/mark-transparent.svg
-cp /Users/justin/Downloads/shakacode-oss-logo-system-with-cypress-playwright-on-rails/cypress-playwright-on-rails/social-card.png /Users/justin/.codex/worktrees/4ca4/shakastack-com/public/projects/cypress-playwright-on-rails/social-card.png
+mkdir -p <workspace>/shakastack-com/public/projects/cypress-playwright-on-rails
+cp <asset-source>/cypress-playwright-on-rails/lockup-dark.svg <workspace>/shakastack-com/public/projects/cypress-playwright-on-rails/lockup-dark.svg
 ```
 
-Expected: three assets exist under `public/projects/cypress-playwright-on-rails/`.
+Expected: the selected assets exist under `public/projects/cypress-playwright-on-rails/`.
 
 - [ ] **Step 2: Add typed logo support to the content model**
 
@@ -581,7 +582,7 @@ Expected: checks pass and commit is created. If `bundle exec rake` fails for an 
 
 - [ ] **Step 1: Initialize repo main**
 
-Inside `/Users/justin/.codex/worktrees/4ca4/e2eonrails-com`, if the repo is empty:
+Inside `<workspace>/e2eonrails-com`, if the repo is empty:
 
 ```bash
 git switch --orphan main
@@ -909,7 +910,7 @@ Run:
 ```bash
 npm install
 npm --prefix prototypes/docusaurus install
-E2E_ON_RAILS_REPO=/Users/justin/.codex/worktrees/4ca4/cypress-playwright-on-rails npm run build:full
+E2E_ON_RAILS_REPO=<workspace>/cypress-playwright-on-rails npm run build:full
 git add .
 git commit -m "Bootstrap E2E on Rails docs site"
 git push -u origin main
@@ -949,7 +950,7 @@ pnpm dev --host 127.0.0.1
 Run docs site:
 
 ```bash
-cd /Users/justin/.codex/worktrees/4ca4/e2eonrails-com
+cd <workspace>/e2eonrails-com
 npm run dev -- --host 127.0.0.1
 ```
 
@@ -967,7 +968,7 @@ Expected: ShakaStack shows five ordered layers; E2E docs site shows synced docs 
 Run:
 
 ```bash
-cd /Users/justin/.codex/worktrees/4ca4/shakastack-com
+cd <workspace>/shakastack-com
 git status --short
 git push -u origin jg-codex/add-e2e-on-rails-layer
 gh pr create --draft --title "Add E2E on Rails to ShakaStack" --body "Adds E2E on Rails as the Test layer, moves Deploy last, and documents the docs-site publication workflow."
@@ -980,7 +981,7 @@ Expected: draft PR exists for `shakacode/shakastack-com`.
 Run:
 
 ```bash
-cd /Users/justin/.codex/worktrees/4ca4/cypress-playwright-on-rails
+cd <workspace>/cypress-playwright-on-rails
 git status --short
 git push -u origin jg-codex/e2e-docs-site-wiring
 gh pr create --draft --title "Wire E2E on Rails docs site" --body "Adds the docs sidebar, docs publication dispatch, public docs pages, and README link for e2eonrails.com."
