@@ -1,5 +1,5 @@
 import { useState, type CSSProperties } from "react";
-import { Icon } from "../Icon";
+import { GitHubMark, Icon } from "../Icon";
 import { phaseStage, type Project } from "../../data/shaka";
 
 interface Props {
@@ -26,6 +26,8 @@ interface PhaseGroup {
 export default function StackExplorer({ projects }: Props) {
   const [active, setActive] = useState(0);
   const p = projects[active];
+  const github = p.links.find((l) => l[0] === "GitHub");
+  const docs = p.links.find((l) => l[0] === "Docs");
 
   // Group consecutive projects by phase so the visible order follows the stack.
   const phases: PhaseGroup[] = [];
@@ -90,6 +92,7 @@ export default function StackExplorer({ projects }: Props) {
           <span className="se-detail-stage">{phaseStage(p)}</span>
           <h3>{p.name}</h3>
           <p className="se-detail-tag">{p.tagline}</p>
+          <p className="se-detail-blurb">{p.blurb}</p>
         </div>
         <div className="se-detail-benefits">
           {p.benefits.map(([title, desc]) => (
@@ -104,17 +107,46 @@ export default function StackExplorer({ projects }: Props) {
             </div>
           ))}
         </div>
+        <div className="term">
+          <div className="term-bar">
+            <i></i>
+            <i></i>
+            <i></i>
+            <span className="tt">{p.domain} - terminal</span>
+          </div>
+          <div className="term-body">
+            <div className="ln">
+              <span className="pr">$</span>
+              <span>{p.install}</span>
+            </div>
+            {p.altInstall && (
+              <div className="ln">
+                <span className="pr">$</span>
+                <span>{p.altInstall}</span>
+              </div>
+            )}
+          </div>
+        </div>
         <div className="se-detail-foot">
           <a
             className="btn btn-accent"
             style={{ background: "var(--c)", color: "#fff" }}
-            href={`#proj-${p.id}`}
+            href={p.url}
+            target="_blank"
+            rel="noreferrer"
           >
-            See details <Icon name="arrow" />
+            Visit {p.domain} <Icon name="arrowUR" />
           </a>
-          <a className="link-arrow" href={p.url} target="_blank" rel="noreferrer">
-            {p.domain} <Icon name="arrowUR" />
-          </a>
+          {github && (
+            <a className="btn btn-ghost" href={github[1]} target="_blank" rel="noreferrer">
+              <GitHubMark width={15} height={15} /> Source
+            </a>
+          )}
+          {docs && (
+            <a className="link-arrow" href={docs[1]} target="_blank" rel="noreferrer">
+              Docs <Icon name="arrow" />
+            </a>
+          )}
         </div>
       </div>
     </div>

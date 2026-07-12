@@ -240,7 +240,9 @@ img { max-width: 100%; display: block; }
 .se-detail-stage { font-family: var(--ff-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cd); font-weight: 600; }
 .se-detail h3 { font-size: clamp(28px, 3.4vw, 38px); margin: 12px 0 0; }
 .se-detail-tag { font-size: 17px; color: var(--ink); font-weight: 500; margin-top: 10px; max-width: 460px; text-wrap: pretty; }
+.se-detail-blurb { color: var(--ink-2); font-size: 15px; margin-top: 12px; max-width: 500px; text-wrap: pretty; }
 .se-detail-benefits { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; flex: 1; }
+.se-detail .term { margin: 0 0 24px; }
 .se-b { display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: start; }
 .se-b-tick { width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; color: #fff; background: var(--c); margin-top: 1px; }
 .se-b-tick svg { width: 15px; height: 15px; }
@@ -270,59 +272,6 @@ img { max-width: 100%; display: block; }
 .flow-step .stage { font-family: var(--ff-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
 .flow-step p { color: var(--ink-2); font-size: 15px; margin-top: 4px; padding-right: 18px; text-wrap: pretty; }
 
-/* ============================================================
-   PROJECT SECTIONS
-   ============================================================ */
-.proj { --c: var(--ror); --cd: var(--ror-deep); padding: 84px 0; border-top: 1px solid var(--line); position: relative; }
-.proj-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 60px; align-items: center; }
-.proj.flip .proj-grid { grid-template-columns: 1.08fr 0.92fr; }
-.proj.flip .proj-visual { order: -1; }
-.proj-badge { display: inline-flex; align-items: center; gap: 10px; }
-.proj-badge .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 4px color-mix(in oklch, var(--c) 22%, transparent); }
-.proj-badge .stage { font-family: var(--ff-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cd); font-weight: 600; }
-.proj h2 { font-size: clamp(30px, 3.6vw, 44px); margin: 16px 0 0; }
-.proj .tagline { font-size: 19px; color: var(--ink); font-weight: 500; margin-top: 12px; }
-.proj .blurb { color: var(--ink-2); margin-top: 16px; max-width: 520px; text-wrap: pretty; }
-.benefits { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
-.benefit { display: grid; grid-template-columns: 26px 1fr; gap: 14px; align-items: start; }
-.benefit .tick { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; background: color-mix(in oklch, var(--c) 18%, var(--sand)); color: var(--cd); margin-top: 1px; }
-.benefit .tick svg { width: 14px; height: 14px; }
-.benefit b { font-weight: 650; font-size: 16px; }
-.benefit p { color: var(--ink-2); font-size: 15px; margin-top: 2px; text-wrap: pretty; }
-.proj-actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; align-items: center; }
-.proj-actions .btn-accent { background: var(--c); color: #fff; }
-.proj-actions .btn-accent:hover { box-shadow: 0 10px 26px color-mix(in oklch, var(--c) 45%, transparent); }
-
-/* project visual card */
-.proj-visual {
-  border-radius: var(--r); padding: 26px; position: relative; overflow: hidden;
-  background:
-    radial-gradient(120% 90% at 85% 0%, color-mix(in oklch, var(--c) 26%, transparent), transparent 60%),
-    linear-gradient(160deg, color-mix(in oklch, var(--cd) 16%, var(--sand)), var(--sand-2));
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
-  min-height: 340px;
-  display: flex; flex-direction: column;
-}
-.proj-logo-slot {
-  height: 132px; border-radius: var(--r-sm); border: 1.5px dashed color-mix(in oklch, var(--c) 50%, var(--line-2));
-  display: grid; place-items: center; gap: 8px; text-align: center;
-  background-image: repeating-linear-gradient(135deg, color-mix(in oklch, var(--c) 8%, transparent) 0 11px, transparent 11px 22px);
-}
-.proj-logo-slot .glyph { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: var(--c); color: #fff; box-shadow: var(--shadow-sm); }
-.proj-logo-slot .glyph svg { width: 24px; height: 24px; }
-.proj-logo-slot .ph { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--ink-3); text-transform: uppercase; }
-.proj-logo-slot.has-logo {
-  border-style: solid;
-  background: var(--sand);
-  padding: 18px;
-}
-.proj-logo-slot.has-logo img {
-  width: min(100%, 520px);
-  max-height: 92px;
-  object-fit: contain;
-}
-
 /* terminal */
 .term { margin-top: 18px; border-radius: var(--r-sm); overflow: hidden; border: 1px solid var(--line-2); background: oklch(0.22 0.03 255); box-shadow: var(--shadow-sm); }
 .term-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; background: oklch(0.27 0.03 255); }
@@ -333,8 +282,6 @@ img { max-width: 100%; display: block; }
 .term-body .ln { display: flex; gap: 9px; white-space: pre-wrap; word-break: break-word; }
 .term-body .pr { color: color-mix(in oklch, var(--c) 75%, white); user-select: none; }
 .term-body .cmt { color: oklch(0.92 0.02 80 / 0.4); }
-.term-meta { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
-.chip { font-family: var(--ff-mono); font-size: 11.5px; padding: 5px 11px; border-radius: 999px; background: color-mix(in oklch, var(--c) 14%, var(--sand)); color: var(--cd); border: 1px solid color-mix(in oklch, var(--c) 24%, transparent); }
 
 /* ============================================================
    EXAMPLES GALLERY
@@ -497,8 +444,6 @@ img { max-width: 100%; display: block; }
 @media (max-width: 940px) {
   .hero-inner { grid-template-columns: 1fr; gap: 40px; padding-block: 64px 120px; }
   .hero-visual { max-width: 460px; }
-  .proj-grid, .proj.flip .proj-grid { grid-template-columns: 1fr; gap: 36px; }
-  .proj.flip .proj-visual { order: 0; }
   .flow { grid-template-columns: repeat(2, 1fr); }
   .flow-step:not(:last-child)::after { display: none; }
   .cards { grid-template-columns: repeat(2, 1fr); }
