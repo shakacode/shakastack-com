@@ -1,141 +1,212 @@
 ---
 import Icon from "./Icon.astro";
-import GitHubMark from "./GitHubMark.astro";
 import {
   roads,
   exodusEvidence,
   tanstackSplit,
-  starter,
   perfLead,
   perfColumns,
   perfMatrix,
   perfNote,
-  STARTER_REPO,
-  STARTER_DEMO,
-  RSC_VS_NEXTJS_DOC,
-  BLOG_POST,
+  NEXTJS_RAILS_COMPARISON_DOC,
 } from "../data/shaka";
+
+interface Props {
+  variant?: "full" | "teaser";
+}
+
+const { variant = "full" } = Astro.props;
 ---
 
-<section class="section vsnext" id="vs-nextjs">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Leaving Next.js?</span>
-      <h2>The Next.js era is cracking. Two roads out.</h2>
-      <p>{exodusEvidence}</p>
-    </div>
+{
+  variant === "teaser" ? (
+    <section class="section vsnext vsnext-teaser" id="vs-nextjs">
+      <div class="wrap teaser-grid">
+        <div class="section-head reveal">
+          <span class="eyebrow">Next.js + Rails</span>
+          <h2>Both stacks can stream. The key tradeoff is the application boundary.</h2>
+          <p>
+            Compare a Next.js Server Component fetching Rails directly with React on Rails Pro
+            resolving Rails-owned async props inside the active Rails request.
+          </p>
+        </div>
+        <div class="teaser-action reveal">
+          <a class="btn btn-accent" href="/vs-nextjs">
+            See the full comparison <Icon name="arrow" />
+          </a>
+          <span>Architecture, tradeoffs, and an honest decision guide.</span>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section class="section vsnext vsnext-full" id="comparison">
+      <div class="wrap">
+        <header class="section-head vsnext-intro reveal">
+          <span class="eyebrow">Leaving Next.js?</span>
+          <h1>Choose the right boundary for Rails-backed rendering.</h1>
+          <p>{exodusEvidence}</p>
+        </header>
 
-    <div class="roads reveal">
-      {
-        roads.map((r) => (
-          <div class={`road road-${r.kind}`}>
-            <span class="road-label">{r.label}</span>
-            <h3>{r.title}</h3>
-            <p>{r.body}</p>
-            <ul>
-              {r.points.map((pt) => (
-                <li><Icon name="check" />{pt}</li>
-              ))}
-            </ul>
+        <div class="roads reveal">
+          {roads.map((road) => (
+            <article class={`road road-${road.kind}`}>
+              <span class="road-label">{road.label}</span>
+              <h2>{road.title}</h2>
+              <p>{road.body}</p>
+              <ul>
+                {road.points.map((point) => (
+                  <li><Icon name="check" />{point}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+
+        <div class="streaming-thesis reveal">
+          <span class="eyebrow">The streaming distinction</span>
+          <h2>Both support Suspense streaming. Rails-owned data takes a different path.</h2>
+          <p>
+            This is a comparison of the strongest server-rendered versions of both architectures,
+            not a client-fetch straw man. A Next.js Server Component can fetch Rails directly and
+            progressively stream the result. React on Rails Pro can stream the same kind of slow
+            Rails-backed section while keeping request ownership inside Rails.
+          </p>
+        </div>
+
+        <div class="architecture-flows reveal">
+          <article class="flow-card">
+            <span class="flow-label">Next.js + separate Rails service</span>
+            <h3>Server Component → Rails API → Suspense</h3>
+            <p>
+              The Next server calls a Rails JSON or GraphQL endpoint. Authorization, tenancy,
+              locale, tracing, caching context, and response contracts cross that application
+              boundary before React resumes rendering.
+            </p>
+            <p class="flow-fit">
+              <b>Best fit:</b> the API and independent frontend are intentional product boundaries.
+            </p>
+          </article>
+          <article class="flow-card flow-card-ror">
+            <span class="flow-label">React on Rails Pro</span>
+            <h3>Rails request → async prop → Suspense</h3>
+            <p>
+              Rails policies, scopes, caches, and query objects stay in the active page request.
+              Each resolved async prop fulfills a request-scoped Promise in the Node renderer and
+              flushes its Suspense boundary into the same browser response.
+            </p>
+            <p class="flow-fit">
+              <b>Best fit:</b> Rails owns the product, domain logic, and request context.
+            </p>
+          </article>
+        </div>
+
+        <div class="async-props reveal">
+          <div class="async-copy">
+            <span class="eyebrow">React on Rails 17.0+</span>
+            <h2>Push known work, pull on demand, or mix both.</h2>
+            <p>
+              The controller starts the streaming view and supplies fast synchronous props. Slow
+              work belongs in the async emitter or query layer—not completed synchronously in the
+              controller before the shell can render.
+            </p>
           </div>
-        ))
-      }
-    </div>
+          <div class="mode-grid">
+            <article>
+              <span>01</span>
+              <h3>Push</h3>
+              <p>Rails starts known work and emits each named prop as it resolves.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Pull</h3>
+              <p>React requests a named prop only when the rendered component tree needs it.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Mixed</h3>
+              <p>Push critical props immediately while pulling optional branches on demand.</p>
+            </article>
+          </div>
+        </div>
 
-    <div class="tanstack-split reveal">
-      <div class="ts-head">
-        <h3>“TanStack” is two different things.</h3>
-        <p>Keep them separate - embrace the client libraries, skip the framework.</p>
-      </div>
-      <div class="ts-cols">
-        {
-          tanstackSplit.map((t) => (
-            <div class={`ts-card ts-${t.kind}`}>
-              <span class="ts-tag">
-                <Icon name={t.kind === "embrace" ? "check" : "arrowUR"} />
-                {t.kind === "embrace" ? "Embrace" : "Substitute"}
-              </span>
-              <h4>{t.title}</h4>
-              <p>{t.body}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
+        <aside class="accuracy-note reveal" aria-labelledby="accuracy-note-heading">
+          <div>
+            <span class="eyebrow">Accuracy guardrails</span>
+            <h2 id="accuracy-note-heading">An architectural advantage, not a universal speed promise.</h2>
+          </div>
+          <ul>
+            <li>
+              React on Rails Pro still serializes values across its internal Rails-to-Node renderer
+              transport; it removes a separate application API, not every runtime boundary.
+            </li>
+            <li>
+              Independent database work overlaps only with safe fiber isolation, driver support,
+              connection-pool capacity, and explicitly captured request context.
+            </li>
+            <li>
+              Network placement, caching, payload size, query time, and renderer capacity can
+              dominate. Benchmark representative pages before claiming a speedup.
+            </li>
+          </ul>
+          <a class="link-arrow" href={NEXTJS_RAILS_COMPARISON_DOC} target="_blank" rel="noreferrer">
+            Read the detailed React on Rails comparison <Icon name="arrowUR" />
+          </a>
+        </aside>
 
-    <div class="perf reveal">
-      <div class="perf-lead">
-        <h3>{perfLead.title}</h3>
-        <p>{perfLead.body}</p>
-      </div>
-      <div class="cmp-wrap">
-        <table class="cmp">
-          <thead>
-            <tr>
-              <th></th>
-              {
-                perfColumns.map((c, i) => (
-                  <th class={i === 0 ? "col-ror" : ""}>{c}</th>
-                ))
-              }
-            </tr>
-          </thead>
-          <tbody>
-            {
-              perfMatrix.map((row) => (
+        <div class="tanstack-split reveal">
+          <div class="ts-head">
+            <h2>“TanStack” is two different decisions.</h2>
+            <p>Adopt its client libraries independently from its full-stack framework.</p>
+          </div>
+          <div class="ts-cols">
+            {tanstackSplit.map((item) => (
+              <article class={`ts-card ts-${item.kind}`}>
+                <span class="ts-tag">
+                  <Icon name={item.kind === "embrace" ? "check" : "arrowUR"} />
+                  {item.kind === "embrace" ? "Embrace" : "Substitute"}
+                </span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="perf reveal">
+          <div class="perf-lead">
+            <h2>{perfLead.title}</h2>
+          </div>
+          <div class="cmp-wrap">
+            <table class="cmp">
+              <thead>
                 <tr>
-                  <th scope="row">{row.feature}</th>
-                  {row.cells.map((cell, i) => (
-                    <td class={i === 0 ? "col-ror" : ""}>
-                      {cell === "no" ? (
-                        <span class="cell no" aria-label="Not supported">-</span>
-                      ) : (
-                        <span class="cell yes" aria-label={cell === "rc" ? "Supported (release candidate)" : "Supported"}>
-                          <Icon name="check" />
-                          {cell === "rc" && <i class="rc">RC</i>}
-                        </span>
-                      )}
-                    </td>
+                  <th><span class="sr-only">Capability</span></th>
+                  {perfColumns.map((column, index) => (
+                    <th scope="col" class={index === 0 ? "col-ror" : ""}>{column}</th>
                   ))}
                 </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
-      <p class="cmp-note">{perfNote}</p>
-    </div>
-
-    <p class="boundary reveal">
-      No Rails and little server-side logic? A JavaScript meta-framework is a
-      fine choice, and we'll say so. ShakaStack is for teams who have Rails, or
-      want it.
-    </p>
-
-    <div class="starter reveal">
-      <div class="starter-copy">
-        <span class="eyebrow">The proof</span>
-        <h3>The official React on Rails × TanStack starter.</h3>
-        <p>{starter.blurb}</p>
-        <p class="starter-guardrail">{starter.guardrail}</p>
-        <div class="starter-actions">
-          <a class="btn btn-accent" href={STARTER_REPO} target="_blank" rel="noreferrer">
-            <GitHubMark width={16} height={16} /> Get the starter
-          </a>
-          <a class="btn btn-ghost" href={STARTER_DEMO} target="_blank" rel="noreferrer">
-            Live demo <Icon name="arrowUR" />
-          </a>
-          <a class="link-arrow" href={RSC_VS_NEXTJS_DOC} target="_blank" rel="noreferrer">
-            RSC vs Next.js <Icon name="arrowUR" />
-          </a>
-          <a class="link-arrow" href={BLOG_POST} target="_blank" rel="noreferrer">
-            Read the full story <Icon name="arrowUR" />
-          </a>
-        </div>
-        <div class="starter-chips">
-          {starter.stack.map((s) => <span>{s}</span>)}
+              </thead>
+              <tbody>
+                {perfMatrix.map((row) => (
+                  <tr>
+                    <th scope="row">{row.feature}</th>
+                    {row.cells.map((cell, index) => (
+                      <td class={index === 0 ? "col-ror" : ""}>
+                        {cell === "no" ? (
+                          <span class="cell no" aria-label="Not supported">—</span>
+                        ) : (
+                          <span class="cell yes" aria-label="Supported"><Icon name="check" /></span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="cmp-note">{perfNote}</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  )
+}

@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/islands/Nav.tsx";
+import VsNextjs from "../components/VsNextjs.astro";
+import Faq from "../components/Faq.astro";
+import CTA from "../components/CTA.astro";
+import Footer from "../components/Footer.astro";
+import { vsNextjsFaq } from "../data/shaka";
+
+const title = "Next.js Alternative for Rails Teams | ShakaStack";
+const description =
+  "Compare Next.js with a separate Rails backend to React on Rails Pro async-props streaming, including Suspense, application boundaries, tradeoffs, and fit.";
+---
+
+<Layout title={title} description={description}>
+  <Nav client:load />
+  <main id="top">
+    <VsNextjs />
+    <Faq
+      items={vsNextjsFaq}
+      id="decision-faq"
+      eyebrow="Decision guide"
+      heading="Choose the boundary your product actually needs."
+    />
+    <CTA />
+  </main>
+  <Footer />
+</Layout>

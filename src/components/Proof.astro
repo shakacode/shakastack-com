@@ -1,17 +1,47 @@
 ---
-import { logos } from "../data/shaka";
+import Icon from "./Icon.astro";
+import GitHubMark from "./GitHubMark.astro";
+import {
+  logos,
+  starter,
+  STARTER_REPO,
+  STARTER_DEMO,
+  STARTER_AGENTS_MD,
+} from "../data/shaka";
 ---
 
 <section class="section proof">
   <div class="wrap">
-    <div
-      class="section-head reveal"
-      style="max-width: none; margin-bottom: 30px; text-align: center"
-    >
-      <span class="eyebrow" style="justify-content: center; display: inline-flex">
-        Trusted in production
-      </span>
-      <h2 style="margin-top: 16px">Shipping for teams large and small.</h2>
+    <div class="section-head reveal">
+      <span class="eyebrow">The proof</span>
+      <h2>Start from a working app, not a slide deck.</h2>
+    </div>
+
+    <div class="starter reveal">
+      <div class="starter-copy">
+        <h3>{starter.title}</h3>
+        <p>{starter.blurb}</p>
+        <p class="starter-guardrail">{starter.guardrail}</p>
+        <div class="starter-actions">
+          <a class="btn btn-accent" href={STARTER_REPO} target="_blank" rel="noreferrer">
+            <GitHubMark width={16} height={16} /> Get the starter
+          </a>
+          <a class="btn btn-ghost" href={STARTER_DEMO} target="_blank" rel="noreferrer">
+            Live demo <Icon name="arrowUR" />
+          </a>
+          <a class="link-arrow" href={STARTER_AGENTS_MD} target="_blank" rel="noreferrer">
+            Read its AGENTS.md <Icon name="arrowUR" />
+          </a>
+        </div>
+        <div class="starter-chips">
+          {starter.stack.map((item) => <span>{item}</span>)}
+        </div>
+      </div>
+    </div>
+
+    <div class="proof-trust-head reveal">
+      <span class="eyebrow">Trusted in production</span>
+      <h3>Shipping for teams large and small.</h3>
     </div>
     <div class="logos-row reveal">
       {logos.map((l) => <span class="logo-ph">{l}</span>)}
