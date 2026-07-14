@@ -83,8 +83,6 @@ export const ALL_DEMOS = "https://reactonrails.com/examples";
 export const STARTER_REPO =
   "https://github.com/shakacode/react-on-rails-starter-tanstack";
 export const STARTER_DEMO = "https://starter.reactonrails.com";
-export const RSC_VS_NEXTJS_DOC =
-  "https://reactonrails.com/docs/pro/react-server-components/nextjs-comparison";
 export const NEXTJS_RAILS_COMPARISON_DOC =
   "https://reactonrails.com/docs/getting-started/nextjs-with-separate-rails-backend";
 export const MIGRATE_FROM_NEXTJS_DOC =
@@ -93,8 +91,6 @@ export const TANSTACK_ROUTER_DOC =
   "https://reactonrails.com/docs/building-features/tanstack-router";
 export const TANSTACK_QUERY_DOC =
   "https://reactonrails.com/docs/building-features/tanstack-query";
-export const BLOG_POST =
-  "https://shakacode.com/blog/tanstack-with-react-on-rails";
 
 export const projects: Project[] = [
   {
@@ -498,4 +494,4 @@ export const perfMatrix: CmpRow[] = [
 ];
 
 export const perfNote =
-  "React on Rails Pro requires its Node renderer for streaming and RSC. React on Rails and Pro 17.0.0+ support push, pull, and mixed async-props modes.";
+  "React on Rails Pro requires its Node renderer for streaming and RSC. React on Rails Pro 17.0.0+ supports push, pull, and mixed async-props modes.";
