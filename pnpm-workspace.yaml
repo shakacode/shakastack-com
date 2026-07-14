@@ -1,1 +1,7 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
 enablePrePostScripts: true
+onlyBuiltDependencies:
+  - esbuild
+  - sharp

@@ -7,7 +7,7 @@ is absent means that capability is n/a in this repository.
 
 | Script | Purpose | This repo runs |
 | --- | --- | --- |
-| `setup` | Install dependencies | `pnpm install --frozen-lockfile --ignore-scripts`; install Playwright Chromium |
+| `setup` | Install dependencies | `pnpm install --frozen-lockfile`; install Playwright Chromium |
 | `validate` | Pre-push gate | `pnpm check` |
 | `test` | Run tests | `pnpm test:mobile` |
 | `lint` | Lint / format | n/a |
