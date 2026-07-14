@@ -1,5 +1,7 @@
 ---
-trusted_users: []
+trusted_users:
+  - justin808
+  - sashakhar1
 trusted_bots: []
 trusted_metadata_bots: []
 trusted_teams: []
