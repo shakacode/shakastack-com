@@ -1,0 +1,16 @@
+---
+trusted_users:
+  - justin808
+  - sashakhar1
+trusted_bots:
+  - coderabbitai
+  - dependabot
+  - greptile-app
+  - greptile-apps
+  - chatgpt-codex-connector
+  - claude
+  - codex
+  - openai-codex
+trusted_metadata_bots:
+  - cloudflare-workers-and-pages
+trusted_teams: []
