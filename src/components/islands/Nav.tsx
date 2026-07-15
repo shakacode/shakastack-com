@@ -16,15 +16,15 @@ export default function Nav() {
   return (
     <nav className={"nav" + (scrolled ? " scrolled" : "")}>
       <div className="wrap nav-inner">
-        <a className="brand" href="#top">
+        <a className="brand" href="/#top">
           <span className="mark">🤙</span>
           <span>ShakaStack</span>
         </a>
         <div className="nav-links">
-          <a href="#problem">Why</a>
-          <a href="#stack">The Stack</a>
-          <a href="#vs-nextjs">vs Next.js</a>
-          <a href="#examples">Examples</a>
+          <a href="/#problem">Why</a>
+          <a href="/#stack">The Stack</a>
+          <a href="/vs-nextjs">vs Next.js</a>
+          <a href="/#examples">Examples</a>
         </div>
         <div className="nav-cta">
           <a

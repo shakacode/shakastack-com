@@ -83,16 +83,14 @@ export const ALL_DEMOS = "https://reactonrails.com/examples";
 export const STARTER_REPO =
   "https://github.com/shakacode/react-on-rails-starter-tanstack";
 export const STARTER_DEMO = "https://starter.reactonrails.com";
-export const RSC_VS_NEXTJS_DOC =
-  "https://reactonrails.com/docs/pro/react-server-components/nextjs-comparison";
+export const NEXTJS_RAILS_COMPARISON_DOC =
+  "https://reactonrails.com/docs/getting-started/nextjs-with-separate-rails-backend";
 export const MIGRATE_FROM_NEXTJS_DOC =
   "https://reactonrails.com/docs/migrating/migrating-from-nextjs";
 export const TANSTACK_ROUTER_DOC =
   "https://reactonrails.com/docs/building-features/tanstack-router";
 export const TANSTACK_QUERY_DOC =
   "https://reactonrails.com/docs/building-features/tanstack-query";
-export const BLOG_POST =
-  "https://shakacode.com/blog/tanstack-with-react-on-rails";
 
 export const projects: Project[] = [
   {
@@ -323,10 +321,9 @@ export function phaseStage(p: Pick<Project, "phase" | "stage">): string {
 }
 
 /* ============================================================
-   "Leaving Next.js? The fork in the road" - positioning content.
-   Accuracy guardrails: RSC is demoable/maturing (RC), NOT GA. We never claim
-   the Query-backed data is server-rendered/SEO-crawlable - only the shell +
-   router state are SSR'd; data is fast client fetch. See README before edits.
+   Leaving Next.js - compare the strongest versions of both architectures.
+   The distinction is the application boundary for Rails-owned SSR data, not
+   whether either stack can stream through Suspense.
    ============================================================ */
 
 export interface Road {
@@ -337,31 +334,30 @@ export interface Road {
   points: string[];
 }
 
-/** The Next.js exodus is a tailwind - the critique went mainstream. */
 export const exodusEvidence =
-  "Teams are leaving Next.js. Lovable made TanStack Start its default for new projects this year; Inngest reported cutting local dev load times by roughly 83% after migrating off Next.js. The reasons they give - complexity, slow local dev, fighting the network - are exactly the critique ShakaCode has made for years.";
+  "If Next.js no longer fits, the important question is not simply which JavaScript framework replaces it. Decide whether the frontend should remain a separately owned application or whether Rails should own the page request and server render.";
 
 export const roads: Road[] = [
   {
     kind: "leave",
-    label: "Road A - another JS framework",
-    title: "Swap Next.js for TanStack Start",
-    body: "A new vendor, but the same all-JavaScript backend. TanStack Start's server functions put your data access, auth, and business logic into TypeScript on a Node server.",
+    label: "Road A - separate frontend",
+    title: "Next.js + a Rails API",
+    body: "Next.js owns the web UI and server render while Rails owns business rules and persistence behind JSON or GraphQL endpoints.",
     points: [
-      "New framework, same architecture: JavaScript owns the server",
-      "Business logic migrates into TypeScript server functions",
-      "Fine for greenfield, one-language teams - but it isn't Rails",
+      "Server Components can fetch Rails directly during the server render",
+      "Suspense boundaries can stream Rails-backed sections independently",
+      "Request context crosses an explicit API contract between applications",
     ],
   },
   {
     kind: "stay",
-    label: "Road B - ShakaStack",
-    title: "Keep a real backend",
-    body: "Rails owns data, business logic, and auth. React renders the view. TanStack Query owns the client. You leave Next.js without giving up your backend - and nobody else is evangelizing this path.",
+    label: "Road B - integrated Rails app",
+    title: "React on Rails Pro",
+    body: "Rails owns the browser request and streams React from the same application boundary where its policies, tenancy, caches, and queries already live.",
     points: [
-      "Rails: ActiveRecord, validations, jobs, mailers, sessions, CSRF",
-      "React on Rails Pro: SSR, streaming, and React Server Components",
-      "TanStack Query, Router & Table on the client, against a Rails JSON API",
+      "No separate page-data API required for Rails-owned server rendering",
+      "React 19 SSR, Suspense streaming, and React Server Components",
+      "Incremental adoption inside existing Rails routes and views",
     ],
   },
 ];
@@ -371,12 +367,12 @@ export const tanstackSplit: { kind: "embrace" | "substitute"; title: string; bod
   {
     kind: "embrace",
     title: "Embrace - TanStack Query, Router & Table",
-    body: "Backend-agnostic client libraries. TanStack Query is the single best companion to a Rails JSON API: caching, mutations, and URL-synced state on the client.",
+    body: "Backend-agnostic client libraries for caching, mutations, routing, tables, and URL-synced state. Adopt the pieces that improve your UI.",
   },
   {
     kind: "substitute",
     title: "Substitute - TanStack Start",
-    body: "The full-stack framework. Its server functions pull business logic into TypeScript - the one thing you don't want if you have, or want, Rails.",
+    body: "A full-stack JavaScript framework whose server functions run in a Node application. Choose it when that application should own your server-side UI logic.",
   },
 ];
 
@@ -384,7 +380,7 @@ export const tanstackSplit: { kind: "embrace" | "substitute"; title: string; bod
 export const starter = {
   title: "The official starter",
   blurb:
-    "A deployable Rails 8 + React on Rails Pro app with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase. Rails owns data, logic, and auth and exposes explicit JSON; React on Rails Pro server-renders the TanStack shell and hydrates router state; TanStack Query owns the client data lifecycle - CSRF-aware fetch, URL-synced query keys, mutations and invalidation.",
+    "A deployable Rails 8 + React on Rails Pro app with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase. It includes typed JSON contracts, CSRF-aware fetch, URL-synced query keys, mutations, invalidation, SSR, and hydration.",
   guardrail:
     "Its AGENTS.md encodes the thesis as an engineering guardrail: “do not add TanStack Start, Vite, or file-based routing.”",
   stack: ["Rails 8", "React on Rails Pro", "TanStack Router", "TanStack Query", "TanStack Table", "shadcn/ui", "RSC showcase"],
@@ -395,22 +391,14 @@ export interface Faq {
   a: string;
 }
 
-export const faq: Faq[] = [
-  {
-    q: "Isn't TanStack Start the future?",
-    a: "TanStack Query, Router, and Table are excellent - we use them every day. TanStack Start, the full-stack framework, is a different decision: it puts your business logic in TypeScript on a Node server. If you have Rails, that's the part you don't want to give up.",
-  },
+export const vsNextjsFaq: Faq[] = [
   {
     q: "Is RSC on Rails actually ready?",
-    a: "React Server Components in React on Rails Pro are demoable and maturing - running today in the starter and demos on a release-candidate build, not yet GA. You get the “server code next to your component” experience now, with Rails models as the server source; we're upfront that the spec is still stabilizing.",
+    a: "Use the official starter and setup docs as your baseline. Production readiness still depends on deploying and sizing the Pro Node renderer, enabling RSC support, and validating your application's bundles, stream, and fallback behavior.",
   },
   {
     q: "When is Next.js (or TanStack Start) the right call?",
-    a: "Greenfield, no Rails, a one-language team optimizing raw velocity, and little server-side business logic? A JavaScript meta-framework is a fine choice - and we'll tell you so. ShakaStack is for teams with Rails, or who want it, and real business logic.",
-  },
-  {
-    q: "Do I have to adopt all of TanStack?",
-    a: "No. Add TanStack Query against your Rails JSON API and stop there if you like. Router and Table are there when you want type-safe routing and URL-owned table state. You never need TanStack Start.",
+    a: "Choose Next.js when a separately deployed frontend, reusable APIs, independent team ownership, or its caching, prefetching, Partial Prerendering, and static-delivery ecosystem are product requirements. Choose TanStack Start when you want its full-stack JavaScript model rather than a Rails-owned application.",
   },
 ];
 
@@ -438,11 +426,11 @@ export const onRamps: OnRamp[] = [
     icon: "layers",
     eyebrow: "Already have Rails?",
     title: "Add TanStack incrementally",
-    body: "Drop React on Rails Pro and TanStack Router, Query & Table into the app you already have. Keep your routes, conventions, and team - no rewrite, no separate frontend deploy.",
+    body: "Add React on Rails Pro and the TanStack libraries you want to the app you already have. Keep your routes, conventions, and team while adopting the UI page by page.",
     points: [
       "Adopt it page by page, alongside your existing Rails views",
       "Great performance out of the box - SSR, hydration, streaming",
-      "Your Rails API stays the single source of truth",
+      "Choose Query, Router, and Table independently",
     ],
   },
   {
@@ -481,13 +469,11 @@ export const railsGoodness: string[] = [
 ];
 
 /* ============================================================
-   Performance parity - React 19.2 / Next.js-class features, in Rails.
-   Differentiator: only React on Rails Pro pairs the React server-performance
-   features with a real Rails backend. Inertia renders on the client (no
-   streaming SSR / RSC / selective hydration). RSC stays annotated as RC.
+   React server-rendering comparison. Both Next.js and React on Rails Pro can
+   stream Rails-backed data through Suspense; the boundary is the distinction.
    ============================================================ */
 
-export type CmpCell = "yes" | "no" | "rc";
+export type CmpCell = "yes" | "no";
 export interface CmpRow {
   feature: string;
   /** cells align 1:1 with perfColumns. */
@@ -495,18 +481,17 @@ export interface CmpRow {
 }
 
 export const perfLead = {
-  title: "Next.js-class React performance - only in Rails.",
-  body: "React on Rails Pro fully supports React 19.2 and brings the performance features Next.js is known for - streaming SSR, React Server Components, and selective hydration - to a real Rails backend, with your Rails models as the server source. Inertia and other Rails + React adapters do plain server rendering at best, with no streaming SSR, no React Server Components, and no selective hydration.",
+  title: "Server-rendering capability matrix.",
 };
 
 export const perfColumns = ["React on Rails Pro", "Inertia", "Next.js"];
 
 export const perfMatrix: CmpRow[] = [
   { feature: "Streaming SSR", cells: ["yes", "no", "yes"] },
-  { feature: "React Server Components", cells: ["rc", "no", "yes"] },
+  { feature: "React Server Components", cells: ["yes", "no", "yes"] },
   { feature: "Selective hydration", cells: ["yes", "no", "yes"] },
-  { feature: "Real Rails backend", cells: ["yes", "yes", "no"] },
+  { feature: "Rails SSR data without a separate app API", cells: ["yes", "yes", "no"] },
 ];
 
 export const perfNote =
-  "React Server Components in React on Rails Pro are demoable & maturing (RC), not yet GA - React 19.2 itself is fully supported.";
+  "React on Rails Pro requires its Node renderer for streaming and RSC. React on Rails Pro 17.0.0+ supports push, pull, and mixed async-props modes.";
