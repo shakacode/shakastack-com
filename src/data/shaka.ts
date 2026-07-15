@@ -1,8 +1,9 @@
 /**
  * ShakaStack content model.
  *
- * NOTE: ShakaPerf copy is provisional - verify against shakaperf.com.
- * Ported from the design prototype's `window.SHAKA` object into typed constants.
+ * Public claims in this file are deliberately paired with primary-source links.
+ * Keep the site static: update the curated wording and its source together rather
+ * than fetching volatile marketing or repository data at runtime.
  */
 
 export type ProjectId = "ror" | "shakapacker" | "e2e" | "shakaperf" | "cpflow";
@@ -41,6 +42,10 @@ export interface Project {
   tagline: string;
   blurb: string;
   benefits: Benefit[];
+  license: {
+    label: string;
+    href: string;
+  };
   install: string;
   altInstall?: string;
   links: ProjectLink[];
@@ -60,8 +65,14 @@ export interface ShakaContent {
   projects: Project[];
   examples: Example[];
   problems: Benefit[];
-  guideStats: Benefit[];
-  logos: string[];
+  guideStats: EvidenceStat[];
+}
+
+export interface EvidenceStat {
+  value: string;
+  label: string;
+  sourceLabel: string;
+  sourceUrl: string;
 }
 
 /** Primary CTA - HubSpot scheduling link, used across the page. */
@@ -72,6 +83,43 @@ export const SHAKACODE_CONTACT = "https://shakacode.com/contact/";
 export const GITHUB_ORG = "https://github.com/shakacode";
 export const GITHUB_SPONSOR = "https://github.com/sponsors/shakacode";
 export const ALL_DEMOS = "https://reactonrails.com/examples";
+export const SHAKACODE_ABOUT = "https://shakacode.com/about/";
+export const POPMENU_PERFORMANCE_SOURCE =
+  "https://www.shakacode.com/services/performance-optimization/";
+export const HVMN_PERFORMANCE_SOURCE =
+  "https://www.shakacode.com/blog/hvmns-90-reduction-in-server-response-time-from-react-on-rails-pro/";
+export const ROR_LICENSE =
+  "https://github.com/shakacode/react_on_rails/blob/main/LICENSE.md";
+export const ROR_PRO_LICENSE =
+  "https://github.com/shakacode/react_on_rails/blob/main/REACT-ON-RAILS-PRO-LICENSE.md";
+export const SHAKAPACKER_LICENSE =
+  "https://github.com/shakacode/shakapacker/blob/main/MIT-LICENSE";
+export const E2E_ON_RAILS_LICENSE =
+  "https://github.com/shakacode/cypress-playwright-on-rails/blob/master/LICENSE";
+export const CONTROL_PLANE_FLOW_LICENSE =
+  "https://github.com/shakacode/control-plane-flow/blob/main/LICENSE";
+export const ROR_OSS_VS_PRO =
+  "https://reactonrails.com/docs/getting-started/oss-vs-pro/";
+export const ROR_PRO = "https://reactonrails.com/pro/";
+export const ROR_SUPPORT =
+  "https://reactonrails.com/docs/deployment/troubleshooting/";
+export const SHAKAPERF_LICENSE =
+  "https://github.com/shakacode/shakaperf/blob/main/LICENSE.md";
+export const SHAKAPERF_PRICING = "https://shakaperf.com/pricing";
+export const SHAKAPERF_METHOD =
+  "https://github.com/shakacode/shakaperf/blob/main/packages/shaka-perf/used_statistics.md";
+
+export const popmenuEvidence = {
+  title: "Measured at Popmenu",
+  context: "One documented optimization engagement, not a universal benchmark.",
+  sourceLabel: "Popmenu performance evidence",
+  sourceUrl: POPMENU_PERFORMANCE_SOURCE,
+  metrics: [
+    ["80%", "LCP improvement · 23s to 4.5s"],
+    ["90%", "Blocking-time reduction · 2,000ms to 200ms"],
+    ["9×", "Smaller initial downloads · 9MB to 1MB"],
+  ] satisfies Benefit[],
+};
 
 /* React on Rails Pro + TanStack positioning - official starter & docs (all verified live). */
 export const STARTER_REPO =
@@ -96,20 +144,26 @@ export const projects: Project[] = [
     url: "https://reactonrails.com",
     accent: "ror",
     icon: "build",
-    tagline: "Render React inside Rails - SSR, hydration, and RSC.",
+    tagline: "Open-source Rails + React integration, with an optional Pro rendering tier.",
     blurb:
-      "Mount React components straight from Rails views and controllers. Server-side rendering, hydration, streaming, and React Server Components - without splitting your product into a separate frontend app.",
+      "Use the MIT-licensed core to mount React components from Rails views and run server-side rendering with hydration. Add commercially licensed React on Rails Pro for React Server Components, streaming SSR, fragment caching, and a dedicated Node renderer.",
     benefits: [
       ["Rails-first React", "Render components from views & controllers. Keep Rails routes, conventions, and your team."],
-      ["Production SSR", "Server rendering, hydration, and streaming paths built for mature Rails deployments."],
-      ["OSS → Pro path", "Start free. Add Pro for RSC, higher SSR throughput, and guided support when you need it."],
+      ["MIT-licensed core", "Use Rails + React integration, hydration, and ExecJS server rendering under the open-source license."],
+      ["Explicit Pro path", "Review the commercial license before using Pro for advanced rendering and maintainer support."],
     ],
+    license: {
+      label: "MIT core · Pro EULA",
+      href: ROR_LICENSE,
+    },
     install: "bundle exec rails generate react_on_rails:install",
     altInstall: "npx create-react-on-rails-app@latest my-app",
     links: [
       ["Website", "https://reactonrails.com"],
       ["Docs", "https://reactonrails.com/docs/"],
       ["GitHub", "https://github.com/shakacode/react_on_rails"],
+      ["OSS vs Pro", ROR_OSS_VS_PRO],
+      ["Pro license", ROR_PRO_LICENSE],
     ],
   },
   {
@@ -129,6 +183,10 @@ export const projects: Project[] = [
       ["Modern webpack", "Up-to-date webpack with sensible defaults so you configure less and ship more."],
       ["Easy migration", "A clear, supported path off the deprecated rails/webpacker."],
     ],
+    license: {
+      label: "MIT",
+      href: SHAKAPACKER_LICENSE,
+    },
     install: "bundle add shakapacker --strict",
     altInstall: "bin/rails shakapacker:install",
     links: [
@@ -158,6 +216,10 @@ export const projects: Project[] = [
       ["Clean app state", "Reset data, load scenarios, and use factories through app commands designed for repeatable E2E tests."],
       ["One bridge, two runners", "Keep Cypress and Playwright support under the same Rails-native integration layer."],
     ],
+    license: {
+      label: "MIT",
+      href: E2E_ON_RAILS_LICENSE,
+    },
     install: 'bundle add cypress-on-rails --group "development,test"',
     altInstall: "bin/rails g cypress_on_rails:install --framework playwright",
     links: [
@@ -176,20 +238,26 @@ export const projects: Project[] = [
     url: "https://shakaperf.com",
     accent: "shakaperf",
     icon: "prove",
-    tagline: "ShakaCode’s own tool for proving performance - rigorously.",
+    tagline: "Source-available A/B performance testing for CI.",
     blurb:
-      "Containerize your app, run control-vs-experiment A/B tests, and let ShakaPerf prove which changes actually make pages faster - across desktop and mobile, with regressions caught automatically.",
+      "Run control and experiment Docker containers side by side, sample them together, and compare performance with paired statistics. One Playwright definition can drive performance, visual, accessibility, SEO, and bundle checks.",
     benefits: [
-      ["Rigorous A/B testing", "Real control-vs-experiment perf testing across screen types - not flaky one-off Lighthouse runs."],
-      ["Automatic regression detection", "Catches performance regressions and visual changes on your main branch before users do."],
-      ["Stack agnostic", "Works with any web stack, with accessibility and SEO checks built in."],
+      ["Paired measurements", "Control and experiment run together so shared CPU noise can cancel inside each measured pair."],
+      ["One test, multiple gates", "Reuse one Playwright definition for performance, visual, accessibility, SEO, and bundle checks."],
+      ["Docker-based", "Measure any web stack that can run as a production Docker image with an exposed port."],
     ],
-    install: "# Bring rigorous perf testing to your app",
-    altInstall: "# Get started at shakaperf.com",
+    license: {
+      label: "Source-available",
+      href: SHAKAPERF_LICENSE,
+    },
+    install: "yarn add shaka-perf shaka-bundle-size",
+    altInstall: "shaka-perf compare",
     links: [
       ["Website", "https://shakaperf.com"],
       ["Docs", "https://shakaperf.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakaperf"],
+      ["Methodology", SHAKAPERF_METHOD],
+      ["License", SHAKAPERF_LICENSE],
     ],
   },
   {
@@ -209,6 +277,10 @@ export const projects: Project[] = [
       ["Control Plane power", "Run on flexible, cost-efficient infrastructure with room to scale well past Heroku."],
       ["Migrate, don't rewrite", "Keep your release flow. Move the runtime underneath it with minimal disruption."],
     ],
+    license: {
+      label: "LGPL-3.0",
+      href: CONTROL_PLANE_FLOW_LICENSE,
+    },
     install: "gem install cpflow",
     altInstall: "cpflow setup-app -a my-app",
     links: [
@@ -273,16 +345,19 @@ export const problems: Benefit[] = [
   ["The infra & config tax", "Heroku bills climb, build configs rot, and every upgrade is a gamble. The stack fights you instead of working for you."],
 ];
 
-export const guideStats: Benefit[] = [
-  ["2013", "Shipping React in Rails since"],
-  ["First", "Rails framework with React Server Components"],
-  ["80-90%", "Faster pages for clients like HVMN & Popmenu"],
-  ["Paia, HI", "Open-source maintainers - not a faceless vendor"],
-];
-
-export const logos: string[] = [
-  "Popmenu", "HVMN", "Printivity", "Simply Business", "User Interviews",
-  "Jewlr", "AirRobe", "SkyVerge", "Datacenters.com", "The Information",
+export const guideStats: EvidenceStat[] = [
+  {
+    value: "2011",
+    label: "ShakaCode consulting since",
+    sourceLabel: "ShakaCode about",
+    sourceUrl: SHAKACODE_ABOUT,
+  },
+  {
+    value: "≈90%",
+    label: "Lower HVMN server-response times in one documented Pro engagement",
+    sourceLabel: "HVMN case study",
+    sourceUrl: HVMN_PERFORMANCE_SOURCE,
+  },
 ];
 
 export const shaka: ShakaContent = {
@@ -290,7 +365,6 @@ export const shaka: ShakaContent = {
   examples,
   problems,
   guideStats,
-  logos,
 };
 
 /** Helper: phase · stage label (collapses when identical), used in badges. */

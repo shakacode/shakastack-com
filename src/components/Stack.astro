@@ -1,5 +1,6 @@
 ---
 import StackExplorer from "./islands/StackExplorer.tsx";
+import MaturitySupport from "./MaturitySupport.astro";
 import { projects } from "../data/shaka";
 ---
 
@@ -13,10 +14,10 @@ import { projects } from "../data/shaka";
       <span class="eyebrow">The plan</span>
       <h2>Build → test → prove → deploy.</h2>
       <p>
-        Four phases, five open-source projects - one path from Rails + React
-        code to validated production. Every project is production-tested and
-        maintained by the ShakaCode team; use one on its own, or follow the
-        whole path. Tap a layer to see how it moves your app forward.
+        Four phases, four open-source projects, and source-available ShakaPerf -
+        one path from Rails + React code to measured production changes. Each
+        layer links to its public source, docs, and license so you can evaluate
+        it independently. Tap a layer to see how it moves your app forward.
       </p>
     </div>
 
@@ -25,3 +26,5 @@ import { projects } from "../data/shaka";
     </div>
   </div>
 </section>
+
+<MaturitySupport />

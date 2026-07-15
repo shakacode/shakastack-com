@@ -9,7 +9,7 @@ interface Props {
 const PHASE_NOTE: Record<string, string> = {
   Build: "Render React in Rails and bundle assets.",
   Test: "Exercise real browser flows with Rails test state.",
-  Prove: "Prove every page is faster before it ships.",
+  Prove: "Compare control and experiment before changes ship.",
   Deploy: "Ship the validated app to production.",
 };
 
@@ -28,6 +28,7 @@ export default function StackExplorer({ projects }: Props) {
   const p = projects[active];
   const github = p.links.find((l) => l[0] === "GitHub");
   const docs = p.links.find((l) => l[0] === "Docs");
+  const evidence = p.links.find((l) => l[0] === "Methodology" || l[0] === "OSS vs Pro");
 
   // Group consecutive projects by phase so the visible order follows the stack.
   const phases: PhaseGroup[] = [];
@@ -89,7 +90,12 @@ export default function StackExplorer({ projects }: Props) {
         }
       >
         <div className="se-detail-top">
-          <span className="se-detail-stage">{phaseStage(p)}</span>
+          <div className="se-detail-labels">
+            <span className="se-detail-stage">{phaseStage(p)}</span>
+            <a href={p.license.href} target="_blank" rel="noreferrer" className="license-badge">
+              {p.license.label}
+            </a>
+          </div>
           <h3>{p.name}</h3>
           <p className="se-detail-tag">{p.tagline}</p>
           <p className="se-detail-blurb">{p.blurb}</p>
@@ -145,6 +151,11 @@ export default function StackExplorer({ projects }: Props) {
           {docs && (
             <a className="link-arrow" href={docs[1]} target="_blank" rel="noreferrer">
               Docs <Icon name="arrow" />
+            </a>
+          )}
+          {evidence && (
+            <a className="link-arrow" href={evidence[1]} target="_blank" rel="noreferrer">
+              {evidence[0]} <Icon name="arrow" />
             </a>
           )}
         </div>
