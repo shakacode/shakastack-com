@@ -346,7 +346,7 @@ img { max-width: 100%; display: block; }
 .card-art-lines { display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 6px; margin-top: 12px; }
 .card-art-lines span { height: 20px; border-radius: 5px; background: color-mix(in oklch, var(--card-art-accent) 15%, var(--sand-2)); }
 .card-art-lines span:first-child { grid-row: span 2; height: auto; }
-.card-tag { position: absolute; top: 12px; left: 12px; font-family: var(--ff-mono); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: oklch(0.24 0.035 250 / 0.9); color: var(--sand); letter-spacing: 0.04em; }
+.card-tag { position: absolute; z-index: 1; top: 12px; left: 12px; font-family: var(--ff-mono); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: oklch(0.24 0.035 250 / 0.9); color: var(--sand); letter-spacing: 0.04em; }
 .card-body { padding: 20px 20px 22px; display: flex; flex-direction: column; flex: 1; }
 .card-body h3 { font-size: 20px; }
 .card-body p { color: var(--ink-2); font-size: 14.5px; margin-top: 8px; flex: 1; text-wrap: pretty; }
