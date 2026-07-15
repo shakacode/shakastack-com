@@ -359,6 +359,11 @@ test.describe("home page IA", () => {
     const demoCard = page.getByRole("article").filter({
       has: page.getByRole("heading", { name: "Marketplace" }),
     });
+    await expect(
+      demoCard.getByRole("img", {
+        name: "React on Rails Performance Demo landing page with the headline Make Your Rails App 2x Faster",
+      })
+    ).toHaveAttribute("src", "/examples/marketplace.webp");
     const demoLink = demoCard.getByRole("link", { name: "Live demo" });
     await expect(demoLink).toHaveClass("live");
     await expect(demoLink.locator("svg path")).toHaveAttribute(
@@ -387,6 +392,11 @@ test.describe("home page IA", () => {
       has: page.getByRole("heading", { name: "ShakaPerf audit report" }),
     });
     await expect(proofCard).toBeVisible();
+    const proofPreview = proofCard.getByRole("img", {
+      name: "ShakaPerf audit report preview unavailable",
+    });
+    await expect(proofPreview).toBeVisible();
+    await expect(proofPreview.getByText("View report snapshot", { exact: true })).toBeVisible();
     const artifactLink = proofCard.getByRole("link", { name: "View report snapshot" });
     await expect(artifactLink).toHaveAttribute(
       "href",
