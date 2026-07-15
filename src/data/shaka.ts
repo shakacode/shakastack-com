@@ -92,6 +92,12 @@ export const ROR_LICENSE =
   "https://github.com/shakacode/react_on_rails/blob/main/LICENSE.md";
 export const ROR_PRO_LICENSE =
   "https://github.com/shakacode/react_on_rails/blob/main/REACT-ON-RAILS-PRO-LICENSE.md";
+export const SHAKAPACKER_LICENSE =
+  "https://github.com/shakacode/shakapacker/blob/main/MIT-LICENSE";
+export const E2E_ON_RAILS_LICENSE =
+  "https://github.com/shakacode/cypress-playwright-on-rails/blob/master/LICENSE";
+export const CONTROL_PLANE_FLOW_LICENSE =
+  "https://github.com/shakacode/control-plane-flow/blob/main/LICENSE";
 export const ROR_OSS_VS_PRO =
   "https://reactonrails.com/docs/getting-started/oss-vs-pro/";
 export const ROR_PRO = "https://reactonrails.com/pro/";
@@ -179,7 +185,7 @@ export const projects: Project[] = [
     ],
     license: {
       label: "MIT",
-      href: "https://github.com/shakacode/shakapacker/blob/main/MIT-LICENSE",
+      href: SHAKAPACKER_LICENSE,
     },
     install: "bundle add shakapacker --strict",
     altInstall: "bin/rails shakapacker:install",
@@ -212,7 +218,7 @@ export const projects: Project[] = [
     ],
     license: {
       label: "MIT",
-      href: "https://github.com/shakacode/cypress-playwright-on-rails/blob/master/LICENSE",
+      href: E2E_ON_RAILS_LICENSE,
     },
     install: 'bundle add cypress-on-rails --group "development,test"',
     altInstall: "bin/rails g cypress_on_rails:install --framework playwright",
@@ -273,7 +279,7 @@ export const projects: Project[] = [
     ],
     license: {
       label: "LGPL-3.0",
-      href: "https://github.com/shakacode/control-plane-flow/blob/main/LICENSE",
+      href: CONTROL_PLANE_FLOW_LICENSE,
     },
     install: "gem install cpflow",
     altInstall: "cpflow setup-app -a my-app",
