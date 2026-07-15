@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon, GitHubMark } from "../Icon";
 import type { Example, Project, ProjectId } from "../../data/shaka";
 
@@ -21,12 +21,52 @@ const PROJ_LABEL: Record<Filter, string> = {
 const exampleAccent = (example: Example): ProjectId =>
   example.projects.find((project) => project !== "ror") ?? example.projects[0] ?? "ror";
 
+function GalleryThumbnail({ example }: { example: Example }) {
+  const [failed, setFailed] = useState(false);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const image = imageRef.current;
+    if (image?.complete && image.naturalWidth === 0) {
+      setFailed(true);
+    }
+  }, []);
+
+  return (
+    <div className={`card-thumb card-thumb-${exampleAccent(example)}`}>
+      <span className="card-tag">{example.tag}</span>
+      {failed ? (
+        <div
+          className="card-thumb-fallback"
+          role="img"
+          aria-label={`${example.name} demo preview unavailable`}
+        >
+          <div aria-hidden="true">
+            <span>Live demo</span>
+            <strong>{example.name}</strong>
+            <small>Preview temporarily unavailable</small>
+          </div>
+        </div>
+      ) : (
+        <img
+          ref={imageRef}
+          className="card-thumb-image"
+          src={example.thumbnail.src}
+          alt={example.thumbnail.alt}
+          width={960}
+          height={540}
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
+      )}
+    </div>
+  );
+}
+
 /** Client-side example filter by project id, with live counts and empty state. */
 export default function GalleryGrid({ examples, projects }: Props) {
   const [filter, setFilter] = useState<Filter>("all");
-  const [failedThumbnails, setFailedThumbnails] = useState<Set<string>>(
-    () => new Set(),
-  );
   const filters: Filter[] = ["all", ...projects.map((p) => p.id)];
   const count = (f: Filter) =>
     f === "all"
@@ -53,68 +93,32 @@ export default function GalleryGrid({ examples, projects }: Props) {
       </div>
 
       <div className="cards">
-        {shown.map((e) => {
-          const thumbnailFailed = failedThumbnails.has(e.thumbnail.src);
-
-          return (
-            <article className="card" key={e.name}>
-              <div className={`card-thumb card-thumb-${exampleAccent(e)}`}>
-                <span className="card-tag">{e.tag}</span>
-                {thumbnailFailed ? (
-                  <div
-                    className="card-thumb-fallback"
-                    role="img"
-                    aria-label={`${e.name} demo preview unavailable`}
-                  >
-                    <div aria-hidden="true">
-                      <span>Live demo</span>
-                      <strong>{e.name}</strong>
-                      <small>Preview temporarily unavailable</small>
-                    </div>
-                  </div>
-                ) : (
-                  <img
-                    className="card-thumb-image"
-                    src={e.thumbnail.src}
-                    alt={e.thumbnail.alt}
-                    width={960}
-                    height={540}
-                    loading="lazy"
-                    decoding="async"
-                    onError={() => {
-                      setFailedThumbnails((failed) => {
-                        const next = new Set(failed);
-                        next.add(e.thumbnail.src);
-                        return next;
-                      });
-                    }}
-                  />
-                )}
+        {shown.map((e) => (
+          <article className="card" key={e.name}>
+            <GalleryThumbnail example={e} />
+            <div className="card-body">
+              <h3>{e.name}</h3>
+              <p>{e.blurb}</p>
+              <div className="card-stack">
+                {e.stack.map((s) => (
+                  <span key={s}>{s}</span>
+                ))}
               </div>
-              <div className="card-body">
-                <h3>{e.name}</h3>
-                <p>{e.blurb}</p>
-                <div className="card-stack">
-                  {e.stack.map((s) => (
-                    <span key={s}>{s}</span>
-                  ))}
-                </div>
-                <div className="card-links">
-                  {e.live ? (
-                    <a className="live" href={e.live} target="_blank" rel="noreferrer">
-                      <Icon name="play" /> Live demo
-                    </a>
-                  ) : (
-                    <span className="soon">Demo coming soon</span>
-                  )}
-                  <a className="src" href={e.source} target="_blank" rel="noreferrer">
-                    <GitHubMark width={14} height={14} /> Source
+              <div className="card-links">
+                {e.live ? (
+                  <a className="live" href={e.live} target="_blank" rel="noreferrer">
+                    <Icon name="play" /> Live demo
                   </a>
-                </div>
+                ) : (
+                  <span className="soon">Demo coming soon</span>
+                )}
+                <a className="src" href={e.source} target="_blank" rel="noreferrer">
+                  <GitHubMark width={14} height={14} /> Source
+                </a>
               </div>
-            </article>
-          );
-        })}
+            </div>
+          </article>
+        ))}
         {shown.length === 0 && filter !== "all" && (
           <div className="empty">
             More {PROJ_LABEL[filter]} demos are on the way. In the meantime,
