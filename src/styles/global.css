@@ -338,6 +338,7 @@ img { max-width: 100%; display: block; }
 .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--line-2); }
 .card-thumb {
   --card-art-accent: var(--ror);
+
   aspect-ratio: 16 / 9; position: relative; overflow: hidden;
   background:
     radial-gradient(circle at 82% 18%, color-mix(in oklch, var(--card-art-accent) 45%, transparent), transparent 34%),
