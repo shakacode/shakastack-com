@@ -192,7 +192,7 @@ export const maturitySnapshot: ProjectMaturity[] = [
       "https://api.github.com/repos/shakacode/shakaperf",
     note: {
       label: "New public repository",
-      sourceUrl: "https://api.github.com/repos/shakacode/shakaperf",
+      sourceUrl: "https://github.com/shakacode/shakaperf",
     },
   },
   {

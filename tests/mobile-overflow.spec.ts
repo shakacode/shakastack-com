@@ -347,10 +347,14 @@ test.describe("home page IA", () => {
       "https://github.com/shakacode/shakapacker/blob/5485afe290d8f489f973c78420470c1b72dcd10c/README.md"
     );
     await expect(
-      snapshot.locator('[data-project="shakaperf"]').getByText("New public repository", {
+      snapshot.locator('[data-project="shakaperf"]').getByRole("link", {
+        name: "New public repository",
         exact: true,
       })
-    ).toBeVisible();
+    ).toHaveAttribute("href", "https://github.com/shakacode/shakaperf");
+    await expect(
+      snapshot.locator('[data-project="shakaperf"] .maturity-snapshot-facts small')
+    ).toHaveCSS("font-size", "12px");
   });
 
   test("filters to the public ShakaPerf report proof", async ({ page }) => {
@@ -435,6 +439,56 @@ test.describe("home page IA", () => {
       failedPreview.getByText("Preview temporarily unavailable", { exact: true })
     ).toBeVisible();
     await expect(failedPreview).not.toContainText("Pinned public proof");
+  });
+
+  test("shows the unavailable fallback for a demo without a thumbnail", async ({ page }) => {
+    await page.addInitScript(() => {
+      const removeFirstDemoThumbnail = (node: Node) => {
+        if (!(node instanceof Element)) return;
+
+        const islands = node.matches("astro-island")
+          ? [node]
+          : [...node.querySelectorAll("astro-island")];
+
+        for (const island of islands) {
+          if (!island.getAttribute("component-url")?.includes("GalleryGrid")) continue;
+
+          const rawProps = island.getAttribute("props");
+          if (!rawProps) continue;
+
+          const props = JSON.parse(rawProps);
+          const firstDemo = props.examples?.[1]?.[0]?.[1];
+          if (!firstDemo?.thumbnail) continue;
+
+          delete firstDemo.thumbnail;
+          island.setAttribute("props", JSON.stringify(props));
+        }
+      };
+
+      new MutationObserver((records) => {
+        for (const record of records) {
+          for (const node of record.addedNodes) removeFirstDemoThumbnail(node);
+        }
+      }).observe(document, { childList: true, subtree: true });
+    });
+    await page.goto("/");
+
+    const demoCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "Marketplace" }),
+    });
+    const galleryIsland = demoCard.locator("xpath=ancestor::astro-island");
+    await demoCard.scrollIntoViewIfNeeded();
+    await expect(galleryIsland).not.toHaveAttribute("ssr", "");
+
+    const missingPreview = demoCard.getByRole("img", {
+      name: "Marketplace preview unavailable",
+    });
+    await expect(missingPreview).toBeVisible();
+    await expect(missingPreview.getByText("Live demo", { exact: true })).toBeVisible();
+    await expect(
+      missingPreview.getByText("Preview temporarily unavailable", { exact: true })
+    ).toBeVisible();
+    await expect(missingPreview).not.toContainText("Pinned public proof");
   });
 
   test("keeps core content visible without JavaScript", async ({ browser }) => {

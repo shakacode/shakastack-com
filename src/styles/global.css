@@ -469,7 +469,7 @@ img { max-width: 100%; display: block; }
 .maturity-snapshot-facts { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 14px; }
 .maturity-snapshot-facts a { color: var(--ink); font-size: 13px; font-weight: 650; line-height: 1.35; }
 .maturity-snapshot-facts a:hover, .maturity-snapshot-note:hover { color: var(--accent-deep); }
-.maturity-snapshot-facts small { display: block; margin-top: 2px; color: var(--ink-3); font-size: 10px; font-weight: 500; }
+.maturity-snapshot-facts small { display: block; margin-top: 2px; color: var(--ink-3); font-size: 12px; font-weight: 500; }
 .maturity-snapshot-note { display: inline-block; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 12px; font-weight: 650; }
 .maturity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .maturity-card { display: flex; flex-direction: column; padding: 30px 28px 32px; border: 1px solid var(--line); border-radius: var(--r); background: #fff; box-shadow: var(--shadow-sm); }

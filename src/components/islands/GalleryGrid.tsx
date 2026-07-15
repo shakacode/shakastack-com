@@ -51,7 +51,7 @@ function GalleryThumbnail({ example }: { example: Example }) {
             <small>{example.liveLabel ?? "Open proof artifact"} below</small>
           </div>
         </div>
-      ) : failed ? (
+      ) : failed || !example.thumbnail ? (
         <div
           className="card-thumb-fallback"
           role="img"
@@ -63,7 +63,7 @@ function GalleryThumbnail({ example }: { example: Example }) {
             <small>Preview temporarily unavailable</small>
           </div>
         </div>
-      ) : example.thumbnail ? (
+      ) : (
         <img
           ref={imageRef}
           className="card-thumb-image"
@@ -75,7 +75,7 @@ function GalleryThumbnail({ example }: { example: Example }) {
           decoding="async"
           onError={() => setFailed(true)}
         />
-      ) : null}
+      )}
     </div>
   );
 }
