@@ -214,6 +214,16 @@ test.describe("home page IA", () => {
   test("shows the ShakaPerf command and artifact-specific license records", async ({ page }) => {
     await page.goto("/");
 
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+      "content",
+      /ShakaPerf repository source and exact package records/
+    );
+    await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
+      "content",
+      /ShakaPerf repository source and exact package records/
+    );
+    await expect(page.locator("body")).not.toContainText(/source-available ShakaPerf/i);
+
     const shakaPerfTab = page.getByRole("tab", { name: /ShakaPerf/ });
     const stackExplorer = shakaPerfTab.locator("xpath=ancestor::astro-island");
 
