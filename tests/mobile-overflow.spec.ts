@@ -393,10 +393,14 @@ test.describe("home page IA", () => {
     });
     await expect(proofCard).toBeVisible();
     const proofPreview = proofCard.getByRole("img", {
-      name: "ShakaPerf audit report preview unavailable",
+      name: "ShakaPerf audit report pinned public proof",
     });
     await expect(proofPreview).toBeVisible();
-    await expect(proofPreview.getByText("View report snapshot", { exact: true })).toBeVisible();
+    await expect(proofPreview.getByText("Pinned public proof", { exact: true })).toBeVisible();
+    await expect(
+      proofPreview.getByText("View report snapshot below", { exact: true })
+    ).toBeVisible();
+    await expect(proofPreview).not.toContainText(/unavailable/i);
     const artifactLink = proofCard.getByRole("link", { name: "View report snapshot" });
     await expect(artifactLink).toHaveAttribute(
       "href",
@@ -411,6 +415,26 @@ test.describe("home page IA", () => {
       "href",
       "https://github.com/shakacode/shakaperf/tree/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results"
     );
+  });
+
+  test("reserves unavailable copy for real thumbnail load failures", async ({ page }) => {
+    await page.route("**/examples/marketplace.webp", (route) => route.abort());
+    await page.goto("/");
+
+    const demoCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "Marketplace" }),
+    });
+    await demoCard.scrollIntoViewIfNeeded();
+
+    const failedPreview = demoCard.getByRole("img", {
+      name: "Marketplace preview unavailable",
+    });
+    await expect(failedPreview).toBeVisible();
+    await expect(failedPreview.getByText("Live demo", { exact: true })).toBeVisible();
+    await expect(
+      failedPreview.getByText("Preview temporarily unavailable", { exact: true })
+    ).toBeVisible();
+    await expect(failedPreview).not.toContainText("Pinned public proof");
   });
 
   test("keeps core content visible without JavaScript", async ({ browser }) => {

@@ -26,6 +26,8 @@ const primaryLinkKind = (example: Example) => example.primaryLinkKind ?? "demo";
 function GalleryThumbnail({ example }: { example: Example }) {
   const [failed, setFailed] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
+  const isPinnedArtifact =
+    !example.thumbnail && primaryLinkKind(example) === "artifact";
 
   useEffect(() => {
     const image = imageRef.current;
@@ -37,7 +39,19 @@ function GalleryThumbnail({ example }: { example: Example }) {
   return (
     <div className={`card-thumb card-thumb-${exampleAccent(example)}`}>
       <span className="card-tag">{example.tag}</span>
-      {!example.thumbnail || failed ? (
+      {isPinnedArtifact ? (
+        <div
+          className="card-thumb-fallback"
+          role="img"
+          aria-label={`${example.name} pinned public proof`}
+        >
+          <div aria-hidden="true">
+            <span>Pinned public proof</span>
+            <strong>{example.name}</strong>
+            <small>{example.liveLabel ?? "Open proof artifact"} below</small>
+          </div>
+        </div>
+      ) : failed ? (
         <div
           className="card-thumb-fallback"
           role="img"
@@ -49,7 +63,7 @@ function GalleryThumbnail({ example }: { example: Example }) {
             <small>Preview temporarily unavailable</small>
           </div>
         </div>
-      ) : (
+      ) : example.thumbnail ? (
         <img
           ref={imageRef}
           className="card-thumb-image"
@@ -61,7 +75,7 @@ function GalleryThumbnail({ example }: { example: Example }) {
           decoding="async"
           onError={() => setFailed(true)}
         />
-      )}
+      ) : null}
     </div>
   );
 }
