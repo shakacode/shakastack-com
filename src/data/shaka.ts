@@ -319,7 +319,7 @@ export const examples: Example[] = [
     source: "https://github.com/shakacode/react-on-rails-demo-hacker-news-rsc",
     thumbnail: {
       src: "/examples/hacker-news.webp",
-      alt: "Hacker Next on Rails demo showing a ranked list of news stories",
+      alt: "Hacker News on Rails demo showing a ranked list of news stories",
     },
   },
   {
