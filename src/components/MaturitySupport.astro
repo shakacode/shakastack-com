@@ -64,13 +64,7 @@ const stars = new Intl.NumberFormat("en-US");
                 rel="noreferrer"
               >
                 {stars.format(project.stars)} stars
-                <small>GitHub repository metadata JSON</small>
-              </a>
-              <a
-                href={project.repositoryMetadataUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
+                <span> · </span>
                 Public repo since {project.publicSince}
                 <small>GitHub repository metadata JSON</small>
               </a>

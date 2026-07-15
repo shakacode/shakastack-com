@@ -109,7 +109,7 @@ export default function GalleryGrid({ examples, projects }: Props) {
               <div className="card-links">
                 {e.live ? (
                   <a
-                    className={`live live-${primaryLinkKind(e)}`}
+                    className="live"
                     href={e.live}
                     target="_blank"
                     rel="noreferrer"

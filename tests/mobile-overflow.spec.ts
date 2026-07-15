@@ -326,14 +326,17 @@ test.describe("home page IA", () => {
         "href",
         project.release
       );
-      await expect(card.getByRole("link", { name: new RegExp(`^${project.stars}`) })).toHaveAttribute(
+      const metadataEvidence = card.getByRole("link", {
+        name: `${project.stars} · ${project.since} GitHub repository metadata JSON`,
+        exact: true,
+      });
+      await expect(metadataEvidence).toHaveAttribute(
         "href",
         project.metadata
       );
-      await expect(card.getByRole("link", { name: new RegExp(`^${project.since}`) })).toHaveAttribute(
-        "href",
-        project.metadata
-      );
+      await expect(
+        card.locator(`.maturity-snapshot-facts a[href="${project.metadata}"]`)
+      ).toHaveCount(1);
     }
 
     const shakapacker = snapshot.locator('[data-project="shakapacker"]');
@@ -357,7 +360,7 @@ test.describe("home page IA", () => {
       has: page.getByRole("heading", { name: "Marketplace" }),
     });
     const demoLink = demoCard.getByRole("link", { name: "Live demo" });
-    await expect(demoLink).toHaveClass(/live-demo/);
+    await expect(demoLink).toHaveClass("live");
     await expect(demoLink.locator("svg path")).toHaveAttribute(
       "d",
       "M6 4l14 8-14 8V4z"
@@ -389,7 +392,7 @@ test.describe("home page IA", () => {
       "href",
       "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results/client__01-overview.png"
     );
-    await expect(artifactLink).toHaveClass(/live-artifact/);
+    await expect(artifactLink).toHaveClass("live");
     await expect(artifactLink.locator("svg path")).toHaveAttribute(
       "d",
       "M7 17L17 7M9 7h8v8"
