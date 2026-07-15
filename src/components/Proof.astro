@@ -2,7 +2,6 @@
 import Icon from "./Icon.astro";
 import GitHubMark from "./GitHubMark.astro";
 import {
-  logos,
   starter,
   STARTER_REPO,
   STARTER_DEMO,
@@ -47,21 +46,5 @@ import {
       </div>
     </div>
 
-    <div class="proof-trust-head reveal">
-      <span class="eyebrow">Trusted in production</span>
-      <h3>Shipping for teams large and small.</h3>
-    </div>
-    <div class="logos-row reveal">
-      {logos.map((l) => <span class="logo-ph">{l}</span>)}
-    </div>
-    <div class="quote reveal">
-      <div class="qmark">“</div>
-      <blockquote>
-        React on Rails lets us run React at scale inside Rails without the
-        complexity of a separate frontend deployment - 97% Good LCP scores and
-        80% faster hydration across our platform.
-      </blockquote>
-      <cite><b>Justis Blasco</b> · Popmenu</cite>
-    </div>
   </div>
 </section>

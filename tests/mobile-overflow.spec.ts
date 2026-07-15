@@ -195,7 +195,7 @@ test.describe("home page IA", () => {
 
     await expect(page.locator("#stakes")).toHaveCount(0);
     await expect(
-      page.getByText("Four phases, five open-source projects", { exact: false })
+      page.getByText("Four phases, four open-source projects", { exact: false })
     ).toBeVisible();
     await expect(page.getByRole("link", { name: "TanStack Router guide" })).toHaveAttribute(
       "href",

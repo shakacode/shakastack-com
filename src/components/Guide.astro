@@ -7,12 +7,12 @@ import { guideStats, BOOK_A_CALL, SHAKACODE_URL } from "../data/shaka";
   <div class="wrap guide-grid">
     <div class="guide-copy reveal">
       <span class="eyebrow" style="color: oklch(0.88 0.06 48)">Your guide</span>
-      <h2>We’ve shipped React in Rails since 2013.</h2>
+      <h2>Maintainers with a public track record.</h2>
       <p>
-        ShakaCode has been a performance-obsessed consultancy since 2011 - and
-        we felt every one of these pains first-hand. So we built, open-sourced,
-        and still maintain the tools that fix them, from our home base in Paia,
-        Hawai‘i. We make slow web apps fast.
+        ShakaCode has consulted since 2011 and maintains the public Rails +
+        React foundations behind this stack. Source, documentation, licenses,
+        and support routes stay visible so teams can evaluate each layer on
+        its own terms.
       </p>
       <div class="guide-actions">
         <a class="btn btn-white" href={BOOK_A_CALL} target="_blank" rel="noreferrer">
@@ -25,10 +25,13 @@ import { guideStats, BOOK_A_CALL, SHAKACODE_URL } from "../data/shaka";
     </div>
     <div class="guide-stats reveal">
       {
-        guideStats.map(([big, label]) => (
+        guideStats.map((stat) => (
           <div class="gstat">
-            <b>{big}</b>
-            <span>{label}</span>
+            <b>{stat.value}</b>
+            <span>{stat.label}</span>
+            <a href={stat.sourceUrl} target="_blank" rel="noreferrer">
+              {stat.sourceLabel} <Icon name="arrowUR" />
+            </a>
           </div>
         ))
       }

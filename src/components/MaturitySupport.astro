@@ -1,0 +1,109 @@
+---
+import Icon from "./Icon.astro";
+import {
+  ROR_LICENSE,
+  ROR_OSS_VS_PRO,
+  ROR_PRO,
+  ROR_PRO_LICENSE,
+  ROR_SUPPORT,
+  SHAKAPERF_LICENSE,
+  SHAKAPERF_METHOD,
+  SHAKAPERF_PRICING,
+} from "../data/shaka";
+---
+
+<section class="section maturity-support" aria-labelledby="maturity-support-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Licenses &amp; support</span>
+      <h2 id="maturity-support-title">Clear paths from evaluation to production.</h2>
+      <p>
+        Public source is not the same as an open-source license. Each path keeps
+        its license, evidence, and support route explicit.
+      </p>
+    </div>
+
+    <div class="maturity-grid">
+      <article class="maturity-card reveal">
+        <span class="maturity-card-kicker">Community path</span>
+        <h3>Open-source foundations</h3>
+        <p>
+          React on Rails core, Shakapacker, E2E on Rails, and Control Plane Flow
+          use open-source licenses. Community help is available through public
+          docs, Discussions, and Slack; no service-level agreement is implied.
+        </p>
+        <div class="maturity-links">
+          <a href={ROR_LICENSE} target="_blank" rel="noreferrer">
+            React on Rails license <Icon name="arrowUR" />
+          </a>
+          <a
+            href="https://github.com/shakacode/shakapacker/blob/main/MIT-LICENSE"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Shakapacker license <Icon name="arrowUR" />
+          </a>
+          <a
+            href="https://github.com/shakacode/cypress-playwright-on-rails/blob/master/LICENSE"
+            target="_blank"
+            rel="noreferrer"
+          >
+            E2E on Rails license <Icon name="arrowUR" />
+          </a>
+          <a
+            href="https://github.com/shakacode/control-plane-flow/blob/main/LICENSE"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Control Plane Flow license <Icon name="arrowUR" />
+          </a>
+          <a href={ROR_SUPPORT} target="_blank" rel="noreferrer">
+            Community support routes <Icon name="arrowUR" />
+          </a>
+        </div>
+      </article>
+
+      <article class="maturity-card maturity-card-pro reveal">
+        <span class="maturity-card-kicker">Commercial path</span>
+        <h3>React on Rails Pro</h3>
+        <p>
+          React on Rails Pro is commercially licensed. Review the published
+          EULA and subscription terms before use; paid subscriptions include
+          updates and reasonable maintainer support without implying an SLA.
+        </p>
+        <div class="maturity-links">
+          <a href={ROR_OSS_VS_PRO} target="_blank" rel="noreferrer">
+            Compare OSS and Pro <Icon name="arrowUR" />
+          </a>
+          <a href={ROR_PRO} target="_blank" rel="noreferrer">
+            Pro overview <Icon name="arrowUR" />
+          </a>
+          <a href={ROR_PRO_LICENSE} target="_blank" rel="noreferrer">
+            Pro license <Icon name="arrowUR" />
+          </a>
+        </div>
+      </article>
+
+      <article class="maturity-card maturity-card-perf reveal">
+        <span class="maturity-card-kicker">Newer proof layer</span>
+        <h3>Source-available ShakaPerf</h3>
+        <p>
+          ShakaPerf is the newer, source-available layer in the stack. Inspect
+          its paired-statistics methodology and evaluate it under the published
+          trust-based license before relying on it as a production gate.
+        </p>
+        <div class="maturity-links">
+          <a href={SHAKAPERF_METHOD} target="_blank" rel="noreferrer">
+            Statistical methodology <Icon name="arrowUR" />
+          </a>
+          <a href={SHAKAPERF_LICENSE} target="_blank" rel="noreferrer">
+            ShakaPerf license <Icon name="arrowUR" />
+          </a>
+          <a href={SHAKAPERF_PRICING} target="_blank" rel="noreferrer">
+            Pricing <Icon name="arrowUR" />
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
