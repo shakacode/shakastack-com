@@ -59,6 +59,10 @@ export interface Example {
   stack: string[];
   live: string | null;
   source: string;
+  thumbnail: {
+    src: string;
+    alt: string;
+  };
 }
 
 export interface ShakaContent {
@@ -304,6 +308,10 @@ export const examples: Example[] = [
     stack: ["React on Rails Pro", "React 19", "RSC"],
     live: "https://rsc.reactonrails.com",
     source: "https://github.com/shakacode/react-on-rails-demo-marketplace-rsc",
+    thumbnail: {
+      src: "/examples/marketplace.webp",
+      alt: "React on Rails Performance Demo landing page with the headline Make Your Rails App 2x Faster",
+    },
   },
   {
     name: "Hacker News",
@@ -313,6 +321,10 @@ export const examples: Example[] = [
     stack: ["React on Rails Pro", "React 19", "RSC"],
     live: "https://hn.reactonrails.com",
     source: "https://github.com/shakacode/react-on-rails-demo-hacker-news-rsc",
+    thumbnail: {
+      src: "/examples/hacker-news.webp",
+      alt: "Hacker News on Rails demo showing a ranked list of news stories",
+    },
   },
   {
     name: "Gumroad",
@@ -322,6 +334,10 @@ export const examples: Example[] = [
     stack: ["React on Rails Pro", "Inertia", "RSC"],
     live: "https://gumroad.reactonrails.com/public_product/rsc_demo",
     source: "https://github.com/shakacode/react-on-rails-demo-gumroad-rsc",
+    thumbnail: {
+      src: "/examples/gumroad.webp",
+      alt: "Gumroad-style React Server Components demo showing the Tendon Book product page",
+    },
   },
   {
     name: "TanStack Starter",
@@ -331,6 +347,10 @@ export const examples: Example[] = [
     stack: ["Rails 8", "React on Rails Pro", "TanStack", "RSC"],
     live: "https://starter.reactonrails.com",
     source: "https://github.com/shakacode/react-on-rails-starter-tanstack",
+    thumbnail: {
+      src: "/examples/tanstack-starter.webp",
+      alt: "React on Rails and TanStack starter landing page describing three Rails rendering surfaces",
+    },
   },
   {
     name: "Legacy Tutorial App",
@@ -340,6 +360,10 @@ export const examples: Example[] = [
     stack: ["React on Rails", "Shakapacker", "SSR"],
     live: "https://reactrails.com",
     source: "https://github.com/shakacode/react-webpack-rails-tutorial",
+    thumbnail: {
+      src: "/examples/legacy-tutorial.webp",
+      alt: "React on Rails tutorial demo showing routes for Rails, React, and server rendering",
+    },
   },
 ];
 

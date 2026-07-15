@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon, GitHubMark } from "../Icon";
 import type { Example, Project, ProjectId } from "../../data/shaka";
 
@@ -20,6 +20,49 @@ const PROJ_LABEL: Record<Filter, string> = {
 
 const exampleAccent = (example: Example): ProjectId =>
   example.projects.find((project) => project !== "ror") ?? example.projects[0] ?? "ror";
+
+function GalleryThumbnail({ example }: { example: Example }) {
+  const [failed, setFailed] = useState(false);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const image = imageRef.current;
+    if (image?.complete && image.naturalWidth === 0) {
+      setFailed(true);
+    }
+  }, []);
+
+  return (
+    <div className={`card-thumb card-thumb-${exampleAccent(example)}`}>
+      <span className="card-tag">{example.tag}</span>
+      {failed ? (
+        <div
+          className="card-thumb-fallback"
+          role="img"
+          aria-label={`${example.name} demo preview unavailable`}
+        >
+          <div aria-hidden="true">
+            <span>Live demo</span>
+            <strong>{example.name}</strong>
+            <small>Preview temporarily unavailable</small>
+          </div>
+        </div>
+      ) : (
+        <img
+          ref={imageRef}
+          className="card-thumb-image"
+          src={example.thumbnail.src}
+          alt={example.thumbnail.alt}
+          width={960}
+          height={540}
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
+      )}
+    </div>
+  );
+}
 
 /** Client-side example filter by project id, with live counts and empty state. */
 export default function GalleryGrid({ examples, projects }: Props) {
@@ -52,25 +95,7 @@ export default function GalleryGrid({ examples, projects }: Props) {
       <div className="cards">
         {shown.map((e) => (
           <article className="card" key={e.name}>
-            <div className={`card-thumb card-thumb-${exampleAccent(e)}`}>
-              <span className="card-tag">{e.tag}</span>
-              <div className="card-art" aria-hidden="true">
-                <div className="card-art-bar">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-                <div className="card-art-body">
-                  <span className="card-art-kicker">{e.stack[0]}</span>
-                  <strong>{e.name}</strong>
-                  <div className="card-art-lines">
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <GalleryThumbnail example={e} />
             <div className="card-body">
               <h3>{e.name}</h3>
               <p>{e.blurb}</p>
