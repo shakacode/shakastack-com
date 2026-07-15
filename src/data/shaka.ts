@@ -104,10 +104,14 @@ export const ROR_PRO = "https://reactonrails.com/pro/";
 export const ROR_SUPPORT =
   "https://reactonrails.com/docs/deployment/troubleshooting/";
 export const SHAKAPERF_LICENSE =
-  "https://github.com/shakacode/shakaperf/blob/main/LICENSE.md";
+  "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/LICENSE.md";
+export const SHAKAPERF_NPM_0_1_3 =
+  "https://registry.npmjs.org/shaka-perf/0.1.3";
+export const SHAKA_BUNDLE_SIZE_NPM_0_0_12 =
+  "https://registry.npmjs.org/shaka-bundle-size/0.0.12";
 export const SHAKAPERF_PRICING = "https://shakaperf.com/pricing";
 export const SHAKAPERF_METHOD =
-  "https://github.com/shakacode/shakaperf/blob/main/packages/shaka-perf/used_statistics.md";
+  "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/packages/shaka-perf/used_statistics.md";
 
 export const popmenuEvidence = {
   title: "Measured at Popmenu",
@@ -238,7 +242,7 @@ export const projects: Project[] = [
     url: "https://shakaperf.com",
     accent: "shakaperf",
     icon: "prove",
-    tagline: "Source-available A/B performance testing for CI.",
+    tagline: "Repository source for A/B performance testing in CI.",
     blurb:
       "Run control and experiment Docker containers side by side, sample them together, and compare performance with paired statistics. One Playwright definition can drive performance, visual, accessibility, SEO, and bundle checks.",
     benefits: [
@@ -247,11 +251,11 @@ export const projects: Project[] = [
       ["Docker-based", "Measure any web stack that can run as a production Docker image with an exposed port."],
     ],
     license: {
-      label: "Source-available",
+      label: "Repository source · ShakaPerf License",
       href: SHAKAPERF_LICENSE,
     },
     install: "yarn add shaka-perf shaka-bundle-size",
-    altInstall: "shaka-perf compare",
+    altInstall: "yarn shaka-perf compare",
     links: [
       ["Website", "https://shakaperf.com"],
       ["Docs", "https://shakaperf.com/docs/"],

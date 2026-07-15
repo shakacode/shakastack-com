@@ -1,17 +1,17 @@
 # shakastack.com
 
 Marketing site for **ShakaStack** - a single entry point into four open-source
-[ShakaCode](https://shakacode.com) projects, source-available ShakaPerf, and an
-optional commercially licensed React on Rails Pro tier. The projects are
-organized into four phases for taking a Rails + React app from idea to measured
-production changes:
+[ShakaCode](https://shakacode.com) projects, the ShakaPerf repository source,
+and an optional commercially licensed React on Rails Pro tier. The projects
+are organized into four phases for taking a Rails + React app from idea to
+measured production changes:
 
 | Phase  | Project | What it does |
 |--------|---------|--------------|
 | Build  | [React on Rails](https://reactonrails.com) | Open-source Rails + React integration; Pro adds RSC and advanced rendering. |
 | Build  | [Shakapacker](https://shakapacker.com) | Bundle frontend assets with webpack, the Rails way. |
 | Test   | [E2E on Rails](https://e2eonrails.com) | Cypress or Playwright with Rails scenarios, factories, and clean test data. |
-| Prove  | [ShakaPerf](https://shakaperf.com) | Source-available control-vs-experiment performance testing. |
+| Prove  | [ShakaPerf](https://shakaperf.com) | Repository source for control-vs-experiment performance testing. |
 | Deploy | [Control Plane Flow](https://controlplaneflow.com) | A Heroku-style workflow on Control Plane infrastructure. |
 
 The page follows Donald Miller's **StoryBrand (SB7)** framework: the Rails
@@ -87,8 +87,12 @@ The stack mixes licenses: [React on Rails core](https://github.com/shakacode/rea
 [E2E on Rails](https://github.com/shakacode/cypress-playwright-on-rails/blob/master/LICENSE),
 and [Control Plane Flow](https://github.com/shakacode/control-plane-flow/blob/main/LICENSE)
 are open source; [React on Rails Pro](https://github.com/shakacode/react_on_rails/blob/main/REACT-ON-RAILS-PRO-LICENSE.md)
-uses its own commercial license; [ShakaPerf](https://github.com/shakacode/shakaperf/blob/main/LICENSE.md) is
-source-available under the ShakaPerf License.
+uses its own commercial license. The [ShakaPerf repository source](https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/LICENSE.md)
+uses the ShakaPerf License. Separately, npm registry JSON metadata reports `MIT` for
+[`shaka-perf@0.1.3`](https://registry.npmjs.org/shaka-perf/0.1.3) and
+[`shaka-bundle-size@0.0.12`](https://registry.npmjs.org/shaka-bundle-size/0.0.12).
+The site presents these as separate artifact/version records and does not extend
+them to other artifacts or versions.
 
 ## License
 
