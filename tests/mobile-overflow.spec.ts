@@ -211,6 +211,46 @@ test.describe("home page IA", () => {
     );
   });
 
+  test("shows the ShakaPerf command and artifact-specific license records", async ({ page }) => {
+    await page.goto("/");
+
+    const shakaPerfTab = page.getByRole("tab", { name: /ShakaPerf/ });
+    const stackExplorer = shakaPerfTab.locator("xpath=ancestor::astro-island");
+
+    await shakaPerfTab.scrollIntoViewIfNeeded();
+    await expect(stackExplorer).not.toHaveAttribute("ssr", "");
+    await shakaPerfTab.click();
+
+    const panel = page.getByRole("tabpanel");
+    await expect(panel.getByText("yarn shaka-perf compare", { exact: true })).toBeVisible();
+    await expect(
+      panel.getByRole("link", { name: "Repository source · ShakaPerf License" })
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/LICENSE.md"
+    );
+    await expect(page.getByRole("heading", { name: "ShakaPerf by artifact" })).toBeVisible();
+    await expect(
+      page.getByText("The repository source uses the ShakaPerf License.", { exact: false })
+    ).toBeVisible();
+    await expect(
+      page.getByText(
+        "npm metadata for shaka-perf 0.1.3 and shaka-bundle-size 0.0.12 reports MIT.",
+        { exact: false }
+      )
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "shaka-perf 0.1.3 metadata" })).toHaveAttribute(
+      "href",
+      "https://registry.npmjs.org/shaka-perf/0.1.3"
+    );
+    await expect(
+      page.getByRole("link", { name: "shaka-bundle-size 0.0.12 metadata" })
+    ).toHaveAttribute(
+      "href",
+      "https://registry.npmjs.org/shaka-bundle-size/0.0.12"
+    );
+  });
+
   test("keeps core content visible without JavaScript", async ({ browser }) => {
     const context = await browser.newContext({
       javaScriptEnabled: false,
