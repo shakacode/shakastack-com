@@ -56,6 +56,111 @@ test.describe("mobile layout", () => {
   }
 });
 
+test.describe("mobile navigation", () => {
+  test("is closed by default and supports keyboard open and close", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto("/");
+
+    const menuButton = page.locator(".nav-toggle");
+    const menu = page.getByLabel("Mobile navigation");
+
+    await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    await expect(menu).toBeHidden();
+
+    await menuButton.focus();
+    await page.keyboard.press("Enter");
+
+    await expect(menuButton).toHaveAttribute("aria-expanded", "true");
+    await expect(page.getByRole("button", { name: "Close navigation menu" })).toBeVisible();
+    await expect(menu).toBeVisible();
+    await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(375);
+    await expect(menu.getByRole("link", { name: "vs Next.js" })).toHaveAttribute(
+      "href",
+      "/vs-nextjs"
+    );
+
+    await page.keyboard.press("Escape");
+
+    await expect(menu).toBeHidden();
+    await expect(menuButton).toBeFocused();
+  });
+
+  test("preserves desktop navigation", async ({ page }) => {
+    await page.setViewportSize({ width: 1200, height: 800 });
+    await page.goto("/");
+
+    await expect(page.getByRole("button", { name: "Open navigation menu" })).toBeHidden();
+    await expect(page.locator(".nav-links").getByRole("link", { name: "Why" })).toBeVisible();
+    await expect(page.locator(".nav-cta").getByRole("link", { name: "Book a free call" })).toBeVisible();
+  });
+
+  test("moves focus to visible navigation when resizing to desktop", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto("/");
+
+    await page.getByRole("button", { name: "Open navigation menu" }).click();
+    await page.getByLabel("Mobile navigation").getByRole("link", { name: "Why" }).focus();
+    await page.setViewportSize({ width: 1200, height: 800 });
+
+    await expect(page.getByRole("link", { name: "ShakaStack home" }).first()).toBeFocused();
+    await expect(page.getByLabel("Mobile navigation")).toBeHidden();
+  });
+
+  test("returns focus to the toggle after keyboard link activation", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto("/");
+
+    const menuButton = page.getByRole("button", { name: "Open navigation menu" });
+    await menuButton.click();
+    await page.getByLabel("Mobile navigation").getByRole("link", { name: "Why" }).focus();
+    await page.keyboard.press("Enter");
+
+    await expect(page.getByLabel("Mobile navigation")).toBeHidden();
+    await expect(menuButton).toBeFocused();
+  });
+
+  test("closes the menu and retains brand focus after brand activation", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto("/");
+
+    await page.getByRole("button", { name: "Open navigation menu" }).click();
+    const brand = page.getByRole("link", { name: "ShakaStack home" }).first();
+    await brand.focus();
+    await page.keyboard.press("Enter");
+
+    await expect(page.getByLabel("Mobile navigation")).toBeHidden();
+    await expect(brand).toBeFocused();
+  });
+
+  test("keeps the expanded menu usable on narrow phones", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 568 });
+    await page.goto("/");
+
+    await page.getByRole("button", { name: "Open navigation menu" }).click();
+
+    const menu = page.getByLabel("Mobile navigation");
+    const bookLink = menu.getByRole("link", { name: "Book a free call" });
+    await bookLink.scrollIntoViewIfNeeded();
+    await expect(bookLink).toBeVisible();
+    await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(320);
+  });
+
+  test("scrolls the expanded menu in a short landscape viewport", async ({ page }) => {
+    await page.setViewportSize({ width: 568, height: 320 });
+    await page.goto("/");
+
+    await page.getByRole("button", { name: "Open navigation menu" }).click();
+
+    const menu = page.getByLabel("Mobile navigation");
+    await expect(menu).toHaveCSS("overflow-y", "auto");
+    await expect(menu.evaluate((element) => element.scrollHeight > element.clientHeight)).resolves.toBe(true);
+    const bookLink = menu.getByRole("link", { name: "Book a free call" });
+    await bookLink.scrollIntoViewIfNeeded();
+    await expect(bookLink).toBeVisible();
+    await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(568);
+  });
+});
+
 test.describe("home page IA", () => {
   test("surfaces the stack structure and official starter guides", async ({ page }) => {
     await page.goto("/");
@@ -79,7 +184,10 @@ test.describe("home page IA", () => {
   });
 
   test("keeps core content visible without JavaScript", async ({ browser }) => {
-    const context = await browser.newContext({ javaScriptEnabled: false });
+    const context = await browser.newContext({
+      javaScriptEnabled: false,
+      viewport: { width: 320, height: 568 },
+    });
     const page = await context.newPage();
 
     await page.goto("/");
@@ -96,8 +204,35 @@ test.describe("home page IA", () => {
     await expect(
       page.getByRole("heading", { name: "Start from a working app, not a slide deck." })
     ).toBeVisible();
+    await expect(page.locator(".nav-cta").getByRole("link", { name: "GitHub" })).toBeVisible();
+    await expect(
+      page.locator(".nav-cta").getByRole("link", { name: "Book a free call" })
+    ).toBeVisible();
+    await expect(page.locator(".nav-toggle")).toBeHidden();
+    await expect(page.locator(".mobile-navigation")).toBeHidden();
+    await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(320);
 
     await context.close();
+  });
+
+  test("keeps the fallback navigation within its mobile breakpoint", async ({ browser }) => {
+    for (const width of [361, 600, 601]) {
+      const context = await browser.newContext({
+        javaScriptEnabled: false,
+        viewport: { width, height: 667 },
+      });
+      const page = await context.newPage();
+
+      await page.goto("/");
+
+      await expect(page.locator(".nav-cta").getByRole("link", { name: "GitHub" })).toBeVisible();
+      await expect(
+        page.locator(".nav-cta").getByRole("link", { name: "Book a free call" })
+      ).toBeVisible();
+      await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(width);
+
+      await context.close();
+    }
   });
 
   test("supports keyboard-operated example filters", async ({ page }) => {
