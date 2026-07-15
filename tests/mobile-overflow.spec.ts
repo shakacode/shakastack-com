@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { readFile } from "node:fs/promises";
 
 const phoneViewports = [
   { name: "iPhone SE", width: 375, height: 667 },
@@ -190,6 +191,17 @@ test.describe("mobile navigation", () => {
 });
 
 test.describe("home page IA", () => {
+  test("documents the legacy tutorial capture as historical", async () => {
+    const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
+
+    expect(readme).toContain("four linked live demos plus one historical legacy capture");
+    expect(readme).toContain(
+      "The legacy capture remains as a historical local asset; the current gallery retains the stable source link while suppressing the unavailable live endpoint."
+    );
+    expect(readme).not.toContain("five linked live demos");
+    expect(readme.toLowerCase()).not.toContain(["react", "rails.com"].join(""));
+  });
+
   test("surfaces the stack structure and official starter guides", async ({ page }) => {
     await page.goto("/");
 
@@ -457,9 +469,9 @@ test.describe("home page IA", () => {
     await expect(failedPreview).not.toContainText("Pinned public proof");
   });
 
-  test("shows the unavailable fallback for a demo without a thumbnail", async ({ page }) => {
+  test("shows the unavailable fallback for the legacy demo without a thumbnail", async ({ page }) => {
     await page.addInitScript(() => {
-      const removeFirstDemoThumbnail = (node: Node) => {
+      const removeLegacyDemoThumbnail = (node: Node) => {
         if (!(node instanceof Element)) return;
 
         const islands = node.matches("astro-island")
@@ -473,34 +485,44 @@ test.describe("home page IA", () => {
           if (!rawProps) continue;
 
           const props = JSON.parse(rawProps);
-          const firstDemo = props.examples?.[1]?.[0]?.[1];
-          if (!firstDemo?.thumbnail) continue;
+          type SerializedExample = [
+            number,
+            { name?: [number, string]; thumbnail?: unknown },
+          ];
+          const serializedExamples = props.examples?.[1];
+          const legacyDemo = serializedExamples?.find(
+            (entry: SerializedExample) => entry?.[1]?.name?.[1] === "Legacy Tutorial App"
+          )?.[1];
+          if (!legacyDemo?.thumbnail) continue;
 
-          delete firstDemo.thumbnail;
+          delete legacyDemo.thumbnail;
           island.setAttribute("props", JSON.stringify(props));
+          island.setAttribute("data-legacy-thumbnail-removed", "true");
         }
       };
 
       new MutationObserver((records) => {
         for (const record of records) {
-          for (const node of record.addedNodes) removeFirstDemoThumbnail(node);
+          for (const node of record.addedNodes) removeLegacyDemoThumbnail(node);
         }
       }).observe(document, { childList: true, subtree: true });
     });
     await page.goto("/");
 
-    const demoCard = page.getByRole("article").filter({
-      has: page.getByRole("heading", { name: "Marketplace" }),
+    const legacyCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "Legacy Tutorial App" }),
     });
-    const galleryIsland = demoCard.locator("xpath=ancestor::astro-island");
-    await demoCard.scrollIntoViewIfNeeded();
+    const galleryIsland = legacyCard.locator("xpath=ancestor::astro-island");
+    await legacyCard.scrollIntoViewIfNeeded();
+    await expect(galleryIsland).toHaveAttribute("data-legacy-thumbnail-removed", "true");
     await expect(galleryIsland).not.toHaveAttribute("ssr", "");
 
-    const missingPreview = demoCard.getByRole("img", {
-      name: "Marketplace preview unavailable",
+    const missingPreview = legacyCard.getByRole("img", {
+      name: "Legacy Tutorial App preview unavailable",
     });
     await expect(missingPreview).toBeVisible();
-    await expect(missingPreview.getByText("Live demo", { exact: true })).toBeVisible();
+    await expect(missingPreview.getByText("Demo unavailable", { exact: true })).toBeVisible();
+    await expect(missingPreview.getByText("Live demo", { exact: true })).toHaveCount(0);
     await expect(
       missingPreview.getByText("Preview temporarily unavailable", { exact: true })
     ).toBeVisible();

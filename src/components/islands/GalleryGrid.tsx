@@ -58,7 +58,11 @@ function GalleryThumbnail({ example }: { example: Example }) {
           aria-label={`${example.name} preview unavailable`}
         >
           <div aria-hidden="true">
-            <span>{example.liveLabel ?? "Live demo"}</span>
+            <span>
+              {example.live
+                ? example.liveLabel ?? "Live demo"
+                : example.unavailableLabel ?? "Demo unavailable"}
+            </span>
             <strong>{example.name}</strong>
             <small>Preview temporarily unavailable</small>
           </div>
