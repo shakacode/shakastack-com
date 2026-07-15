@@ -386,6 +386,7 @@ export const vsNextjsFaq: Faq[] = [
    ============================================================ */
 
 export const AI_CONSULTING = "https://shakacode.com/services/ai-consulting";
+export const AGENT_WORKFLOWS_REPO = "https://github.com/shakacode/agent-workflows";
 export const STARTER_AGENTS_MD =
   "https://github.com/shakacode/react-on-rails-starter-tanstack/blob/main/AGENTS.md";
 
@@ -425,14 +426,13 @@ export const onRamps: OnRamp[] = [
   },
 ];
 
-/** Agent-capability is a DX proof point, not a separate pitch. Copy stays within
- *  what ShakaCode publicly claims: experts pick the best AI proposals; ShakaPerf's
- *  A/B loop keeps only provably-faster changes. Verify before broadening. */
+/** Agent-capability is a DX proof point, not a separate pitch. Keep the proof
+ *  grounded in the public agent-workflows repository's verifiable contents. */
 export const agentCapable = {
   badge: "Agent-ready",
   title: "The most agent-capable stack",
   body: "AI agents thrive on convention. Rails' structure, explicit typed JSON contracts, and the starter's AGENTS.md guardrails give an agent a map it can't sprawl outside of - so AI-written changes stay reviewable and maintainable instead of turning into slop.",
-  proof: "It doesn't stop at writing code: ShakaCode's AI optimization loop runs proposed changes through ShakaPerf's A/B testing and keeps only the ones that are provably faster - with experts picking the best proposals.",
+  proof: "It doesn't stop at writing code: ShakaCode's public agent-workflows repository documents the guardrails and workflows behind this approach.",
 };
 
 export const railsGoodness: string[] = [
