@@ -47,12 +47,26 @@ export default function GalleryGrid({ examples, projects }: Props) {
       </div>
 
       <div className="cards">
-        {shown.map((e) => (
+        {shown.map((e, index) => (
           <article className="card" key={e.name}>
-            <div className="card-thumb">
+            <div className={`card-thumb card-thumb-${index % 3}`}>
               <span className="card-tag">{e.tag}</span>
-              <span className="thumb-glyph">{e.name}</span>
-              <span className="ph">screenshot placeholder</span>
+              <div className="card-art" aria-hidden="true">
+                <div className="card-art-bar">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div className="card-art-body">
+                  <span className="card-art-kicker">{e.stack[0]}</span>
+                  <strong>{e.name}</strong>
+                  <div className="card-art-lines">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="card-body">
               <h3>{e.name}</h3>
