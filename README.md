@@ -61,17 +61,26 @@ Pages, Netlify, Vercel, GitHub Pages, or any static host. No server runtime
 required. Set the production domain in [`astro.config.mjs`](astro.config.mjs)
 (`site`) so canonical URLs and the sitemap are correct.
 
-## Before launch - asset placeholders to replace
+## Example gallery captures
 
-This site faithfully recreates the design prototype, including its deliberate
-placeholders. Replace before going live:
+The gallery uses static captures of the five linked live demos so production
+builds remain deterministic. Each URL returned HTTP 200 immediately before its
+capture on 2026-07-15 (UTC).
 
-1. **Project logos** - remaining deep-dives have a dashed "logo / screenshot"
-   slot. Drop in real React on Rails, Shakapacker, Control Plane Flow, and
-   ShakaPerf logos/screenshots.
-2. **OG image** - keep [`public/og.svg`](public/og.svg) and its rendered
-   1200×630 `public/og.png` copy synchronized whenever public positioning
-   changes.
+| Demo | Source URL | Capture date | Capture viewport | Output | Optimization | Provenance |
+|------|------------|--------------|------------------|--------|--------------|------------|
+| Marketplace | [rsc.reactonrails.com](https://rsc.reactonrails.com/) | 2026-07-15 UTC | 1440×900 | [`public/examples/marketplace.webp`](public/examples/marketplace.webp) | Top 1440×810 crop; 960×540 WebP, quality 76, method 6, metadata stripped | Captured from the ShakaCode-operated live demo |
+| Hacker News | [hn.reactonrails.com](https://hn.reactonrails.com/) | 2026-07-15 UTC | 1440×900 | [`public/examples/hacker-news.webp`](public/examples/hacker-news.webp) | Top 1440×810 crop; 960×540 WebP, quality 76, method 6, metadata stripped | Captured from the ShakaCode-operated live demo |
+| Gumroad | [gumroad.reactonrails.com](https://gumroad.reactonrails.com/public_product/rsc_demo) | 2026-07-15 UTC | 1440×900 | [`public/examples/gumroad.webp`](public/examples/gumroad.webp) | Top 1440×810 crop; 960×540 WebP, quality 76, method 6, metadata stripped | Captured from the ShakaCode-operated live demo |
+| TanStack Starter | [starter.reactonrails.com](https://starter.reactonrails.com/) | 2026-07-15 UTC | 1440×900 | [`public/examples/tanstack-starter.webp`](public/examples/tanstack-starter.webp) | Top 1440×810 crop; 960×540 WebP, quality 76, method 6, metadata stripped | Captured from the ShakaCode-operated live demo |
+| Legacy Tutorial App | [reactrails.com](https://reactrails.com/) | 2026-07-15 UTC | 1440×900 | [`public/examples/legacy-tutorial.webp`](public/examples/legacy-tutorial.webp) | Top 1440×810 crop; 960×540 WebP, quality 76, method 6, metadata stripped | Captured from the ShakaCode-operated live demo |
+
+Captures were made with Playwright Chromium in light mode using the `en-US`
+locale and `Pacific/Honolulu` timezone after a three-second settle, with service
+workers blocked. They are first-party documentation assets for this
+ShakaCode-owned site. Linked applications and source code retain their own
+licenses; third-party names and marks visible in a capture remain the property
+of their respective owners.
 
 ## Claim maintenance
 

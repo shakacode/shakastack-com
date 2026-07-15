@@ -24,6 +24,9 @@ const exampleAccent = (example: Example): ProjectId =>
 /** Client-side example filter by project id, with live counts and empty state. */
 export default function GalleryGrid({ examples, projects }: Props) {
   const [filter, setFilter] = useState<Filter>("all");
+  const [failedThumbnails, setFailedThumbnails] = useState<Set<string>>(
+    () => new Set(),
+  );
   const filters: Filter[] = ["all", ...projects.map((p) => p.id)];
   const count = (f: Filter) =>
     f === "all"
@@ -50,50 +53,68 @@ export default function GalleryGrid({ examples, projects }: Props) {
       </div>
 
       <div className="cards">
-        {shown.map((e) => (
-          <article className="card" key={e.name}>
-            <div className={`card-thumb card-thumb-${exampleAccent(e)}`}>
-              <span className="card-tag">{e.tag}</span>
-              <div className="card-art" aria-hidden="true">
-                <div className="card-art-bar">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-                <div className="card-art-body">
-                  <span className="card-art-kicker">{e.stack[0]}</span>
-                  <strong>{e.name}</strong>
-                  <div className="card-art-lines">
-                    <span />
-                    <span />
-                    <span />
+        {shown.map((e) => {
+          const thumbnailFailed = failedThumbnails.has(e.thumbnail.src);
+
+          return (
+            <article className="card" key={e.name}>
+              <div className={`card-thumb card-thumb-${exampleAccent(e)}`}>
+                <span className="card-tag">{e.tag}</span>
+                {thumbnailFailed ? (
+                  <div
+                    className="card-thumb-fallback"
+                    role="img"
+                    aria-label={`${e.name} demo preview unavailable`}
+                  >
+                    <div aria-hidden="true">
+                      <span>Live demo</span>
+                      <strong>{e.name}</strong>
+                      <small>Preview temporarily unavailable</small>
+                    </div>
                   </div>
+                ) : (
+                  <img
+                    className="card-thumb-image"
+                    src={e.thumbnail.src}
+                    alt={e.thumbnail.alt}
+                    width={960}
+                    height={540}
+                    loading="lazy"
+                    decoding="async"
+                    onError={() => {
+                      setFailedThumbnails((failed) => {
+                        const next = new Set(failed);
+                        next.add(e.thumbnail.src);
+                        return next;
+                      });
+                    }}
+                  />
+                )}
+              </div>
+              <div className="card-body">
+                <h3>{e.name}</h3>
+                <p>{e.blurb}</p>
+                <div className="card-stack">
+                  {e.stack.map((s) => (
+                    <span key={s}>{s}</span>
+                  ))}
+                </div>
+                <div className="card-links">
+                  {e.live ? (
+                    <a className="live" href={e.live} target="_blank" rel="noreferrer">
+                      <Icon name="play" /> Live demo
+                    </a>
+                  ) : (
+                    <span className="soon">Demo coming soon</span>
+                  )}
+                  <a className="src" href={e.source} target="_blank" rel="noreferrer">
+                    <GitHubMark width={14} height={14} /> Source
+                  </a>
                 </div>
               </div>
-            </div>
-            <div className="card-body">
-              <h3>{e.name}</h3>
-              <p>{e.blurb}</p>
-              <div className="card-stack">
-                {e.stack.map((s) => (
-                  <span key={s}>{s}</span>
-                ))}
-              </div>
-              <div className="card-links">
-                {e.live ? (
-                  <a className="live" href={e.live} target="_blank" rel="noreferrer">
-                    <Icon name="play" /> Live demo
-                  </a>
-                ) : (
-                  <span className="soon">Demo coming soon</span>
-                )}
-                <a className="src" href={e.source} target="_blank" rel="noreferrer">
-                  <GitHubMark width={14} height={14} /> Source
-                </a>
-              </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
         {shown.length === 0 && filter !== "all" && (
           <div className="empty">
             More {PROJ_LABEL[filter]} demos are on the way. In the meantime,
