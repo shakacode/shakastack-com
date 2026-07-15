@@ -142,6 +142,7 @@ img { max-width: 100%; display: block; }
 .nav-links a:hover { color: var(--ink); background: var(--sand-3); }
 .nav-cta { margin-left: auto; display: flex; align-items: center; gap: 10px; }
 .nav-toggle { display: none; }
+.mobile-navigation { display: none; }
 
 /* ============================================================
    HERO
@@ -471,35 +472,57 @@ img { max-width: 100%; display: block; }
   .cards { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
+  .nav-hydrated .nav-cta { display: none; }
+  .nav-inner { justify-content: space-between; }
+  .nav-hydrated .nav-toggle {
+    width: 44px; height: 44px; padding: 0; display: grid; place-items: center;
+    border: 1px solid var(--line); border-radius: var(--r-sm); background: #fff; color: var(--ink);
+  }
+  .nav-toggle:hover { background: var(--sand-3); }
+  .nav-toggle-icon, .nav-toggle-icon::before, .nav-toggle-icon::after {
+    width: 20px; height: 2px; display: block; border-radius: 999px; background: currentColor;
+  }
+  .nav-toggle-icon { position: relative; }
+  .nav-toggle-icon::before, .nav-toggle-icon::after { content: ""; position: absolute; left: 0; }
+  .nav-toggle-icon::before { top: -6px; }
+  .nav-toggle-icon::after { top: 6px; }
+  .mobile-navigation {
+    display: block; border-top: 1px solid var(--line); background: oklch(0.985 0.008 85 / 0.96);
+    max-height: calc(100dvh - 70px); overflow-y: auto; overscroll-behavior: contain;
+    backdrop-filter: saturate(160%) blur(14px);
+  }
+  .mobile-navigation[hidden] { display: none; }
+  .mobile-navigation-inner { padding-block: 18px 22px; }
+  .mobile-navigation-links { display: grid; gap: 4px; }
+  .mobile-navigation-links a { padding: 12px 14px; border-radius: var(--r-sm); font-weight: 600; color: var(--ink-2); }
+  .mobile-navigation-links a:hover { color: var(--ink); background: var(--sand-3); }
+  .mobile-navigation-cta { display: flex; gap: 10px; margin-top: 18px; }
+  .mobile-navigation-cta .btn { flex: 1; justify-content: center; }
 }
 @media (max-width: 600px) {
   .wrap { padding: 0 20px; }
   .nav-inner { gap: 10px; height: 64px; }
   .brand { gap: 9px; font-size: 18px; min-width: 0; }
   .brand .mark { width: 32px; height: 32px; border-radius: 9px; flex: 0 0 auto; }
+  .nav:not(.nav-hydrated) .brand > span:last-child { display: none; }
+  .mobile-navigation { max-height: calc(100dvh - 64px); }
   .nav-cta { gap: 8px; min-width: 0; }
   .nav-cta .btn { padding: 10px 15px; font-size: 14px; }
   .nav-cta .btn-ghost {
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    justify-content: center;
-    flex: 0 0 auto;
+    width: 42px; height: 42px; padding: 0; justify-content: center; flex: 0 0 auto;
   }
   .nav-cta-label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
   }
   .section { padding: 76px 0; }
   .cards { grid-template-columns: 1fr; }
   .flow { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   .hero-meta { gap: 18px; }
+}
+@media (max-width: 360px) {
+  .mobile-navigation-cta { flex-direction: column; }
 }
 
 /* ============================================================
