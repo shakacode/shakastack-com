@@ -63,9 +63,11 @@ required. Set the production domain in [`astro.config.mjs`](astro.config.mjs)
 
 ## Example gallery captures
 
-The gallery uses static captures of the five linked live demos so production
-builds remain deterministic. Each URL returned HTTP 200 immediately before its
-capture on 2026-07-15 (UTC).
+The gallery uses static captures of four linked live demos plus one historical legacy capture
+so production builds remain deterministic. Each currently linked demo URL returned HTTP 200
+immediately before its capture on 2026-07-15 (UTC).
+
+The legacy capture remains as a historical local asset; the current gallery retains the stable source link while suppressing the unavailable live endpoint.
 
 | Demo | Source URL | Capture date | Capture viewport | Output | Optimization | Provenance |
 |------|------------|--------------|------------------|--------|--------------|------------|
@@ -73,7 +75,7 @@ capture on 2026-07-15 (UTC).
 | Hacker News | [hn.reactonrails.com](https://hn.reactonrails.com/) | 2026-07-15 UTC | 1440×900 | [`public/examples/hacker-news.webp`](public/examples/hacker-news.webp) | Top 1440×810 crop; 960×540 WebP, quality 76, method 6, metadata stripped | Captured from the ShakaCode-operated live demo |
 | Gumroad | [gumroad.reactonrails.com](https://gumroad.reactonrails.com/public_product/rsc_demo) | 2026-07-15 UTC | 1440×900 | [`public/examples/gumroad.webp`](public/examples/gumroad.webp) | Top 1440×810 crop; 960×540 WebP, quality 76, method 6, metadata stripped | Captured from the ShakaCode-operated live demo |
 | TanStack Starter | [starter.reactonrails.com](https://starter.reactonrails.com/) | 2026-07-15 UTC | 1440×900 | [`public/examples/tanstack-starter.webp`](public/examples/tanstack-starter.webp) | Top 1440×810 crop; 960×540 WebP, quality 76, method 6, metadata stripped | Captured from the ShakaCode-operated live demo |
-| Legacy Tutorial App | [reactrails.com](https://reactrails.com/) | 2026-07-15 UTC | 1440×900 | [`public/examples/legacy-tutorial.webp`](public/examples/legacy-tutorial.webp) | Top 1440×810 crop; 960×540 WebP, quality 76, method 6, metadata stripped | Captured from the ShakaCode-operated live demo |
+| Legacy Tutorial App | Historical capture; [stable source repository](https://github.com/shakacode/react-webpack-rails-tutorial) | 2026-07-15 UTC | 1440×900 | [`public/examples/legacy-tutorial.webp`](public/examples/legacy-tutorial.webp) | Top 1440×810 crop; 960×540 WebP, quality 76, method 6, metadata stripped | Historical local capture retained for documentation; live endpoint unavailable |
 
 Captures were made with Playwright Chromium in light mode using the `en-US`
 locale and `Pacific/Honolulu` timezone after a three-second settle, with service
@@ -90,6 +92,13 @@ URLs. Keep each claim and its source in the same change, and verify the source
 still supports the wording before publishing. The static site deliberately does
 not fetch live GitHub, registry, or marketing metrics at build or runtime; this
 keeps builds deterministic and prevents silent claim drift.
+
+The project maturity snapshot is a static, all-project record checked
+`2026-07-15 UTC`. Refresh all five project records and the checked date together
+before publishing updated release/package, star, or repository-age facts; do
+not partially refresh the snapshot. GitHub star counts and public-repository
+years use the linked GitHub REST repository metadata JSON, while versions link
+to the exact release or package record.
 
 The stack mixes licenses: [React on Rails core](https://github.com/shakacode/react_on_rails/blob/main/LICENSE.md),
 [Shakapacker](https://github.com/shakacode/shakapacker/blob/main/MIT-LICENSE),

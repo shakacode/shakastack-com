@@ -58,10 +58,27 @@ export interface Example {
   blurb: string;
   stack: string[];
   live: string | null;
+  liveLabel?: string;
+  unavailableLabel?: string;
+  primaryLinkKind?: "demo" | "artifact";
   source: string;
-  thumbnail: {
+  thumbnail?: {
     src: string;
     alt: string;
+  };
+}
+
+export interface ProjectMaturity {
+  projectId: ProjectId;
+  name: string;
+  recordLabel: string;
+  recordUrl: string;
+  stars: number;
+  publicSince: number;
+  repositoryMetadataUrl: string;
+  note?: {
+    label: string;
+    sourceUrl: string;
   };
 }
 
@@ -116,6 +133,81 @@ export const SHAKA_BUNDLE_SIZE_NPM_0_0_12 =
 export const SHAKAPERF_PRICING = "https://shakaperf.com/pricing";
 export const SHAKAPERF_METHOD =
   "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/packages/shaka-perf/used_statistics.md";
+export const SHAKAPERF_REPORT_SNAPSHOT =
+  "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results/client__01-overview.png";
+export const SHAKAPERF_REPORT_GALLERY =
+  "https://github.com/shakacode/shakaperf/tree/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results";
+
+/**
+ * Static maturity snapshot checked 2026-07-15 UTC.
+ * Refresh every record and the date together; the site never fetches these facts.
+ */
+export const MATURITY_SNAPSHOT_DATE = "2026-07-15";
+export const maturitySnapshot: ProjectMaturity[] = [
+  {
+    projectId: "ror",
+    name: "React on Rails",
+    recordLabel: "v16.6.0 stable",
+    recordUrl:
+      "https://github.com/shakacode/react_on_rails/releases/tag/v16.6.0",
+    stars: 5190,
+    publicSince: 2015,
+    repositoryMetadataUrl:
+      "https://api.github.com/repos/shakacode/react_on_rails",
+  },
+  {
+    projectId: "shakapacker",
+    name: "Shakapacker",
+    recordLabel: "v10.3.0",
+    recordUrl:
+      "https://github.com/shakacode/shakapacker/releases/tag/v10.3.0",
+    stars: 490,
+    publicSince: 2017,
+    repositoryMetadataUrl:
+      "https://api.github.com/repos/shakacode/shakapacker",
+    note: {
+      label: "Official Webpacker successor",
+      sourceUrl:
+        "https://github.com/shakacode/shakapacker/blob/5485afe290d8f489f973c78420470c1b72dcd10c/README.md",
+    },
+  },
+  {
+    projectId: "e2e",
+    name: "E2E on Rails",
+    recordLabel: "v1.20.1",
+    recordUrl:
+      "https://github.com/shakacode/cypress-playwright-on-rails/releases/tag/v1.20.1",
+    stars: 453,
+    publicSince: 2017,
+    repositoryMetadataUrl:
+      "https://api.github.com/repos/shakacode/cypress-playwright-on-rails",
+  },
+  {
+    projectId: "shakaperf",
+    name: "ShakaPerf",
+    recordLabel: "shaka-perf@0.1.3 package record",
+    recordUrl: SHAKAPERF_NPM_0_1_3,
+    stars: 0,
+    publicSince: 2026,
+    repositoryMetadataUrl:
+      "https://api.github.com/repos/shakacode/shakaperf",
+    note: {
+      label: "New public repository",
+      sourceUrl: "https://github.com/shakacode/shakaperf",
+    },
+  },
+  {
+    projectId: "cpflow",
+    name: "Control Plane Flow",
+    recordLabel: "v5.2.0",
+    recordUrl:
+      "https://github.com/shakacode/control-plane-flow/releases/tag/v5.2.0",
+    stars: 51,
+    publicSince: 2022,
+    repositoryMetadataUrl:
+      "https://api.github.com/repos/shakacode/control-plane-flow",
+  },
+];
 
 export const popmenuEvidence = {
   title: "Measured at Popmenu",
@@ -265,6 +357,8 @@ export const projects: Project[] = [
       ["Docs", "https://shakaperf.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakaperf"],
       ["Methodology", SHAKAPERF_METHOD],
+      ["Report snapshot", SHAKAPERF_REPORT_SNAPSHOT],
+      ["Report gallery", SHAKAPERF_REPORT_GALLERY],
       ["License", SHAKAPERF_LICENSE],
     ],
   },
@@ -356,14 +450,27 @@ export const examples: Example[] = [
     name: "Legacy Tutorial App",
     tag: "Production",
     projects: ["ror", "shakapacker"],
-    blurb: "The original full-app React on Rails tutorial demo - running in production for years on Shakapacker.",
+    blurb: "The original full-app React on Rails tutorial, using Shakapacker with server rendering.",
     stack: ["React on Rails", "Shakapacker", "SSR"],
-    live: "https://reactrails.com",
+    live: null,
+    unavailableLabel: "Demo unavailable",
     source: "https://github.com/shakacode/react-webpack-rails-tutorial",
     thumbnail: {
       src: "/examples/legacy-tutorial.webp",
       alt: "React on Rails tutorial demo showing routes for Rails, React, and server rendering",
     },
+  },
+  {
+    name: "ShakaPerf audit report",
+    tag: "Proof",
+    projects: ["shakaperf"],
+    blurb:
+      "An integration-test report snapshot from ShakaPerf's audit-results fixture, pinned to the tested repository commit.",
+    stack: ["ShakaPerf", "Integration test", "Audit report"],
+    live: SHAKAPERF_REPORT_SNAPSHOT,
+    liveLabel: "View report snapshot",
+    primaryLinkKind: "artifact",
+    source: SHAKAPERF_REPORT_GALLERY,
   },
 ];
 

@@ -21,9 +21,13 @@ const PROJ_LABEL: Record<Filter, string> = {
 const exampleAccent = (example: Example): ProjectId =>
   example.projects.find((project) => project !== "ror") ?? example.projects[0] ?? "ror";
 
+const primaryLinkKind = (example: Example) => example.primaryLinkKind ?? "demo";
+
 function GalleryThumbnail({ example }: { example: Example }) {
   const [failed, setFailed] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
+  const isPinnedArtifact =
+    !example.thumbnail && primaryLinkKind(example) === "artifact";
 
   useEffect(() => {
     const image = imageRef.current;
@@ -35,14 +39,30 @@ function GalleryThumbnail({ example }: { example: Example }) {
   return (
     <div className={`card-thumb card-thumb-${exampleAccent(example)}`}>
       <span className="card-tag">{example.tag}</span>
-      {failed ? (
+      {isPinnedArtifact ? (
         <div
           className="card-thumb-fallback"
           role="img"
-          aria-label={`${example.name} demo preview unavailable`}
+          aria-label={`${example.name} pinned public proof`}
         >
           <div aria-hidden="true">
-            <span>Live demo</span>
+            <span>Pinned public proof</span>
+            <strong>{example.name}</strong>
+            <small>{example.liveLabel ?? "Open proof artifact"} below</small>
+          </div>
+        </div>
+      ) : failed || !example.thumbnail ? (
+        <div
+          className="card-thumb-fallback"
+          role="img"
+          aria-label={`${example.name} preview unavailable`}
+        >
+          <div aria-hidden="true">
+            <span>
+              {example.live
+                ? example.liveLabel ?? "Live demo"
+                : example.unavailableLabel ?? "Demo unavailable"}
+            </span>
             <strong>{example.name}</strong>
             <small>Preview temporarily unavailable</small>
           </div>
@@ -84,6 +104,7 @@ export default function GalleryGrid({ examples, projects }: Props) {
           <button
             key={f}
             className={"filter" + (f === filter ? " active" : "")}
+            aria-pressed={f === filter}
             onClick={() => setFilter(f)}
           >
             {PROJ_LABEL[f]}
@@ -106,11 +127,19 @@ export default function GalleryGrid({ examples, projects }: Props) {
               </div>
               <div className="card-links">
                 {e.live ? (
-                  <a className="live" href={e.live} target="_blank" rel="noreferrer">
-                    <Icon name="play" /> Live demo
+                  <a
+                    className="live"
+                    href={e.live}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Icon name={primaryLinkKind(e) === "artifact" ? "arrowUR" : "play"} />
+                    {e.liveLabel ?? "Live demo"}
                   </a>
                 ) : (
-                  <span className="soon">Demo coming soon</span>
+                  <span className="soon">
+                    {e.unavailableLabel ?? "Demo coming soon"}
+                  </span>
                 )}
                 <a className="src" href={e.source} target="_blank" rel="noreferrer">
                   <GitHubMark width={14} height={14} /> Source

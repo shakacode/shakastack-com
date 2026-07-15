@@ -14,7 +14,13 @@ import {
   SHAKAPERF_METHOD,
   SHAKAPERF_NPM_0_1_3,
   SHAKAPERF_PRICING,
+  SHAKAPERF_REPORT_GALLERY,
+  SHAKAPERF_REPORT_SNAPSHOT,
+  MATURITY_SNAPSHOT_DATE,
+  maturitySnapshot,
 } from "../data/shaka";
+
+const stars = new Intl.NumberFormat("en-US");
 ---
 
 <section class="section maturity-support" aria-labelledby="maturity-support-title">
@@ -27,6 +33,56 @@ import {
         its license, evidence, and support route explicit.
       </p>
     </div>
+
+    <section class="maturity-snapshot reveal" aria-labelledby="maturity-snapshot-title">
+      <div class="maturity-snapshot-head">
+        <div>
+          <span class="maturity-card-kicker">Project maturity snapshot</span>
+          <h3 id="maturity-snapshot-title">Five public project records, one checked date.</h3>
+        </div>
+        <p>
+          Checked <time datetime={MATURITY_SNAPSHOT_DATE}>{MATURITY_SNAPSHOT_DATE} UTC</time>
+          <span aria-hidden="true"> · </span>statically curated
+        </p>
+      </div>
+
+      <div class="maturity-snapshot-grid" role="list">
+        {maturitySnapshot.map((project) => (
+          <article
+            class={`maturity-snapshot-card maturity-snapshot-card-${project.projectId}`}
+            data-project={project.projectId}
+            role="listitem"
+          >
+            <h4>{project.name}</h4>
+            <div class="maturity-snapshot-facts">
+              <a href={project.recordUrl} target="_blank" rel="noreferrer">
+                {project.recordLabel}
+              </a>
+              <a
+                href={project.repositoryMetadataUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {stars.format(project.stars)} stars
+                <span> · </span>
+                Public repo since {project.publicSince}
+                <small>GitHub repository metadata JSON</small>
+              </a>
+            </div>
+            {project.note && (
+              <a
+                class="maturity-snapshot-note"
+                href={project.note.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {project.note.label}
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
 
     <div class="maturity-grid">
       <article class="maturity-card reveal">
@@ -98,6 +154,12 @@ import {
           MIT. Inspect the exact source or package you plan to use.
         </p>
         <div class="maturity-links">
+          <a href={SHAKAPERF_REPORT_SNAPSHOT} target="_blank" rel="noreferrer">
+            Report snapshot <Icon name="arrowUR" />
+          </a>
+          <a href={SHAKAPERF_REPORT_GALLERY} target="_blank" rel="noreferrer">
+            Report gallery <Icon name="arrowUR" />
+          </a>
           <a href={SHAKAPERF_METHOD} target="_blank" rel="noreferrer">
             Statistical methodology <Icon name="arrowUR" />
           </a>

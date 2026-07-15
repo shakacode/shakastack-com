@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { readFile } from "node:fs/promises";
 
 const phoneViewports = [
   { name: "iPhone SE", width: 375, height: 667 },
@@ -190,6 +191,17 @@ test.describe("mobile navigation", () => {
 });
 
 test.describe("home page IA", () => {
+  test("documents the legacy tutorial capture as historical", async () => {
+    const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
+
+    expect(readme).toContain("four linked live demos plus one historical legacy capture");
+    expect(readme).toContain(
+      "The legacy capture remains as a historical local asset; the current gallery retains the stable source link while suppressing the unavailable live endpoint."
+    );
+    expect(readme).not.toContain("five linked live demos");
+    expect(readme.toLowerCase()).not.toContain(["react", "rails.com"].join(""));
+  });
+
   test("surfaces the stack structure and official starter guides", async ({ page }) => {
     await page.goto("/");
 
@@ -261,6 +273,262 @@ test.describe("home page IA", () => {
     );
   });
 
+  test("shows the statically curated maturity snapshot and primary records", async ({ page }) => {
+    await page.goto("/");
+
+    const snapshot = page.locator(".maturity-snapshot");
+    await expect(snapshot.getByText("2026-07-15 UTC", { exact: true })).toBeVisible();
+
+    const expectedProjects = [
+      {
+        id: "ror",
+        name: "React on Rails",
+        version: "v16.6.0 stable",
+        release: "https://github.com/shakacode/react_on_rails/releases/tag/v16.6.0",
+        stars: "5,190 stars",
+        since: "Public repo since 2015",
+        metadata: "https://api.github.com/repos/shakacode/react_on_rails",
+      },
+      {
+        id: "shakapacker",
+        name: "Shakapacker",
+        version: "v10.3.0",
+        release: "https://github.com/shakacode/shakapacker/releases/tag/v10.3.0",
+        stars: "490 stars",
+        since: "Public repo since 2017",
+        metadata: "https://api.github.com/repos/shakacode/shakapacker",
+      },
+      {
+        id: "e2e",
+        name: "E2E on Rails",
+        version: "v1.20.1",
+        release:
+          "https://github.com/shakacode/cypress-playwright-on-rails/releases/tag/v1.20.1",
+        stars: "453 stars",
+        since: "Public repo since 2017",
+        metadata:
+          "https://api.github.com/repos/shakacode/cypress-playwright-on-rails",
+      },
+      {
+        id: "shakaperf",
+        name: "ShakaPerf",
+        version: "shaka-perf@0.1.3 package record",
+        release: "https://registry.npmjs.org/shaka-perf/0.1.3",
+        stars: "0 stars",
+        since: "Public repo since 2026",
+        metadata: "https://api.github.com/repos/shakacode/shakaperf",
+      },
+      {
+        id: "cpflow",
+        name: "Control Plane Flow",
+        version: "v5.2.0",
+        release:
+          "https://github.com/shakacode/control-plane-flow/releases/tag/v5.2.0",
+        stars: "51 stars",
+        since: "Public repo since 2022",
+        metadata: "https://api.github.com/repos/shakacode/control-plane-flow",
+      },
+    ];
+
+    await expect(snapshot.locator(".maturity-snapshot-card")).toHaveCount(5);
+    for (const project of expectedProjects) {
+      const card = snapshot.locator(`[data-project="${project.id}"]`);
+      await expect(card.getByRole("heading", { name: project.name })).toBeVisible();
+      await expect(card.getByRole("link", { name: project.version })).toHaveAttribute(
+        "href",
+        project.release
+      );
+      const metadataEvidence = card.getByRole("link", {
+        name: `${project.stars} · ${project.since} GitHub repository metadata JSON`,
+        exact: true,
+      });
+      await expect(metadataEvidence).toHaveAttribute(
+        "href",
+        project.metadata
+      );
+      await expect(
+        card.locator(`.maturity-snapshot-facts a[href="${project.metadata}"]`)
+      ).toHaveCount(1);
+    }
+
+    const shakapacker = snapshot.locator('[data-project="shakapacker"]');
+    await expect(
+      shakapacker.getByRole("link", { name: "Official Webpacker successor" })
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakapacker/blob/5485afe290d8f489f973c78420470c1b72dcd10c/README.md"
+    );
+    await expect(
+      snapshot.locator('[data-project="shakaperf"]').getByRole("link", {
+        name: "New public repository",
+        exact: true,
+      })
+    ).toHaveAttribute("href", "https://github.com/shakacode/shakaperf");
+    await expect(
+      snapshot.locator('[data-project="shakaperf"] .maturity-snapshot-facts small')
+    ).toHaveCSS("font-size", "12px");
+  });
+
+  test("filters to the public ShakaPerf report proof", async ({ page }) => {
+    await page.goto("/");
+
+    const demoCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "Marketplace" }),
+    });
+    await expect(
+      demoCard.getByRole("img", {
+        name: "React on Rails Performance Demo landing page with the headline Make Your Rails App 2x Faster",
+      })
+    ).toHaveAttribute("src", "/examples/marketplace.webp");
+    const demoLink = demoCard.getByRole("link", { name: "Live demo" });
+    await expect(demoLink).toHaveClass("live");
+    await expect(demoLink.locator("svg path")).toHaveAttribute(
+      "d",
+      "M6 4l14 8-14 8V4z"
+    );
+
+    const evidence = page.locator(".maturity-card-perf");
+    await expect(evidence.getByRole("link", { name: "Report snapshot" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results/client__01-overview.png"
+    );
+    await expect(evidence.getByRole("link", { name: "Report gallery" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakaperf/tree/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results"
+    );
+
+    const filter = page.getByRole("button", { name: /^ShakaPerf/ });
+    const galleryIsland = filter.locator("xpath=ancestor::astro-island");
+    await filter.scrollIntoViewIfNeeded();
+    await expect(galleryIsland).not.toHaveAttribute("ssr", "");
+    await expect(filter.locator(".ct")).toHaveText("1");
+    await filter.click();
+
+    const proofCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "ShakaPerf audit report" }),
+    });
+    await expect(proofCard).toBeVisible();
+    const proofPreview = proofCard.getByRole("img", {
+      name: "ShakaPerf audit report pinned public proof",
+    });
+    await expect(proofPreview).toBeVisible();
+    await expect(proofPreview.getByText("Pinned public proof", { exact: true })).toBeVisible();
+    await expect(
+      proofPreview.getByText("View report snapshot below", { exact: true })
+    ).toBeVisible();
+    await expect(proofPreview).not.toContainText(/unavailable/i);
+    const artifactLink = proofCard.getByRole("link", { name: "View report snapshot" });
+    await expect(artifactLink).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results/client__01-overview.png"
+    );
+    await expect(artifactLink).toHaveClass("live");
+    await expect(artifactLink.locator("svg path")).toHaveAttribute(
+      "d",
+      "M7 17L17 7M9 7h8v8"
+    );
+    await expect(proofCard.getByRole("link", { name: "Source" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakaperf/tree/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results"
+    );
+  });
+
+  test("keeps the legacy tutorial source without claiming a live demo", async ({ page }) => {
+    await page.goto("/");
+
+    const legacyCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "Legacy Tutorial App" }),
+    });
+
+    await expect(legacyCard.getByRole("link")).toHaveCount(1);
+    await expect(legacyCard.getByText("Demo unavailable", { exact: true })).toBeVisible();
+    await expect(legacyCard.getByRole("link", { name: "Live demo" })).toHaveCount(0);
+    await expect(legacyCard.getByRole("link", { name: "Source" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/react-webpack-rails-tutorial"
+    );
+  });
+
+  test("reserves unavailable copy for real thumbnail load failures", async ({ page }) => {
+    await page.route("**/examples/marketplace.webp", (route) => route.abort());
+    await page.goto("/");
+
+    const demoCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "Marketplace" }),
+    });
+    await demoCard.scrollIntoViewIfNeeded();
+
+    const failedPreview = demoCard.getByRole("img", {
+      name: "Marketplace preview unavailable",
+    });
+    await expect(failedPreview).toBeVisible();
+    await expect(failedPreview.getByText("Live demo", { exact: true })).toBeVisible();
+    await expect(
+      failedPreview.getByText("Preview temporarily unavailable", { exact: true })
+    ).toBeVisible();
+    await expect(failedPreview).not.toContainText("Pinned public proof");
+  });
+
+  test("shows the unavailable fallback for the legacy demo without a thumbnail", async ({ page }) => {
+    await page.addInitScript(() => {
+      const removeLegacyDemoThumbnail = (node: Node) => {
+        if (!(node instanceof Element)) return;
+
+        const islands = node.matches("astro-island")
+          ? [node]
+          : [...node.querySelectorAll("astro-island")];
+
+        for (const island of islands) {
+          if (!island.getAttribute("component-url")?.includes("GalleryGrid")) continue;
+
+          const rawProps = island.getAttribute("props");
+          if (!rawProps) continue;
+
+          const props = JSON.parse(rawProps);
+          type SerializedExample = [
+            number,
+            { name?: [number, string]; thumbnail?: unknown },
+          ];
+          const serializedExamples = props.examples?.[1];
+          const legacyDemo = serializedExamples?.find(
+            (entry: SerializedExample) => entry?.[1]?.name?.[1] === "Legacy Tutorial App"
+          )?.[1];
+          if (!legacyDemo?.thumbnail) continue;
+
+          delete legacyDemo.thumbnail;
+          island.setAttribute("props", JSON.stringify(props));
+          island.setAttribute("data-legacy-thumbnail-removed", "true");
+        }
+      };
+
+      new MutationObserver((records) => {
+        for (const record of records) {
+          for (const node of record.addedNodes) removeLegacyDemoThumbnail(node);
+        }
+      }).observe(document, { childList: true, subtree: true });
+    });
+    await page.goto("/");
+
+    const legacyCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "Legacy Tutorial App" }),
+    });
+    const galleryIsland = legacyCard.locator("xpath=ancestor::astro-island");
+    await legacyCard.scrollIntoViewIfNeeded();
+    await expect(galleryIsland).toHaveAttribute("data-legacy-thumbnail-removed", "true");
+    await expect(galleryIsland).not.toHaveAttribute("ssr", "");
+
+    const missingPreview = legacyCard.getByRole("img", {
+      name: "Legacy Tutorial App preview unavailable",
+    });
+    await expect(missingPreview).toBeVisible();
+    await expect(missingPreview.getByText("Demo unavailable", { exact: true })).toBeVisible();
+    await expect(missingPreview.getByText("Live demo", { exact: true })).toHaveCount(0);
+    await expect(
+      missingPreview.getByText("Preview temporarily unavailable", { exact: true })
+    ).toBeVisible();
+    await expect(missingPreview).not.toContainText("Pinned public proof");
+  });
+
   test("keeps core content visible without JavaScript", async ({ browser }) => {
     const context = await browser.newContext({
       javaScriptEnabled: false,
@@ -316,15 +584,20 @@ test.describe("home page IA", () => {
   test("supports keyboard-operated example filters", async ({ page }) => {
     await page.goto("/");
 
+    const allFilter = page.getByRole("button", { name: /^All/ });
     const filter = page.getByRole("button", { name: /^E2E on Rails/ });
     const galleryIsland = filter.locator("xpath=ancestor::astro-island");
 
     await filter.scrollIntoViewIfNeeded();
     await expect(galleryIsland).not.toHaveAttribute("ssr", "");
+    await expect(allFilter).toHaveAttribute("aria-pressed", "true");
+    await expect(filter).toHaveAttribute("aria-pressed", "false");
     await filter.focus();
     await page.keyboard.press("Enter");
 
     await expect(filter).toHaveClass(/active/);
+    await expect(allFilter).toHaveAttribute("aria-pressed", "false");
+    await expect(filter).toHaveAttribute("aria-pressed", "true");
     await expect(
       page.getByText("More E2E on Rails demos are on the way.", { exact: false })
     ).toBeVisible();
