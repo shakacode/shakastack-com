@@ -107,7 +107,8 @@ export default function GalleryGrid({ examples, projects }: Props) {
               <div className="card-links">
                 {e.live ? (
                   <a className="live" href={e.live} target="_blank" rel="noreferrer">
-                    <Icon name="play" /> Live demo
+                    <Icon name={e.liveLabel ? "arrowUR" : "play"} />
+                    {e.liveLabel ?? "Live demo"}
                   </a>
                 ) : (
                   <span className="soon">Demo coming soon</span>

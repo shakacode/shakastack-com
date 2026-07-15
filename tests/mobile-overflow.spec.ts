@@ -261,6 +261,129 @@ test.describe("home page IA", () => {
     );
   });
 
+  test("shows the statically curated maturity snapshot and primary records", async ({ page }) => {
+    await page.goto("/");
+
+    const snapshot = page.locator(".maturity-snapshot");
+    await expect(snapshot.getByText("2026-07-15 UTC", { exact: true })).toBeVisible();
+
+    const expectedProjects = [
+      {
+        id: "ror",
+        name: "React on Rails",
+        version: "v16.6.0 stable",
+        release: "https://github.com/shakacode/react_on_rails/releases/tag/v16.6.0",
+        stars: "5,190 stars",
+        since: "Public repo since 2015",
+        metadata: "https://api.github.com/repos/shakacode/react_on_rails",
+      },
+      {
+        id: "shakapacker",
+        name: "Shakapacker",
+        version: "v10.3.0",
+        release: "https://github.com/shakacode/shakapacker/releases/tag/v10.3.0",
+        stars: "490 stars",
+        since: "Public repo since 2017",
+        metadata: "https://api.github.com/repos/shakacode/shakapacker",
+      },
+      {
+        id: "e2e",
+        name: "E2E on Rails",
+        version: "v1.20.1",
+        release:
+          "https://github.com/shakacode/cypress-playwright-on-rails/releases/tag/v1.20.1",
+        stars: "453 stars",
+        since: "Public repo since 2017",
+        metadata:
+          "https://api.github.com/repos/shakacode/cypress-playwright-on-rails",
+      },
+      {
+        id: "shakaperf",
+        name: "ShakaPerf",
+        version: "shaka-perf@0.1.3 package record",
+        release: "https://registry.npmjs.org/shaka-perf/0.1.3",
+        stars: "0 stars",
+        since: "Public repo since 2026",
+        metadata: "https://api.github.com/repos/shakacode/shakaperf",
+      },
+      {
+        id: "cpflow",
+        name: "Control Plane Flow",
+        version: "v5.2.0",
+        release:
+          "https://github.com/shakacode/control-plane-flow/releases/tag/v5.2.0",
+        stars: "51 stars",
+        since: "Public repo since 2022",
+        metadata: "https://api.github.com/repos/shakacode/control-plane-flow",
+      },
+    ];
+
+    await expect(snapshot.locator(".maturity-snapshot-card")).toHaveCount(5);
+    for (const project of expectedProjects) {
+      const card = snapshot.locator(`[data-project="${project.id}"]`);
+      await expect(card.getByRole("heading", { name: project.name })).toBeVisible();
+      await expect(card.getByRole("link", { name: project.version })).toHaveAttribute(
+        "href",
+        project.release
+      );
+      await expect(card.getByRole("link", { name: new RegExp(`^${project.stars}`) })).toHaveAttribute(
+        "href",
+        project.metadata
+      );
+      await expect(card.getByRole("link", { name: new RegExp(`^${project.since}`) })).toHaveAttribute(
+        "href",
+        project.metadata
+      );
+    }
+
+    const shakapacker = snapshot.locator('[data-project="shakapacker"]');
+    await expect(
+      shakapacker.getByRole("link", { name: "Official Webpacker successor" })
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakapacker/blob/5485afe290d8f489f973c78420470c1b72dcd10c/README.md"
+    );
+    await expect(
+      snapshot.locator('[data-project="shakaperf"]').getByText("New public repository", {
+        exact: true,
+      })
+    ).toBeVisible();
+  });
+
+  test("filters to the public ShakaPerf report proof", async ({ page }) => {
+    await page.goto("/");
+
+    const evidence = page.locator(".maturity-card-perf");
+    await expect(evidence.getByRole("link", { name: "Report snapshot" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results/client__01-overview.png"
+    );
+    await expect(evidence.getByRole("link", { name: "Report gallery" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakaperf/tree/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results"
+    );
+
+    const filter = page.getByRole("button", { name: /^ShakaPerf/ });
+    const galleryIsland = filter.locator("xpath=ancestor::astro-island");
+    await filter.scrollIntoViewIfNeeded();
+    await expect(galleryIsland).not.toHaveAttribute("ssr", "");
+    await expect(filter.locator(".ct")).toHaveText("1");
+    await filter.click();
+
+    const proofCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "ShakaPerf audit report" }),
+    });
+    await expect(proofCard).toBeVisible();
+    await expect(proofCard.getByRole("link", { name: "View report snapshot" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results/client__01-overview.png"
+    );
+    await expect(proofCard.getByRole("link", { name: "Source" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakaperf/tree/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results"
+    );
+  });
+
   test("keeps core content visible without JavaScript", async ({ browser }) => {
     const context = await browser.newContext({
       javaScriptEnabled: false,

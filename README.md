@@ -91,6 +91,13 @@ still supports the wording before publishing. The static site deliberately does
 not fetch live GitHub, registry, or marketing metrics at build or runtime; this
 keeps builds deterministic and prevents silent claim drift.
 
+The project maturity snapshot is a static, all-project record checked
+`2026-07-15 UTC`. Refresh all five project records and the checked date together
+before publishing updated release/package, star, or repository-age facts; do
+not partially refresh the snapshot. GitHub star counts and public-repository
+years use the linked GitHub REST repository metadata JSON, while versions link
+to the exact release or package record.
+
 The stack mixes licenses: [React on Rails core](https://github.com/shakacode/react_on_rails/blob/main/LICENSE.md),
 [Shakapacker](https://github.com/shakacode/shakapacker/blob/main/MIT-LICENSE),
 [E2E on Rails](https://github.com/shakacode/cypress-playwright-on-rails/blob/master/LICENSE),
