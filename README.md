@@ -88,7 +88,7 @@ The stack mixes licenses: [React on Rails core](https://github.com/shakacode/rea
 and [Control Plane Flow](https://github.com/shakacode/control-plane-flow/blob/main/LICENSE)
 are open source; [React on Rails Pro](https://github.com/shakacode/react_on_rails/blob/main/REACT-ON-RAILS-PRO-LICENSE.md)
 uses its own commercial license. The [ShakaPerf repository source](https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/LICENSE.md)
-uses the ShakaPerf License. Separately, npm registry metadata reports `MIT` for
+uses the ShakaPerf License. Separately, npm registry JSON metadata reports `MIT` for
 [`shaka-perf@0.1.3`](https://registry.npmjs.org/shaka-perf/0.1.3) and
 [`shaka-bundle-size@0.0.12`](https://registry.npmjs.org/shaka-bundle-size/0.0.12).
 The site presents these as separate artifact/version records and does not extend

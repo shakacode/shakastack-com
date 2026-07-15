@@ -111,7 +111,7 @@ export const SHAKA_BUNDLE_SIZE_NPM_0_0_12 =
   "https://registry.npmjs.org/shaka-bundle-size/0.0.12";
 export const SHAKAPERF_PRICING = "https://shakaperf.com/pricing";
 export const SHAKAPERF_METHOD =
-  "https://github.com/shakacode/shakaperf/blob/main/packages/shaka-perf/used_statistics.md";
+  "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/packages/shaka-perf/used_statistics.md";
 
 export const popmenuEvidence = {
   title: "Measured at Popmenu",

@@ -235,16 +235,16 @@ test.describe("home page IA", () => {
     ).toBeVisible();
     await expect(
       page.getByText(
-        "npm metadata for shaka-perf 0.1.3 and shaka-bundle-size 0.0.12 reports MIT.",
+        "npm registry JSON metadata for shaka-perf 0.1.3 and shaka-bundle-size 0.0.12 reports MIT.",
         { exact: false }
       )
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "shaka-perf 0.1.3 metadata" })).toHaveAttribute(
+    await expect(page.getByRole("link", { name: "shaka-perf 0.1.3 registry JSON" })).toHaveAttribute(
       "href",
       "https://registry.npmjs.org/shaka-perf/0.1.3"
     );
     await expect(
-      page.getByRole("link", { name: "shaka-bundle-size 0.0.12 metadata" })
+      page.getByRole("link", { name: "shaka-bundle-size 0.0.12 registry JSON" })
     ).toHaveAttribute(
       "href",
       "https://registry.npmjs.org/shaka-bundle-size/0.0.12"
