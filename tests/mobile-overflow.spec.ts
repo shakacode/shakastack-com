@@ -191,6 +191,20 @@ test.describe("mobile navigation", () => {
 });
 
 test.describe("home page IA", () => {
+  test("labels the ShakaPerf footer link as the repository source license", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(
+      page.getByRole("link", { name: "ShakaPerf repository source license", exact: true })
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/LICENSE.md"
+    );
+    await expect(
+      page.getByRole("link", { name: "ShakaPerf license", exact: true })
+    ).toHaveCount(0);
+  });
+
   test("documents the legacy tutorial capture as historical", async () => {
     const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
 
