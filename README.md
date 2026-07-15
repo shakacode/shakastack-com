@@ -25,7 +25,7 @@ plan.
   - `HeroStackCard` - auto-cycling stack highlight (`client:visible`)
   - `StackExplorer` - tab/tabpanel "the plan" explorer (`client:visible`)
   - `GalleryGrid` - examples filter (`client:visible`)
-- Everything else (hero copy, problem, guide, project deep-dives, stakes, proof,
+- Everything else (hero copy, problem, guide, project deep-dives, proof,
   CTA, footer) is server-rendered to static HTML with **no client JS**.
 - The design system lives in [`src/styles/global.css`](src/styles/global.css)
   (colors authored in OKLCH). Content is typed data in
@@ -67,11 +67,10 @@ placeholders. Replace before going live:
 1. **Project logos** - remaining deep-dives have a dashed "logo / screenshot"
    slot. Drop in real React on Rails, Shakapacker, Control Plane Flow, and
    ShakaPerf logos/screenshots.
-2. **Example screenshots** - gallery cards use striped name placeholders.
-3. **OG image** - [`public/og.svg`](public/og.svg) is a vector placeholder; most
+2. **OG image** - [`public/og.svg`](public/og.svg) is a vector placeholder; most
    social crawlers want a 1200×630 PNG/JPG. Render it to `og.png` and update the
    reference in [`src/layouts/Layout.astro`](src/layouts/Layout.astro).
-4. **Copy to verify:** all **ShakaPerf** copy (least-documented of the five),
+3. **Copy to verify:** all **ShakaPerf** copy (least-documented of the five),
    the **Popmenu pull-quote** attribution & metrics, the client **logo list**,
    and the **"80-90% faster"** guide stat.
 

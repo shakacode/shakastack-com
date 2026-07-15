@@ -55,3 +55,65 @@ test.describe("mobile layout", () => {
     }
   }
 });
+
+test.describe("home page IA", () => {
+  test("surfaces the stack structure and official starter guides", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.locator("#stakes")).toHaveCount(0);
+    await expect(
+      page.getByText("Four phases, five open-source projects", { exact: false })
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "TanStack Router guide" })).toHaveAttribute(
+      "href",
+      "https://reactonrails.com/docs/building-features/tanstack-router"
+    );
+    await expect(page.getByRole("link", { name: "TanStack Query guide" })).toHaveAttribute(
+      "href",
+      "https://reactonrails.com/docs/building-features/tanstack-query"
+    );
+    await expect(page.getByRole("link", { name: "vs Next.js" }).first()).toHaveAttribute(
+      "href",
+      "/vs-nextjs"
+    );
+  });
+
+  test("keeps core content visible without JavaScript", async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+
+    await page.goto("/");
+
+    await expect(
+      page.getByRole("heading", {
+        name: "Modern React on Rails is harder than it should be.",
+      })
+    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Build → test → prove → deploy." })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Live demos & starters, with source." })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Start from a working app, not a slide deck." })
+    ).toBeVisible();
+
+    await context.close();
+  });
+
+  test("supports keyboard-operated example filters", async ({ page }) => {
+    await page.goto("/");
+
+    const filter = page.getByRole("button", { name: /^E2E on Rails/ });
+    const galleryIsland = filter.locator("xpath=ancestor::astro-island");
+
+    await filter.scrollIntoViewIfNeeded();
+    await expect(galleryIsland).not.toHaveAttribute("ssr", "");
+    await filter.focus();
+    await page.keyboard.press("Enter");
+
+    await expect(filter).toHaveClass(/active/);
+    await expect(
+      page.getByText("More E2E on Rails demos are on the way.", { exact: false })
+    ).toBeVisible();
+  });
+});

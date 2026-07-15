@@ -56,17 +56,11 @@ export interface Example {
   source: string;
 }
 
-export interface Stakes {
-  without: string[];
-  withStack: string[];
-}
-
 export interface ShakaContent {
   projects: Project[];
   examples: Example[];
   problems: Benefit[];
   guideStats: Benefit[];
-  stakes: Stakes;
   logos: string[];
 }
 
@@ -257,7 +251,7 @@ export const examples: Example[] = [
     name: "TanStack Starter",
     tag: "Official",
     projects: ["ror", "shakapacker"],
-    blurb: "The official Rails 8 + React on Rails Pro starter with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase - leave Next.js without leaving your Rails backend.",
+    blurb: "The official Rails 8 + React on Rails Pro starter with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase, with Rails remaining the application boundary.",
     stack: ["Rails 8", "React on Rails Pro", "TanStack", "RSC"],
     live: "https://starter.reactonrails.com",
     source: "https://github.com/shakacode/react-on-rails-starter-tanstack",
@@ -286,21 +280,6 @@ export const guideStats: Benefit[] = [
   ["Paia, HI", "Open-source maintainers - not a faceless vendor"],
 ];
 
-export const stakes: Stakes = {
-  without: [
-    "A frontend you dread touching",
-    "Guessing whether a change made things faster",
-    "Rising infra bills and brittle build config",
-    "Quietly falling behind on React (RSC, React 19)",
-  ],
-  withStack: [
-    "Modern React, rendered the Rails way",
-    "Performance you can prove, run after run",
-    "Lower infra cost with a Heroku-style flow",
-    "A stack the maintainers stand behind",
-  ],
-};
-
 export const logos: string[] = [
   "Popmenu", "HVMN", "Printivity", "Simply Business", "User Interviews",
   "Jewlr", "AirRobe", "SkyVerge", "Datacenters.com", "The Information",
@@ -311,7 +290,6 @@ export const shaka: ShakaContent = {
   examples,
   problems,
   guideStats,
-  stakes,
   logos,
 };
 
