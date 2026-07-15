@@ -132,6 +132,34 @@ test.describe("mobile navigation", () => {
     await expect(brand).toBeFocused();
   });
 
+  test("does not force brand focus when the menu is already closed", async ({ page }) => {
+    await page.setViewportSize({ width: 1200, height: 800 });
+    await page.goto("/");
+    await expect(page.locator("nav.nav")).toHaveClass(/nav-hydrated/);
+
+    const brand = page.getByRole("link", { name: "ShakaStack home" }).first();
+    await brand.evaluate((element) => {
+      element.addEventListener("click", (event) => event.preventDefault(), { once: true });
+      (element as HTMLElement).click();
+    });
+    await page.evaluate(() => new Promise(requestAnimationFrame));
+
+    await expect(brand).not.toBeFocused();
+  });
+
+  test("leaves the menu open when Escape is pressed outside navigation", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto("/");
+
+    await page.getByRole("button", { name: "Open navigation menu" }).click();
+    const galleryFilter = page.getByRole("button", { name: /^E2E on Rails/ });
+    await galleryFilter.focus();
+    await page.keyboard.press("Escape");
+
+    await expect(page.getByLabel("Mobile navigation")).toBeVisible();
+    await expect(galleryFilter).toBeFocused();
+  });
+
   test("keeps the expanded menu usable on narrow phones", async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 568 });
     await page.goto("/");

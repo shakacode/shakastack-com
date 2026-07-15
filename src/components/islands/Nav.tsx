@@ -7,6 +7,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
   const brandRef = useRef<HTMLAnchorElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -37,10 +38,10 @@ export default function Nav() {
     if (!menuOpen) return;
 
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setMenuOpen(false);
-        menuButtonRef.current?.focus();
-      }
+      if (event.key !== "Escape" || !navRef.current?.contains(event.target as Node)) return;
+
+      setMenuOpen(false);
+      menuButtonRef.current?.focus();
     };
 
     window.addEventListener("keydown", closeOnEscape);
@@ -53,12 +54,17 @@ export default function Nav() {
   };
 
   const closeMenuFromBrand = () => {
+    if (!menuOpen) return;
+
     setMenuOpen(false);
     window.requestAnimationFrame(() => brandRef.current?.focus());
   };
 
   return (
-    <nav className={`nav${scrolled ? " scrolled" : ""}${hydrated ? " nav-hydrated" : ""}`}>
+    <nav
+      ref={navRef}
+      className={`nav${scrolled ? " scrolled" : ""}${hydrated ? " nav-hydrated" : ""}`}
+    >
       <div className="wrap nav-inner">
         <a
           ref={brandRef}
