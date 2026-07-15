@@ -323,15 +323,20 @@ img { max-width: 100%; display: block; }
     radial-gradient(circle at 82% 18%, color-mix(in oklch, var(--card-art-accent) 45%, transparent), transparent 34%),
     linear-gradient(145deg, color-mix(in oklch, var(--card-art-accent) 16%, var(--sand-2)), var(--sand-3));
 }
-.card-thumb-1 { --card-art-accent: var(--shakapacker); }
-.card-thumb-2 { --card-art-accent: var(--cpflow); }
+.card-thumb-ror { --card-art-accent: var(--ror); }
+.card-thumb-shakapacker { --card-art-accent: var(--shakapacker); }
+.card-thumb-e2e { --card-art-accent: var(--e2e); }
+.card-thumb-shakaperf { --card-art-accent: var(--shakaperf); }
+.card-thumb-cpflow { --card-art-accent: var(--cpflow); }
 .card-art {
   width: min(100%, 270px); height: 142px; border-radius: 12px 12px 0 0; overflow: hidden;
   background: #fff; border: 1px solid oklch(1 0 0 / 0.72); box-shadow: 0 14px 35px oklch(0.25 0.03 245 / 0.18);
   transform: rotate(-1deg); transform-origin: bottom center;
 }
-.card-thumb-1 .card-art { transform: translateX(8px) rotate(1.5deg); }
-.card-thumb-2 .card-art { transform: translateX(-7px) rotate(-2deg); }
+.card-thumb-shakapacker .card-art,
+.card-thumb-shakaperf .card-art { transform: translateX(8px) rotate(1.5deg); }
+.card-thumb-e2e .card-art,
+.card-thumb-cpflow .card-art { transform: translateX(-7px) rotate(-2deg); }
 .card-art-bar { height: 24px; display: flex; align-items: center; gap: 5px; padding: 0 9px; background: var(--ink); }
 .card-art-bar span { width: 6px; height: 6px; border-radius: 50%; background: oklch(1 0 0 / 0.42); }
 .card-art-bar span:first-child { background: var(--card-art-accent); }

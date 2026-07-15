@@ -18,6 +18,9 @@ const PROJ_LABEL: Record<Filter, string> = {
   shakaperf: "ShakaPerf",
 };
 
+const exampleAccent = (example: Example): ProjectId =>
+  example.projects.find((project) => project !== "ror") ?? example.projects[0] ?? "ror";
+
 /** Client-side example filter by project id, with live counts and empty state. */
 export default function GalleryGrid({ examples, projects }: Props) {
   const [filter, setFilter] = useState<Filter>("all");
@@ -47,9 +50,9 @@ export default function GalleryGrid({ examples, projects }: Props) {
       </div>
 
       <div className="cards">
-        {shown.map((e, index) => (
+        {shown.map((e) => (
           <article className="card" key={e.name}>
-            <div className={`card-thumb card-thumb-${index % 3}`}>
+            <div className={`card-thumb card-thumb-${exampleAccent(e)}`}>
               <span className="card-tag">{e.tag}</span>
               <div className="card-art" aria-hidden="true">
                 <div className="card-art-bar">
