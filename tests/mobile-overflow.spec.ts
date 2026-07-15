@@ -353,6 +353,16 @@ test.describe("home page IA", () => {
   test("filters to the public ShakaPerf report proof", async ({ page }) => {
     await page.goto("/");
 
+    const demoCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "Marketplace" }),
+    });
+    const demoLink = demoCard.getByRole("link", { name: "Live demo" });
+    await expect(demoLink).toHaveClass(/live-demo/);
+    await expect(demoLink.locator("svg path")).toHaveAttribute(
+      "d",
+      "M6 4l14 8-14 8V4z"
+    );
+
     const evidence = page.locator(".maturity-card-perf");
     await expect(evidence.getByRole("link", { name: "Report snapshot" })).toHaveAttribute(
       "href",
@@ -374,9 +384,15 @@ test.describe("home page IA", () => {
       has: page.getByRole("heading", { name: "ShakaPerf audit report" }),
     });
     await expect(proofCard).toBeVisible();
-    await expect(proofCard.getByRole("link", { name: "View report snapshot" })).toHaveAttribute(
+    const artifactLink = proofCard.getByRole("link", { name: "View report snapshot" });
+    await expect(artifactLink).toHaveAttribute(
       "href",
       "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results/client__01-overview.png"
+    );
+    await expect(artifactLink).toHaveClass(/live-artifact/);
+    await expect(artifactLink.locator("svg path")).toHaveAttribute(
+      "d",
+      "M7 17L17 7M9 7h8v8"
     );
     await expect(proofCard.getByRole("link", { name: "Source" })).toHaveAttribute(
       "href",

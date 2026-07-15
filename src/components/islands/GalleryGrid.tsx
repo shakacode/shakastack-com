@@ -21,6 +21,8 @@ const PROJ_LABEL: Record<Filter, string> = {
 const exampleAccent = (example: Example): ProjectId =>
   example.projects.find((project) => project !== "ror") ?? example.projects[0] ?? "ror";
 
+const primaryLinkKind = (example: Example) => example.primaryLinkKind ?? "demo";
+
 function GalleryThumbnail({ example }: { example: Example }) {
   const [failed, setFailed] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -35,14 +37,14 @@ function GalleryThumbnail({ example }: { example: Example }) {
   return (
     <div className={`card-thumb card-thumb-${exampleAccent(example)}`}>
       <span className="card-tag">{example.tag}</span>
-      {failed ? (
+      {!example.thumbnail || failed ? (
         <div
           className="card-thumb-fallback"
           role="img"
-          aria-label={`${example.name} demo preview unavailable`}
+          aria-label={`${example.name} preview unavailable`}
         >
           <div aria-hidden="true">
-            <span>Live demo</span>
+            <span>{example.liveLabel ?? "Live demo"}</span>
             <strong>{example.name}</strong>
             <small>Preview temporarily unavailable</small>
           </div>
@@ -106,8 +108,13 @@ export default function GalleryGrid({ examples, projects }: Props) {
               </div>
               <div className="card-links">
                 {e.live ? (
-                  <a className="live" href={e.live} target="_blank" rel="noreferrer">
-                    <Icon name={e.liveLabel ? "arrowUR" : "play"} />
+                  <a
+                    className={`live live-${primaryLinkKind(e)}`}
+                    href={e.live}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Icon name={primaryLinkKind(e) === "artifact" ? "arrowUR" : "play"} />
                     {e.liveLabel ?? "Live demo"}
                   </a>
                 ) : (

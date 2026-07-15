@@ -59,8 +59,9 @@ export interface Example {
   stack: string[];
   live: string | null;
   liveLabel?: string;
+  primaryLinkKind?: "demo" | "artifact";
   source: string;
-  thumbnail: {
+  thumbnail?: {
     src: string;
     alt: string;
   };
@@ -466,6 +467,7 @@ export const examples: Example[] = [
     stack: ["ShakaPerf", "Integration test", "Audit report"],
     live: SHAKAPERF_REPORT_SNAPSHOT,
     liveLabel: "View report snapshot",
+    primaryLinkKind: "artifact",
     source: SHAKAPERF_REPORT_GALLERY,
   },
 ];
