@@ -100,6 +100,7 @@ export default function GalleryGrid({ examples, projects }: Props) {
           <button
             key={f}
             className={"filter" + (f === filter ? " active" : "")}
+            aria-pressed={f === filter}
             onClick={() => setFilter(f)}
           >
             {PROJ_LABEL[f]}
@@ -132,7 +133,9 @@ export default function GalleryGrid({ examples, projects }: Props) {
                     {e.liveLabel ?? "Live demo"}
                   </a>
                 ) : (
-                  <span className="soon">Demo coming soon</span>
+                  <span className="soon">
+                    {e.unavailableLabel ?? "Demo coming soon"}
+                  </span>
                 )}
                 <a className="src" href={e.source} target="_blank" rel="noreferrer">
                   <GitHubMark width={14} height={14} /> Source

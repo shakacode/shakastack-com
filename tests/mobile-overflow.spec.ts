@@ -421,6 +421,22 @@ test.describe("home page IA", () => {
     );
   });
 
+  test("keeps the legacy tutorial source without claiming a live demo", async ({ page }) => {
+    await page.goto("/");
+
+    const legacyCard = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: "Legacy Tutorial App" }),
+    });
+
+    await expect(legacyCard.getByRole("link")).toHaveCount(1);
+    await expect(legacyCard.getByText("Demo unavailable", { exact: true })).toBeVisible();
+    await expect(legacyCard.getByRole("link", { name: "Live demo" })).toHaveCount(0);
+    await expect(legacyCard.getByRole("link", { name: "Source" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/react-webpack-rails-tutorial"
+    );
+  });
+
   test("reserves unavailable copy for real thumbnail load failures", async ({ page }) => {
     await page.route("**/examples/marketplace.webp", (route) => route.abort());
     await page.goto("/");
@@ -546,15 +562,20 @@ test.describe("home page IA", () => {
   test("supports keyboard-operated example filters", async ({ page }) => {
     await page.goto("/");
 
+    const allFilter = page.getByRole("button", { name: /^All/ });
     const filter = page.getByRole("button", { name: /^E2E on Rails/ });
     const galleryIsland = filter.locator("xpath=ancestor::astro-island");
 
     await filter.scrollIntoViewIfNeeded();
     await expect(galleryIsland).not.toHaveAttribute("ssr", "");
+    await expect(allFilter).toHaveAttribute("aria-pressed", "true");
+    await expect(filter).toHaveAttribute("aria-pressed", "false");
     await filter.focus();
     await page.keyboard.press("Enter");
 
     await expect(filter).toHaveClass(/active/);
+    await expect(allFilter).toHaveAttribute("aria-pressed", "false");
+    await expect(filter).toHaveAttribute("aria-pressed", "true");
     await expect(
       page.getByText("More E2E on Rails demos are on the way.", { exact: false })
     ).toBeVisible();

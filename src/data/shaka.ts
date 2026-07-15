@@ -59,6 +59,7 @@ export interface Example {
   stack: string[];
   live: string | null;
   liveLabel?: string;
+  unavailableLabel?: string;
   primaryLinkKind?: "demo" | "artifact";
   source: string;
   thumbnail?: {
@@ -449,9 +450,10 @@ export const examples: Example[] = [
     name: "Legacy Tutorial App",
     tag: "Production",
     projects: ["ror", "shakapacker"],
-    blurb: "The original full-app React on Rails tutorial demo - running in production for years on Shakapacker.",
+    blurb: "The original full-app React on Rails tutorial, using Shakapacker with server rendering.",
     stack: ["React on Rails", "Shakapacker", "SSR"],
-    live: "https://reactrails.com",
+    live: null,
+    unavailableLabel: "Demo unavailable",
     source: "https://github.com/shakacode/react-webpack-rails-tutorial",
     thumbnail: {
       src: "/examples/legacy-tutorial.webp",
