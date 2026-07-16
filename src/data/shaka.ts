@@ -640,7 +640,7 @@ export const onRamps: OnRamp[] = [
 export const agentCapable = {
   badge: "Agent-ready",
   title: "The most agent-capable stack",
-  body: "AI agents thrive on convention. Rails' structure, explicit typed JSON contracts, and the starter's AGENTS.md guardrails give an agent a map it can't sprawl outside of. Humans remain responsible for review and decisions. In ShakaCode's separate ShakaPerf optimization loop, only optimization changes that ShakaPerf proves faster survive the loop - keeping AI-assisted changes reviewable and maintainable instead of turning into slop.",
+  body: "AI agents thrive on convention. Rails' structure, explicit typed JSON contracts, and the starter's AGENTS.md guardrails give an agent a map it can't sprawl outside of, so AI-assisted changes stay reviewable and maintainable instead of turning into slop. Humans remain responsible for review and decisions. In ShakaCode's separate ShakaPerf optimization loop, only optimization changes that ShakaPerf proves faster survive the loop.",
   proof: "It doesn't stop at writing code: ShakaCode's public agent-workflows repository documents the guardrails and workflows behind this approach.",
 };
 
