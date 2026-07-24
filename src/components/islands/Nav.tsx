@@ -95,7 +95,7 @@ export default function Nav() {
             <span className="nav-cta-label">GitHub</span>
           </a>
           <a className="btn btn-primary" href={STARTER_REPO} target="_blank" rel="noreferrer">
-            Starter code
+            Clone the starter
           </a>
         </div>
         <button
@@ -143,7 +143,7 @@ export default function Nav() {
               rel="noreferrer"
               onClick={closeMenu}
             >
-              Starter code
+              Clone the starter
             </a>
           </div>
         </div>

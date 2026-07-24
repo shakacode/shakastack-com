@@ -363,7 +363,6 @@ img { max-width: 100%; display: block; }
 .card-links .src { margin-left: auto; font-size: 13.5px; color: var(--ink-3); display: inline-flex; align-items: center; gap: 6px; }
 .card-links .src:hover { color: var(--ink); }
 .card-links .soon { font-family: var(--ff-mono); font-size: 12px; color: var(--ink-3); }
-.empty { grid-column: 1/-1; padding: 50px; text-align: center; border: 1.5px dashed var(--line-2); border-radius: var(--r); color: var(--ink-2); background: var(--sand-2); }
 /* ============================================================
    PROOF
    ============================================================ */

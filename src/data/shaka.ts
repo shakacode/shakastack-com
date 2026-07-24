@@ -82,9 +82,6 @@ export interface EvidenceStat {
   sourceUrl: string;
 }
 
-/** Primary CTA - HubSpot scheduling link, used across the page. */
-export const BOOK_A_CALL =
-  "https://meetings.hubspot.com/justingordon/30-minute-consultation";
 export const SHAKACODE_URL = "https://shakacode.com";
 export const SHAKACODE_CONTACT = "https://shakacode.com/contact/";
 export const GITHUB_ORG = "https://github.com/shakacode";
@@ -377,13 +374,13 @@ export const guideStats: EvidenceStat[] = [
   {
     value: "12.5M+",
     label: "React on Rails gem downloads",
-    sourceLabel: "RubyGems",
+    sourceLabel: "React on Rails on RubyGems",
     sourceUrl: ROR_RUBYGEMS,
   },
   {
     value: "11.4M+",
     label: "Shakapacker gem downloads",
-    sourceLabel: "RubyGems",
+    sourceLabel: "Shakapacker on RubyGems",
     sourceUrl: SHAKAPACKER_RUBYGEMS,
   },
 ];

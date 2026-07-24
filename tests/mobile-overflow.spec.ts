@@ -92,7 +92,7 @@ test.describe("mobile navigation", () => {
 
     await expect(page.getByRole("button", { name: "Open navigation menu" })).toBeHidden();
     await expect(page.locator(".nav-links").getByRole("link", { name: "Why" })).toBeVisible();
-    await expect(page.locator(".nav-cta").getByRole("link", { name: "Starter code" })).toHaveAttribute(
+    await expect(page.locator(".nav-cta").getByRole("link", { name: "Clone the starter" })).toHaveAttribute(
       "href",
       "https://github.com/shakacode/react-on-rails-starter-tanstack"
     );
@@ -171,7 +171,7 @@ test.describe("mobile navigation", () => {
     await page.getByRole("button", { name: "Open navigation menu" }).click();
 
     const menu = page.getByLabel("Mobile navigation");
-    const starterLink = menu.getByRole("link", { name: "Starter code" });
+    const starterLink = menu.getByRole("link", { name: "Clone the starter" });
     await starterLink.scrollIntoViewIfNeeded();
     await expect(starterLink).toBeVisible();
     await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(320);
@@ -186,7 +186,7 @@ test.describe("mobile navigation", () => {
     const menu = page.getByLabel("Mobile navigation");
     await expect(menu).toHaveCSS("overflow-y", "auto");
     await expect(menu.evaluate((element) => element.scrollHeight > element.clientHeight)).resolves.toBe(true);
-    const starterLink = menu.getByRole("link", { name: "Starter code" });
+    const starterLink = menu.getByRole("link", { name: "Clone the starter" });
     await starterLink.scrollIntoViewIfNeeded();
     await expect(starterLink).toBeVisible();
     await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(568);
@@ -295,10 +295,10 @@ test.describe("home page IA", () => {
     await expect(page.getByText("11.4M+")).toBeVisible();
     await expect(page.getByText("Shakapacker gem downloads")).toBeVisible();
     await expect(
-      page.getByRole("link", { name: "RubyGems" }).first()
+      page.getByRole("link", { name: "React on Rails on RubyGems" })
     ).toHaveAttribute("href", "https://rubygems.org/gems/react_on_rails");
     await expect(
-      page.getByRole("link", { name: "RubyGems" }).last()
+      page.getByRole("link", { name: "Shakapacker on RubyGems" })
     ).toHaveAttribute("href", "https://rubygems.org/gems/shakapacker");
 
     const reactOnRailsTab = page.getByRole("tab", { name: /React on Rails/ });
@@ -468,7 +468,7 @@ test.describe("home page IA", () => {
     ).toBeVisible();
     await expect(page.locator(".nav-cta").getByRole("link", { name: "GitHub" })).toBeVisible();
     await expect(
-      page.locator(".nav-cta").getByRole("link", { name: "Starter code" })
+      page.locator(".nav-cta").getByRole("link", { name: "Clone the starter" })
     ).toBeVisible();
     await expect(page.locator(".nav-toggle")).toBeHidden();
     await expect(page.locator(".mobile-navigation")).toBeHidden();
@@ -489,7 +489,7 @@ test.describe("home page IA", () => {
 
       await expect(page.locator(".nav-cta").getByRole("link", { name: "GitHub" })).toBeVisible();
       await expect(
-        page.locator(".nav-cta").getByRole("link", { name: "Starter code" })
+        page.locator(".nav-cta").getByRole("link", { name: "Clone the starter" })
       ).toBeVisible();
       await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(width);
 
