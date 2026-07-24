@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { GitHubMark } from "../Icon";
-import { BOOK_A_CALL, GITHUB_ORG } from "../../data/shaka";
+import { GITHUB_ORG, STARTER_REPO } from "../../data/shaka";
 
 /** Sticky nav - fades in its bottom border after the page scrolls past 12px. */
 export default function Nav() {
@@ -78,6 +78,7 @@ export default function Nav() {
         </a>
         <div className="nav-links">
           <a href="/#problem">Why</a>
+          <a href="/#starter">Starter</a>
           <a href="/#stack">The Stack</a>
           <a href="/vs-nextjs">vs Next.js</a>
           <a href="/#examples">Examples</a>
@@ -93,8 +94,8 @@ export default function Nav() {
             <GitHubMark width={16} height={16} />
             <span className="nav-cta-label">GitHub</span>
           </a>
-          <a className="btn btn-primary" href={BOOK_A_CALL} target="_blank" rel="noreferrer">
-            Book a free call
+          <a className="btn btn-primary" href={STARTER_REPO} target="_blank" rel="noreferrer">
+            Clone the starter
           </a>
         </div>
         <button
@@ -119,6 +120,7 @@ export default function Nav() {
         <div className="wrap mobile-navigation-inner">
           <div className="mobile-navigation-links">
             <a href="/#problem" onClick={closeMenu}>Why</a>
+            <a href="/#starter" onClick={closeMenu}>Starter</a>
             <a href="/#stack" onClick={closeMenu}>The Stack</a>
             <a href="/vs-nextjs" onClick={closeMenu}>vs Next.js</a>
             <a href="/#examples" onClick={closeMenu}>Examples</a>
@@ -136,12 +138,12 @@ export default function Nav() {
             </a>
             <a
               className="btn btn-primary"
-              href={BOOK_A_CALL}
+              href={STARTER_REPO}
               target="_blank"
               rel="noreferrer"
               onClick={closeMenu}
             >
-              Book a free call
+              Clone the starter
             </a>
           </div>
         </div>

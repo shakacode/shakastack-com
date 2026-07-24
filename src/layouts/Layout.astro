@@ -7,14 +7,14 @@ interface Props {
 }
 
 const {
-  title = "ShakaStack - Build · Test · Prove · Deploy Rails + React",
-  description = "ShakaStack connects four open-source ShakaCode projects, ShakaPerf repository source and exact package records, and optional React on Rails Pro capabilities in one path for modern Rails + React apps.",
+  title = "ShakaStack - Build Rails + React with AI and prove performance",
+  description = "Give coding agents a public Rails 8 + React 19 foundation, then use ShakaPerf to keep only changes proven faster and visually stable.",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL("/og.png", Astro.site).href;
 const ogImageAlt =
-  "ShakaStack social preview: Ship modern React in Rails fast, and prove it.";
+  "ShakaStack social preview: Build ambitious Rails and React apps with AI. Prove every improvement.";
 ---
 
 <!doctype html>

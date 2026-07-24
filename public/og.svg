@@ -34,10 +34,11 @@
     <text x="86" y="44" font-family="system-ui, sans-serif" font-size="40" font-weight="800" letter-spacing="0" fill="#ffffff">ShakaStack</text>
   </g>
 
-  <text x="96" y="300" font-family="system-ui, sans-serif" font-size="78" font-weight="800" letter-spacing="0" fill="#ffffff">Ship modern React in Rails -</text>
-  <text x="96" y="392" font-family="system-ui, sans-serif" font-size="78" font-weight="800" letter-spacing="0"><tspan fill="url(#fast)">fast</tspan><tspan fill="#ffffff">, and prove it.</tspan></text>
+  <text x="96" y="260" font-family="system-ui, sans-serif" font-size="66" font-weight="800" letter-spacing="0" fill="#ffffff">Build ambitious Rails +</text>
+  <text x="96" y="338" font-family="system-ui, sans-serif" font-size="66" font-weight="800" letter-spacing="0" fill="#ffffff">React apps with AI.</text>
+  <text x="96" y="416" font-family="system-ui, sans-serif" font-size="66" font-weight="800" letter-spacing="0"><tspan fill="url(#fast)">Prove</tspan><tspan dx="20" fill="#ffffff">every improvement.</tspan></text>
 
-  <text x="96" y="470" font-family="system-ui, sans-serif" font-size="30" fill="#f1e9dd" opacity="0.88">Four phases, four OSS projects + ShakaPerf by artifact.</text>
+  <text x="96" y="480" font-family="system-ui, sans-serif" font-size="30" fill="#f1e9dd" opacity="0.88">Public starter. Measured performance.</text>
 
   <text x="96" y="556" font-family="ui-monospace, monospace" font-size="26" letter-spacing="2" fill="#f4d79a" opacity="0.92">build → test → prove → deploy</text>
 </svg>

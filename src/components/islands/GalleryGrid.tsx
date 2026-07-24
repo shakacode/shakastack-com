@@ -84,14 +84,17 @@ function GalleryThumbnail({ example }: { example: Example }) {
   );
 }
 
-/** Client-side example filter by project id, with live counts and empty state. */
+/** Client-side example filter by project id, with live counts. */
 export default function GalleryGrid({ examples, projects }: Props) {
   const [filter, setFilter] = useState<Filter>("all");
-  const filters: Filter[] = ["all", ...projects.map((p) => p.id)];
   const count = (f: Filter) =>
     f === "all"
       ? examples.length
       : examples.filter((e) => e.projects.includes(f)).length;
+  const filters: Filter[] = [
+    "all",
+    ...projects.map((p) => p.id).filter((id) => count(id) > 0),
+  ];
   const shown =
     filter === "all"
       ? examples
@@ -148,22 +151,6 @@ export default function GalleryGrid({ examples, projects }: Props) {
             </div>
           </article>
         ))}
-        {shown.length === 0 && filter !== "all" && (
-          <div className="empty">
-            More {PROJ_LABEL[filter]} demos are on the way. In the meantime,
-            explore the docs on{" "}
-            <a
-              className="link-arrow"
-              style={{ color: "var(--accent)" }}
-              href={projects.find((p) => p.id === filter)!.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {projects.find((p) => p.id === filter)!.domain}
-            </a>
-            .
-          </div>
-        )}
       </div>
     </>
   );

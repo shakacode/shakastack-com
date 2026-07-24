@@ -1,22 +1,24 @@
 # shakastack.com
 
-Marketing site for **ShakaStack** - a single entry point into four open-source
-[ShakaCode](https://shakacode.com) projects, the ShakaPerf repository source,
-and an optional commercially licensed React on Rails Pro tier. The projects
-are organized into four phases for taking a Rails + React app from idea to
-measured production changes:
+Marketing site for **ShakaStack**, a public
+[ShakaCode](https://shakacode.com) toolkit for building ambitious Rails +
+React applications with AI agents, testing the result, proving performance and
+visual stability, and deploying it. The working starter gives agents a concrete
+architecture and guardrails instead of a blank prompt.
 
 | Phase  | Project | What it does |
 |--------|---------|--------------|
-| Build  | [React on Rails](https://reactonrails.com) | Open-source Rails + React integration; Pro adds RSC and advanced rendering. |
+| Build  | [React on Rails](https://reactonrails.com) | Open-source Rails + React integration; Pro 17.0.0 adds supported GA RSC and advanced rendering. |
 | Build  | [Shakapacker](https://shakapacker.com) | Bundle frontend assets with webpack, the Rails way. |
 | Test   | [E2E on Rails](https://e2eonrails.com) | Cypress or Playwright with Rails scenarios, factories, and clean test data. |
-| Prove  | [ShakaPerf](https://shakaperf.com) | Repository source for control-vs-experiment performance testing. |
+| Prove  | [ShakaPerf](https://shakaperf.com) | Branch-vs-trunk performance and visual verification. |
 | Deploy | [Control Plane Flow](https://controlplaneflow.com) | A Heroku-style workflow on Control Plane infrastructure. |
 
 The page follows Donald Miller's **StoryBrand (SB7)** framework: the Rails
 engineer is the hero, ShakaCode is the guide, and the four-phase stack is the
-plan.
+plan. Cloning the public starter is the primary call to action; its live demo is
+the secondary evaluation path. React on Rails Pro and maintainer contact remain
+contextual options after visitors can inspect and build with the work.
 
 ## Tech stack
 
@@ -86,31 +88,15 @@ of their respective owners.
 
 ## Claim maintenance
 
-Public product, licensing, support, and performance claims are curated in
+Public product and performance claims are curated in
 [`src/data/shaka.ts`](src/data/shaka.ts) together with their primary-source
 URLs. Keep each claim and its source in the same change, and verify the source
 still supports the wording before publishing. The static site deliberately does
-not fetch live GitHub, registry, or marketing metrics at build or runtime; this
-keeps builds deterministic and prevents silent claim drift.
-
-The project maturity snapshot is a static, all-project record checked
-`2026-07-15 UTC`. Refresh all five project records and the checked date together
-before publishing updated release/package, star, or repository-age facts; do
-not partially refresh the snapshot. GitHub star counts and public-repository
-years use the linked GitHub REST repository metadata JSON, while versions link
-to the exact release or package record.
-
-The stack mixes licenses: [React on Rails core](https://github.com/shakacode/react_on_rails/blob/main/LICENSE.md),
-[Shakapacker](https://github.com/shakacode/shakapacker/blob/main/MIT-LICENSE),
-[E2E on Rails](https://github.com/shakacode/cypress-playwright-on-rails/blob/master/LICENSE),
-and [Control Plane Flow](https://github.com/shakacode/control-plane-flow/blob/main/LICENSE)
-are open source; [React on Rails Pro](https://github.com/shakacode/react_on_rails/blob/main/REACT-ON-RAILS-PRO-LICENSE.md)
-uses its own commercial license. The [ShakaPerf repository source](https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/LICENSE.md)
-uses the ShakaPerf License. Separately, npm registry JSON metadata reports `MIT` for
-[`shaka-perf@0.1.3`](https://registry.npmjs.org/shaka-perf/0.1.3) and
-[`shaka-bundle-size@0.0.12`](https://registry.npmjs.org/shaka-bundle-size/0.0.12).
-The site presents these as separate artifact/version records and does not extend
-them to other artifacts or versions.
+not fetch live GitHub or marketing metrics at build or runtime; this keeps
+builds deterministic and prevents silent claim drift. The rounded download
+proof was checked on `2026-07-24 UTC` against RubyGems totals of `12,509,202`
+for React on Rails and `11,444,369` for Shakapacker. Refresh the displayed
+figures and this note together when either rounded threshold changes.
 
 ## License
 

@@ -8,14 +8,19 @@ import {
   STARTER_AGENTS_MD,
   TANSTACK_ROUTER_DOC,
   TANSTACK_QUERY_DOC,
+  SHADCN_UI,
 } from "../data/shaka";
 ---
 
-<section class="section proof">
+<section class="section proof" id="starter">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">The proof</span>
-      <h2>Start from a working app, not a slide deck.</h2>
+      <span class="eyebrow">Start with the code</span>
+      <h2>Clone the Rails + React starter.</h2>
+      <p>
+        Give an agent a working architecture, explicit guardrails, and examples
+        it can extend. Or open the live deployment to see the result first.
+      </p>
     </div>
 
     <div class="starter reveal">
@@ -25,16 +30,19 @@ import {
         <p class="starter-guardrail">{starter.guardrail}</p>
         <div class="starter-actions">
           <a class="btn btn-accent" href={STARTER_REPO} target="_blank" rel="noreferrer">
-            <GitHubMark width={16} height={16} /> Get the starter
+            <GitHubMark width={16} height={16} /> Clone the starter
           </a>
           <a class="btn btn-ghost" href={STARTER_DEMO} target="_blank" rel="noreferrer">
-            Live demo <Icon name="arrowUR" />
+            View the live demo <Icon name="arrowUR" />
           </a>
           <a class="link-arrow" href={TANSTACK_ROUTER_DOC} target="_blank" rel="noreferrer">
             TanStack Router guide <Icon name="arrowUR" />
           </a>
           <a class="link-arrow" href={TANSTACK_QUERY_DOC} target="_blank" rel="noreferrer">
             TanStack Query guide <Icon name="arrowUR" />
+          </a>
+          <a class="link-arrow" href={SHADCN_UI} target="_blank" rel="noreferrer">
+            shadcn/ui <Icon name="arrowUR" />
           </a>
           <a class="link-arrow" href={STARTER_AGENTS_MD} target="_blank" rel="noreferrer">
             Read its AGENTS.md <Icon name="arrowUR" />
