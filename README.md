@@ -1,9 +1,10 @@
 # shakastack.com
 
-Marketing site for **ShakaStack**, a collection of focused
-[ShakaCode](https://shakacode.com) projects for building, testing, proving,
-and deploying modern Rails + React applications. Visitors can evaluate each
-project independently or start with the official working starter.
+Marketing site for **ShakaStack**, a public
+[ShakaCode](https://shakacode.com) toolkit for building ambitious Rails +
+React applications with AI agents, testing the result, proving performance and
+visual stability, and deploying it. The working starter gives agents a concrete
+architecture and guardrails instead of a blank prompt.
 
 | Phase  | Project | What it does |
 |--------|---------|--------------|
@@ -15,8 +16,9 @@ project independently or start with the official working starter.
 
 The page follows Donald Miller's **StoryBrand (SB7)** framework: the Rails
 engineer is the hero, ShakaCode is the guide, and the four-phase stack is the
-plan. The official starter is the primary call to action; commercial help and
-React on Rails Pro follow after visitors can inspect and try the work.
+plan. Cloning the public starter is the primary call to action; its live demo is
+the secondary evaluation path. React on Rails Pro and maintainer contact remain
+contextual options after visitors can inspect and build with the work.
 
 ## Tech stack
 
@@ -91,9 +93,10 @@ Public product and performance claims are curated in
 URLs. Keep each claim and its source in the same change, and verify the source
 still supports the wording before publishing. The static site deliberately does
 not fetch live GitHub or marketing metrics at build or runtime; this keeps
-builds deterministic and prevents silent claim drift. The ShakaPerf star count
-was checked against GitHub on `2026-07-24 UTC` and should be refreshed whenever
-that visible repository-status badge changes.
+builds deterministic and prevents silent claim drift. The rounded download
+proof was checked on `2026-07-24 UTC` against RubyGems totals of `12,509,202`
+for React on Rails and `11,444,369` for Shakapacker. Refresh the displayed
+figures and this note together when either rounded threshold changes.
 
 ## License
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { GitHubMark } from "../Icon";
-import { GITHUB_ORG, STARTER_DEMO } from "../../data/shaka";
+import { GITHUB_ORG, STARTER_REPO } from "../../data/shaka";
 
 /** Sticky nav - fades in its bottom border after the page scrolls past 12px. */
 export default function Nav() {
@@ -94,8 +94,8 @@ export default function Nav() {
             <GitHubMark width={16} height={16} />
             <span className="nav-cta-label">GitHub</span>
           </a>
-          <a className="btn btn-primary" href={STARTER_DEMO} target="_blank" rel="noreferrer">
-            Try the starter
+          <a className="btn btn-primary" href={STARTER_REPO} target="_blank" rel="noreferrer">
+            Starter code
           </a>
         </div>
         <button
@@ -138,12 +138,12 @@ export default function Nav() {
             </a>
             <a
               className="btn btn-primary"
-              href={STARTER_DEMO}
+              href={STARTER_REPO}
               target="_blank"
               rel="noreferrer"
               onClick={closeMenu}
             >
-              Try the starter
+              Starter code
             </a>
           </div>
         </div>

@@ -92,9 +92,9 @@ test.describe("mobile navigation", () => {
 
     await expect(page.getByRole("button", { name: "Open navigation menu" })).toBeHidden();
     await expect(page.locator(".nav-links").getByRole("link", { name: "Why" })).toBeVisible();
-    await expect(page.locator(".nav-cta").getByRole("link", { name: "Try the starter" })).toHaveAttribute(
+    await expect(page.locator(".nav-cta").getByRole("link", { name: "Starter code" })).toHaveAttribute(
       "href",
-      "https://starter.reactonrails.com"
+      "https://github.com/shakacode/react-on-rails-starter-tanstack"
     );
   });
 
@@ -171,7 +171,7 @@ test.describe("mobile navigation", () => {
     await page.getByRole("button", { name: "Open navigation menu" }).click();
 
     const menu = page.getByLabel("Mobile navigation");
-    const starterLink = menu.getByRole("link", { name: "Try the starter" });
+    const starterLink = menu.getByRole("link", { name: "Starter code" });
     await starterLink.scrollIntoViewIfNeeded();
     await expect(starterLink).toBeVisible();
     await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(320);
@@ -186,7 +186,7 @@ test.describe("mobile navigation", () => {
     const menu = page.getByLabel("Mobile navigation");
     await expect(menu).toHaveCSS("overflow-y", "auto");
     await expect(menu.evaluate((element) => element.scrollHeight > element.clientHeight)).resolves.toBe(true);
-    const starterLink = menu.getByRole("link", { name: "Try the starter" });
+    const starterLink = menu.getByRole("link", { name: "Starter code" });
     await starterLink.scrollIntoViewIfNeeded();
     await expect(starterLink).toBeVisible();
     await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(568);
@@ -199,28 +199,39 @@ test.describe("home page IA", () => {
 
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       "content",
-      /Explore ShakaCode projects/
+      /Give coding agents a public Rails 8/
     );
     const hero = page.locator("#top");
     await expect(
       hero.getByRole("heading", {
-        name: "Build a faster Rails + React app. Prove every improvement.",
+        name: "Build ambitious Rails + React apps with AI. Prove every improvement.",
       })
     ).toBeVisible();
-    await expect(hero.getByRole("link", { name: "Try the live starter" })).toHaveAttribute(
+    await expect(hero.getByRole("link", { name: "Clone the starter" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/react-on-rails-starter-tanstack"
+    );
+    await expect(hero.getByRole("link", { name: "View the live demo" })).toHaveAttribute(
       "href",
       "https://starter.reactonrails.com"
     );
 
     const starter = page.locator("#starter");
-    await expect(starter.getByRole("heading", { name: "Try the official starter." })).toBeVisible();
-    await expect(starter.getByRole("link", { name: "Try the live starter" })).toHaveAttribute(
+    await expect(starter.getByRole("heading", { name: "Clone the Rails + React starter." })).toBeVisible();
+    await expect(starter.getByRole("link", { name: "Clone the starter" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/react-on-rails-starter-tanstack"
+    );
+    await expect(starter.getByRole("link", { name: "View the live demo" })).toHaveAttribute(
       "href",
       "https://starter.reactonrails.com"
     );
-    await expect(starter.getByRole("link", { name: "Get the code" })).toHaveAttribute(
+    await expect(starter.getByRole("link", { name: "shadcn/ui" })).toHaveAttribute(
       "href",
-      "https://github.com/shakacode/react-on-rails-starter-tanstack"
+      "https://ui.shadcn.com/"
+    );
+    await expect(starter).toContainText(
+      "buttons, dialogs, inputs, tables, tabs, and toasts styled with Tailwind CSS"
     );
 
     const sectionIds = await page
@@ -235,6 +246,9 @@ test.describe("home page IA", () => {
       "Newer proof layer",
       "Project maturity snapshot",
       "ShakaPerf by artifact",
+      "0 GitHub stars",
+      "Try the starter",
+      "Pick the project you need",
     ]) {
       await expect(page.locator("body")).not.toContainText(removedCopy);
     }
@@ -256,7 +270,7 @@ test.describe("home page IA", () => {
 
     await expect(page.locator("#stakes")).toHaveCount(0);
     await expect(
-      page.getByRole("heading", { name: "Pick the project you need. Keep the rest optional." })
+      page.getByRole("heading", { name: "Give your agents a proven Rails + React toolkit." })
     ).toBeVisible();
     await expect(page.getByRole("link", { name: "TanStack Router guide" })).toHaveAttribute(
       "href",
@@ -272,18 +286,20 @@ test.describe("home page IA", () => {
     );
   });
 
-  test("uses React on Rails 17.0.0 and recent public evidence", async ({ page }) => {
+  test("uses React on Rails 17.0.0 and gem-download evidence", async ({ page }) => {
     await page.goto("/");
 
     await expect(page.locator("body")).not.toContainText("16.6.0");
+    await expect(page.getByText("12.5M+")).toBeVisible();
+    await expect(page.getByText("React on Rails gem downloads")).toBeVisible();
+    await expect(page.getByText("11.4M+")).toBeVisible();
+    await expect(page.getByText("Shakapacker gem downloads")).toBeVisible();
     await expect(
-      page.getByRole("link", { name: "July 2026 release" })
-    ).toHaveAttribute(
-      "href",
-      "https://github.com/shakacode/react_on_rails/releases/tag/v17.0.0"
-    );
-    await expect(page.getByText("Current stable React on Rails release")).toBeVisible();
-    await expect(page.getByText("React on Rails GitHub stars")).toBeVisible();
+      page.getByRole("link", { name: "RubyGems" }).first()
+    ).toHaveAttribute("href", "https://rubygems.org/gems/react_on_rails");
+    await expect(
+      page.getByRole("link", { name: "RubyGems" }).last()
+    ).toHaveAttribute("href", "https://rubygems.org/gems/shakapacker");
 
     const reactOnRailsTab = page.getByRole("tab", { name: /React on Rails/ });
     await reactOnRailsTab.scrollIntoViewIfNeeded();
@@ -291,6 +307,10 @@ test.describe("home page IA", () => {
     await expect(page.getByRole("tabpanel")).toContainText("React on Rails 17.0.0");
     await expect(page.getByRole("tabpanel")).toContainText(
       "supported GA React Server Components"
+    );
+    await expect(page.getByRole("tabpanel").getByRole("link", { name: "v17.0.0" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/react_on_rails/releases/tag/v17.0.0"
     );
   });
 
@@ -305,9 +325,7 @@ test.describe("home page IA", () => {
 
     const panel = page.getByRole("tabpanel");
     await expect(panel.getByText("yarn shaka-perf compare", { exact: true })).toBeVisible();
-    await expect(
-      panel.getByRole("link", { name: "New public repo · 0 GitHub stars" })
-    ).toHaveAttribute("href", "https://github.com/shakacode/shakaperf");
+    await expect(panel).not.toContainText("GitHub stars");
     await expect(
       panel.getByRole("link", { name: "Source available" })
     ).toHaveAttribute(
@@ -436,21 +454,21 @@ test.describe("home page IA", () => {
 
     await expect(
       page.getByRole("heading", {
-        name: "Getting maximum React performance from Rails takes too much work.",
+        name: "AI can write the code. How do you know it made the app better?",
       })
     ).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Pick the project you need. Keep the rest optional." })
+      page.getByRole("heading", { name: "Give your agents a proven Rails + React toolkit." })
     ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "See what the projects can build." })
     ).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Try the official starter." })
+      page.getByRole("heading", { name: "Clone the Rails + React starter." })
     ).toBeVisible();
     await expect(page.locator(".nav-cta").getByRole("link", { name: "GitHub" })).toBeVisible();
     await expect(
-      page.locator(".nav-cta").getByRole("link", { name: "Try the starter" })
+      page.locator(".nav-cta").getByRole("link", { name: "Starter code" })
     ).toBeVisible();
     await expect(page.locator(".nav-toggle")).toBeHidden();
     await expect(page.locator(".mobile-navigation")).toBeHidden();
@@ -471,7 +489,7 @@ test.describe("home page IA", () => {
 
       await expect(page.locator(".nav-cta").getByRole("link", { name: "GitHub" })).toBeVisible();
       await expect(
-        page.locator(".nav-cta").getByRole("link", { name: "Try the starter" })
+        page.locator(".nav-cta").getByRole("link", { name: "Starter code" })
       ).toBeVisible();
       await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(width);
 

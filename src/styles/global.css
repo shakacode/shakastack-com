@@ -266,8 +266,6 @@ img { max-width: 100%; display: block; }
 .se-detail-stage { font-family: var(--ff-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cd); font-weight: 600; }
 .license-badge { display: inline-flex; align-items: center; padding: 4px 9px; border-radius: 999px; border: 1px solid color-mix(in oklch, var(--c) 36%, var(--line)); background: color-mix(in oklch, var(--c) 8%, #fff); color: var(--cd); font-family: var(--ff-mono); font-size: 10.5px; font-weight: 650; letter-spacing: 0.04em; }
 .license-badge:hover { border-color: var(--cd); }
-.repo-status { display: inline-flex; align-items: center; padding: 4px 9px; border-radius: 999px; background: var(--ink); color: #fff; font-family: var(--ff-mono); font-size: 10.5px; font-weight: 650; letter-spacing: 0.02em; }
-.repo-status:hover { background: var(--accent-deep); }
 .se-detail h3 { font-size: clamp(28px, 3.4vw, 38px); margin: 12px 0 0; }
 .se-detail-tag { font-size: 17px; color: var(--ink); font-weight: 500; margin-top: 10px; max-width: 460px; text-wrap: pretty; }
 .se-detail-blurb { color: var(--ink-2); font-size: 15px; margin-top: 12px; max-width: 500px; text-wrap: pretty; }

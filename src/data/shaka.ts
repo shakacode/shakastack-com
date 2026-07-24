@@ -46,10 +46,6 @@ export interface Project {
     label: string;
     href: string;
   };
-  repoStatus?: {
-    label: string;
-    href: string;
-  };
   install: string;
   altInstall?: string;
   links: ProjectLink[];
@@ -98,8 +94,8 @@ export const POPMENU_PERFORMANCE_SOURCE =
   "https://www.shakacode.com/services/performance-optimization/";
 export const ROR_17_RELEASE =
   "https://github.com/shakacode/react_on_rails/releases/tag/v17.0.0";
-export const ROR_REPOSITORY =
-  "https://github.com/shakacode/react_on_rails";
+export const ROR_RUBYGEMS = "https://rubygems.org/gems/react_on_rails";
+export const SHAKAPACKER_RUBYGEMS = "https://rubygems.org/gems/shakapacker";
 export const ROR_LICENSE =
   "https://github.com/shakacode/react_on_rails/blob/main/LICENSE.md";
 export const ROR_PRO_LICENSE =
@@ -134,6 +130,7 @@ export const popmenuEvidence = {
 export const STARTER_REPO =
   "https://github.com/shakacode/react-on-rails-starter-tanstack";
 export const STARTER_DEMO = "https://starter.reactonrails.com";
+export const SHADCN_UI = "https://ui.shadcn.com/";
 export const NEXTJS_RAILS_COMPARISON_DOC =
   "https://reactonrails.com/docs/getting-started/nextjs-with-separate-rails-backend";
 export const MIGRATE_FROM_NEXTJS_DOC =
@@ -260,10 +257,6 @@ export const projects: Project[] = [
       label: "Source available",
       href: SHAKAPERF_LICENSE,
     },
-    repoStatus: {
-      label: "New public repo · 0 GitHub stars",
-      href: "https://github.com/shakacode/shakaperf",
-    },
     install: "yarn add shaka-perf shaka-bundle-size",
     altInstall: "yarn shaka-perf compare",
     links: [
@@ -375,23 +368,23 @@ export const examples: Example[] = [
 ];
 
 export const problems: Benefit[] = [
-  ["Modern React, old friction", "Bundling, SSR, hydration, and React 19 features should not require a second application or a pile of custom glue."],
-  ["Performance without proof", "A faster-looking page is not evidence. You need repeatable measurements that show whether a change really helped."],
-  ["Tools that drift apart", "Browser tests, build configuration, and deployment workflows become fragile when every layer follows a different playbook."],
+  ["Agents need a map", "Blank-prompt code drifts. Conventions, typed boundaries, working examples, and repository instructions keep ambitious changes coherent."],
+  ["Modern React crosses layers", "RSC, streaming, data loading, browser tests, bundles, and deploys all have to work as one Rails application."],
+  ["Faster needs proof", "A change is not an improvement until repeatable measurements show it is faster and visual checks show it is still correct."],
 ];
 
 export const guideStats: EvidenceStat[] = [
   {
-    value: "17.0.0",
-    label: "Current stable React on Rails release",
-    sourceLabel: "July 2026 release",
-    sourceUrl: ROR_17_RELEASE,
+    value: "12.5M+",
+    label: "React on Rails gem downloads",
+    sourceLabel: "RubyGems",
+    sourceUrl: ROR_RUBYGEMS,
   },
   {
-    value: "5,189",
-    label: "React on Rails GitHub stars",
-    sourceLabel: "GitHub repository",
-    sourceUrl: ROR_REPOSITORY,
+    value: "11.4M+",
+    label: "Shakapacker gem downloads",
+    sourceLabel: "RubyGems",
+    sourceUrl: SHAKAPACKER_RUBYGEMS,
   },
 ];
 
@@ -465,9 +458,9 @@ export const tanstackSplit: { kind: "embrace" | "substitute"; title: string; bod
 
 /** Official starter - the proof. Copy reflects what it genuinely demonstrates. */
 export const starter = {
-  title: "Start with a working Rails + React app",
+  title: "Clone a working Rails + React app",
   blurb:
-    "Try or clone the official Rails 8 + React on Rails Pro starter. It demonstrates React 19, supported GA React Server Components, streaming, TanStack Router, Query & Table, and shadcn/ui in one working app.",
+    "The public Rails 8 starter combines React on Rails Pro, React 19, supported GA React Server Components, streaming, and TanStack Router, Query & Table. Its shared shadcn/ui layer provides buttons, dialogs, inputs, tables, tabs, and toasts styled with Tailwind CSS.",
   guardrail:
     "Rails stays the application boundary. Add the React and TanStack pieces you need without adding a second server tier.",
   stack: ["Rails 8", "React on Rails Pro", "TanStack Router", "TanStack Query", "TanStack Table", "shadcn/ui", "RSC showcase"],
@@ -517,7 +510,7 @@ export const onRamps: OnRamp[] = [
     body: "Add React on Rails Pro and the TanStack libraries you want to the app you already have. Keep your routes, conventions, and team while adopting the UI page by page.",
     points: [
       "Adopt it page by page, alongside your existing Rails views",
-      "Great performance out of the box - SSR, hydration, streaming",
+      "Use SSR, hydration, and streaming where they earn their place",
       "Choose Query, Router, and Table independently",
     ],
   },
@@ -539,9 +532,9 @@ export const onRamps: OnRamp[] = [
  *  grounded in the public agent-workflows repository's verifiable contents. */
 export const agentCapable = {
   badge: "Agent-ready",
-  title: "Built for agents. Reviewed by humans.",
-  body: "Rails conventions, typed contracts, and the starter's AGENTS.md give coding agents clear boundaries. Humans still own review and product decisions.",
-  proof: "ShakaPerf closes the loop: optimization changes survive only when the evidence shows they are faster.",
+  title: "Give agents a real codebase and a measurable goal.",
+  body: "Rails conventions, typed contracts, and the starter's AGENTS.md let agents build ambitious features without starting from a blank prompt. Humans still own product decisions and review.",
+  proof: "ShakaPerf closes the loop: agents iterate, and only changes verified faster and visually stable are kept.",
 };
 
 export const railsGoodness: string[] = [

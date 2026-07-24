@@ -8,17 +8,18 @@ import {
   STARTER_AGENTS_MD,
   TANSTACK_ROUTER_DOC,
   TANSTACK_QUERY_DOC,
+  SHADCN_UI,
 } from "../data/shaka";
 ---
 
 <section class="section proof" id="starter">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Start here</span>
-      <h2>Try the official starter.</h2>
+      <span class="eyebrow">Start with the code</span>
+      <h2>Clone the Rails + React starter.</h2>
       <p>
-        See the strongest Rails + React path running, then inspect every line
-        of the public starter before deciding whether it fits.
+        Give an agent a working architecture, explicit guardrails, and examples
+        it can extend. Or open the live deployment to see the result first.
       </p>
     </div>
 
@@ -28,17 +29,20 @@ import {
         <p>{starter.blurb}</p>
         <p class="starter-guardrail">{starter.guardrail}</p>
         <div class="starter-actions">
-          <a class="btn btn-accent" href={STARTER_DEMO} target="_blank" rel="noreferrer">
-            Try the live starter <Icon name="arrowUR" />
+          <a class="btn btn-accent" href={STARTER_REPO} target="_blank" rel="noreferrer">
+            <GitHubMark width={16} height={16} /> Clone the starter
           </a>
-          <a class="btn btn-ghost" href={STARTER_REPO} target="_blank" rel="noreferrer">
-            <GitHubMark width={16} height={16} /> Get the code
+          <a class="btn btn-ghost" href={STARTER_DEMO} target="_blank" rel="noreferrer">
+            View the live demo <Icon name="arrowUR" />
           </a>
           <a class="link-arrow" href={TANSTACK_ROUTER_DOC} target="_blank" rel="noreferrer">
             TanStack Router guide <Icon name="arrowUR" />
           </a>
           <a class="link-arrow" href={TANSTACK_QUERY_DOC} target="_blank" rel="noreferrer">
             TanStack Query guide <Icon name="arrowUR" />
+          </a>
+          <a class="link-arrow" href={SHADCN_UI} target="_blank" rel="noreferrer">
+            shadcn/ui <Icon name="arrowUR" />
           </a>
           <a class="link-arrow" href={STARTER_AGENTS_MD} target="_blank" rel="noreferrer">
             Read its AGENTS.md <Icon name="arrowUR" />

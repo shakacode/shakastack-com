@@ -28,7 +28,9 @@ export default function StackExplorer({ projects }: Props) {
   const p = projects[active];
   const github = p.links.find((l) => l[0] === "GitHub");
   const docs = p.links.find((l) => l[0] === "Docs");
-  const evidence = p.links.find((l) => l[0] === "Methodology" || l[0] === "OSS vs Pro");
+  const evidence = p.links.find(
+    (l) => l[0] === "v17.0.0" || l[0] === "Methodology" || l[0] === "OSS vs Pro"
+  );
 
   // Group consecutive projects by phase so the visible order follows the stack.
   const phases: PhaseGroup[] = [];
@@ -95,16 +97,6 @@ export default function StackExplorer({ projects }: Props) {
             <a href={p.license.href} target="_blank" rel="noreferrer" className="license-badge">
               {p.license.label}
             </a>
-            {p.repoStatus && (
-              <a
-                href={p.repoStatus.href}
-                target="_blank"
-                rel="noreferrer"
-                className="repo-status"
-              >
-                {p.repoStatus.label}
-              </a>
-            )}
           </div>
           <h3>{p.name}</h3>
           <p className="se-detail-tag">{p.tagline}</p>
