@@ -87,11 +87,14 @@ function GalleryThumbnail({ example }: { example: Example }) {
 /** Client-side example filter by project id, with live counts and empty state. */
 export default function GalleryGrid({ examples, projects }: Props) {
   const [filter, setFilter] = useState<Filter>("all");
-  const filters: Filter[] = ["all", ...projects.map((p) => p.id)];
   const count = (f: Filter) =>
     f === "all"
       ? examples.length
       : examples.filter((e) => e.projects.includes(f)).length;
+  const filters: Filter[] = [
+    "all",
+    ...projects.map((p) => p.id).filter((id) => count(id) > 0),
+  ];
   const shown =
     filter === "all"
       ? examples

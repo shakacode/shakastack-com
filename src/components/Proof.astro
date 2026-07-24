@@ -11,11 +11,15 @@ import {
 } from "../data/shaka";
 ---
 
-<section class="section proof">
+<section class="section proof" id="starter">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">The proof</span>
-      <h2>Start from a working app, not a slide deck.</h2>
+      <span class="eyebrow">Start here</span>
+      <h2>Try the official starter.</h2>
+      <p>
+        See the strongest Rails + React path running, then inspect every line
+        of the public starter before deciding whether it fits.
+      </p>
     </div>
 
     <div class="starter reveal">
@@ -24,11 +28,11 @@ import {
         <p>{starter.blurb}</p>
         <p class="starter-guardrail">{starter.guardrail}</p>
         <div class="starter-actions">
-          <a class="btn btn-accent" href={STARTER_REPO} target="_blank" rel="noreferrer">
-            <GitHubMark width={16} height={16} /> Get the starter
+          <a class="btn btn-accent" href={STARTER_DEMO} target="_blank" rel="noreferrer">
+            Try the live starter <Icon name="arrowUR" />
           </a>
-          <a class="btn btn-ghost" href={STARTER_DEMO} target="_blank" rel="noreferrer">
-            Live demo <Icon name="arrowUR" />
+          <a class="btn btn-ghost" href={STARTER_REPO} target="_blank" rel="noreferrer">
+            <GitHubMark width={16} height={16} /> Get the code
           </a>
           <a class="link-arrow" href={TANSTACK_ROUTER_DOC} target="_blank" rel="noreferrer">
             TanStack Router guide <Icon name="arrowUR" />

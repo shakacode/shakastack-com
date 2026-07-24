@@ -46,6 +46,10 @@ export interface Project {
     label: string;
     href: string;
   };
+  repoStatus?: {
+    label: string;
+    href: string;
+  };
   install: string;
   altInstall?: string;
   links: ProjectLink[];
@@ -65,20 +69,6 @@ export interface Example {
   thumbnail?: {
     src: string;
     alt: string;
-  };
-}
-
-export interface ProjectMaturity {
-  projectId: ProjectId;
-  name: string;
-  recordLabel: string;
-  recordUrl: string;
-  stars: number;
-  publicSince: number;
-  repositoryMetadataUrl: string;
-  note?: {
-    label: string;
-    sourceUrl: string;
   };
 }
 
@@ -104,11 +94,12 @@ export const SHAKACODE_CONTACT = "https://shakacode.com/contact/";
 export const GITHUB_ORG = "https://github.com/shakacode";
 export const GITHUB_SPONSOR = "https://github.com/sponsors/shakacode";
 export const ALL_DEMOS = "https://reactonrails.com/examples";
-export const SHAKACODE_ABOUT = "https://shakacode.com/about/";
 export const POPMENU_PERFORMANCE_SOURCE =
   "https://www.shakacode.com/services/performance-optimization/";
-export const HVMN_PERFORMANCE_SOURCE =
-  "https://www.shakacode.com/blog/hvmns-90-reduction-in-server-response-time-from-react-on-rails-pro/";
+export const ROR_17_RELEASE =
+  "https://github.com/shakacode/react_on_rails/releases/tag/v17.0.0";
+export const ROR_REPOSITORY =
+  "https://github.com/shakacode/react_on_rails";
 export const ROR_LICENSE =
   "https://github.com/shakacode/react_on_rails/blob/main/LICENSE.md";
 export const ROR_PRO_LICENSE =
@@ -124,90 +115,8 @@ export const ROR_OSS_VS_PRO =
 export const ROR_PRO = "https://reactonrails.com/pro/";
 export const ROR_SUPPORT =
   "https://reactonrails.com/docs/deployment/troubleshooting/";
-export const SHAKAPERF_LICENSE =
-  "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/LICENSE.md";
-export const SHAKAPERF_NPM_0_1_3 =
-  "https://registry.npmjs.org/shaka-perf/0.1.3";
-export const SHAKA_BUNDLE_SIZE_NPM_0_0_12 =
-  "https://registry.npmjs.org/shaka-bundle-size/0.0.12";
-export const SHAKAPERF_PRICING = "https://shakaperf.com/pricing";
-export const SHAKAPERF_METHOD =
-  "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/packages/shaka-perf/used_statistics.md";
-export const SHAKAPERF_REPORT_SNAPSHOT =
-  "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results/client__01-overview.png";
-export const SHAKAPERF_REPORT_GALLERY =
-  "https://github.com/shakacode/shakaperf/tree/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results";
-
-/**
- * Static maturity snapshot checked 2026-07-15 UTC.
- * Refresh every record and the date together; the site never fetches these facts.
- */
-export const MATURITY_SNAPSHOT_DATE = "2026-07-15";
-export const maturitySnapshot: ProjectMaturity[] = [
-  {
-    projectId: "ror",
-    name: "React on Rails",
-    recordLabel: "v16.6.0 stable",
-    recordUrl:
-      "https://github.com/shakacode/react_on_rails/releases/tag/v16.6.0",
-    stars: 5190,
-    publicSince: 2015,
-    repositoryMetadataUrl:
-      "https://api.github.com/repos/shakacode/react_on_rails",
-  },
-  {
-    projectId: "shakapacker",
-    name: "Shakapacker",
-    recordLabel: "v10.3.0",
-    recordUrl:
-      "https://github.com/shakacode/shakapacker/releases/tag/v10.3.0",
-    stars: 490,
-    publicSince: 2017,
-    repositoryMetadataUrl:
-      "https://api.github.com/repos/shakacode/shakapacker",
-    note: {
-      label: "Official Webpacker successor",
-      sourceUrl:
-        "https://github.com/shakacode/shakapacker/blob/5485afe290d8f489f973c78420470c1b72dcd10c/README.md",
-    },
-  },
-  {
-    projectId: "e2e",
-    name: "E2E on Rails",
-    recordLabel: "v1.20.1",
-    recordUrl:
-      "https://github.com/shakacode/cypress-playwright-on-rails/releases/tag/v1.20.1",
-    stars: 453,
-    publicSince: 2017,
-    repositoryMetadataUrl:
-      "https://api.github.com/repos/shakacode/cypress-playwright-on-rails",
-  },
-  {
-    projectId: "shakaperf",
-    name: "ShakaPerf",
-    recordLabel: "shaka-perf@0.1.3 package record",
-    recordUrl: SHAKAPERF_NPM_0_1_3,
-    stars: 0,
-    publicSince: 2026,
-    repositoryMetadataUrl:
-      "https://api.github.com/repos/shakacode/shakaperf",
-    note: {
-      label: "New public repository",
-      sourceUrl: "https://github.com/shakacode/shakaperf",
-    },
-  },
-  {
-    projectId: "cpflow",
-    name: "Control Plane Flow",
-    recordLabel: "v5.2.0",
-    recordUrl:
-      "https://github.com/shakacode/control-plane-flow/releases/tag/v5.2.0",
-    stars: 51,
-    publicSince: 2022,
-    repositoryMetadataUrl:
-      "https://api.github.com/repos/shakacode/control-plane-flow",
-  },
-];
+export const SHAKAPERF_LICENSE = "https://shakaperf.com/license";
+export const SHAKAPERF_METHOD = "https://shakaperf.com/docs/";
 
 export const popmenuEvidence = {
   title: "Measured at Popmenu",
@@ -244,13 +153,13 @@ export const projects: Project[] = [
     url: "https://reactonrails.com",
     accent: "ror",
     icon: "build",
-    tagline: "Open-source Rails + React integration, with an optional Pro rendering tier.",
+    tagline: "Bring React 19 and modern rendering to Rails.",
     blurb:
-      "Use the MIT-licensed core to mount React components from Rails views and run server-side rendering with hydration. Add commercially licensed React on Rails Pro for React Server Components, streaming SSR, fragment caching, and a dedicated Node renderer.",
+      "Start with the MIT-licensed React on Rails 17.0.0 core for components, server rendering, and hydration. When you need more, React on Rails Pro adds supported GA React Server Components, streaming SSR, fragment caching, and a dedicated Node renderer without forcing Rails behind a separate frontend app.",
     benefits: [
-      ["Rails-first React", "Render components from views & controllers. Keep Rails routes, conventions, and your team."],
-      ["MIT-licensed core", "Use Rails + React integration, hydration, and ExecJS server rendering under the open-source license."],
-      ["Explicit Pro path", "Review the commercial license before using Pro for advanced rendering and maintainer support."],
+      ["Keep Rails in charge", "Render React from Rails views and controllers while keeping your routes, domain logic, and conventions."],
+      ["Start open source", "Use the MIT-licensed core for Rails + React integration, hydration, and server rendering."],
+      ["Upgrade when it earns its place", "Add Pro for GA RSC, streaming, caching, and advanced rendering when your application needs them."],
     ],
     license: {
       label: "MIT core · Pro EULA",
@@ -262,6 +171,7 @@ export const projects: Project[] = [
       ["Website", "https://reactonrails.com"],
       ["Docs", "https://reactonrails.com/docs/"],
       ["GitHub", "https://github.com/shakacode/react_on_rails"],
+      ["v17.0.0", ROR_17_RELEASE],
       ["OSS vs Pro", ROR_OSS_VS_PRO],
       ["Pro license", ROR_PRO_LICENSE],
     ],
@@ -338,17 +248,21 @@ export const projects: Project[] = [
     url: "https://shakaperf.com",
     accent: "shakaperf",
     icon: "prove",
-    tagline: "Repository source for A/B performance testing in CI.",
+    tagline: "Prove whether a change actually made your app faster.",
     blurb:
-      "Run control and experiment Docker containers side by side, sample them together, and compare performance with paired statistics. One Playwright definition can drive performance, visual, accessibility, SEO, and bundle checks.",
+      "Compare branch and trunk side by side, cancel shared noise with paired measurements, and keep only changes that produce a measurable improvement. Use one Playwright definition for performance, visual, accessibility, SEO, and bundle checks.",
     benefits: [
       ["Paired measurements", "Control and experiment run together so shared CPU noise can cancel inside each measured pair."],
       ["One test, multiple gates", "Reuse one Playwright definition for performance, visual, accessibility, SEO, and bundle checks."],
       ["Docker-based", "Measure any web stack that can run as a production Docker image with an exposed port."],
     ],
     license: {
-      label: "Repository source · ShakaPerf License",
+      label: "Source available",
       href: SHAKAPERF_LICENSE,
+    },
+    repoStatus: {
+      label: "New public repo · 0 GitHub stars",
+      href: "https://github.com/shakacode/shakaperf",
     },
     install: "yarn add shaka-perf shaka-bundle-size",
     altInstall: "yarn shaka-perf compare",
@@ -357,8 +271,6 @@ export const projects: Project[] = [
       ["Docs", "https://shakaperf.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakaperf"],
       ["Methodology", SHAKAPERF_METHOD],
-      ["Report snapshot", SHAKAPERF_REPORT_SNAPSHOT],
-      ["Report gallery", SHAKAPERF_REPORT_GALLERY],
       ["License", SHAKAPERF_LICENSE],
     ],
   },
@@ -460,38 +372,26 @@ export const examples: Example[] = [
       alt: "React on Rails tutorial demo showing routes for Rails, React, and server rendering",
     },
   },
-  {
-    name: "ShakaPerf audit report",
-    tag: "Proof",
-    projects: ["shakaperf"],
-    blurb:
-      "An integration-test report snapshot from ShakaPerf's audit-results fixture, pinned to the tested repository commit.",
-    stack: ["ShakaPerf", "Integration test", "Audit report"],
-    live: SHAKAPERF_REPORT_SNAPSHOT,
-    liveLabel: "View report snapshot",
-    primaryLinkKind: "artifact",
-    source: SHAKAPERF_REPORT_GALLERY,
-  },
 ];
 
 export const problems: Benefit[] = [
-  ["Bolting React onto Rails", "Webpacker’s deprecated, SSR is fiddly, and React 19 / RSC feel out of reach. You’re duct-taping a frontend instead of shipping features."],
-  ["Pages that lost their speed", "Slow LCP and hydration drag down SEO and conversions - and you have no rigorous way to measure it or prove a fix actually worked."],
-  ["The infra & config tax", "Heroku bills climb, build configs rot, and every upgrade is a gamble. The stack fights you instead of working for you."],
+  ["Modern React, old friction", "Bundling, SSR, hydration, and React 19 features should not require a second application or a pile of custom glue."],
+  ["Performance without proof", "A faster-looking page is not evidence. You need repeatable measurements that show whether a change really helped."],
+  ["Tools that drift apart", "Browser tests, build configuration, and deployment workflows become fragile when every layer follows a different playbook."],
 ];
 
 export const guideStats: EvidenceStat[] = [
   {
-    value: "2011",
-    label: "ShakaCode consulting since",
-    sourceLabel: "ShakaCode about",
-    sourceUrl: SHAKACODE_ABOUT,
+    value: "17.0.0",
+    label: "Current stable React on Rails release",
+    sourceLabel: "July 2026 release",
+    sourceUrl: ROR_17_RELEASE,
   },
   {
-    value: "≈90%",
-    label: "Lower HVMN server-response times in one documented Pro engagement",
-    sourceLabel: "HVMN case study",
-    sourceUrl: HVMN_PERFORMANCE_SOURCE,
+    value: "5,189",
+    label: "React on Rails GitHub stars",
+    sourceLabel: "GitHub repository",
+    sourceUrl: ROR_REPOSITORY,
   },
 ];
 
@@ -565,11 +465,11 @@ export const tanstackSplit: { kind: "embrace" | "substitute"; title: string; bod
 
 /** Official starter - the proof. Copy reflects what it genuinely demonstrates. */
 export const starter = {
-  title: "The official starter",
+  title: "Start with a working Rails + React app",
   blurb:
-    "A deployable Rails 8 + React on Rails Pro app with TanStack Router, Query & Table, shadcn/ui, and an RSC showcase. It includes typed JSON contracts, CSRF-aware fetch, URL-synced query keys, mutations, invalidation, SSR, and hydration.",
+    "Try or clone the official Rails 8 + React on Rails Pro starter. It demonstrates React 19, supported GA React Server Components, streaming, TanStack Router, Query & Table, and shadcn/ui in one working app.",
   guardrail:
-    "Its AGENTS.md encodes the thesis as an engineering guardrail: “do not add TanStack Start, Vite, or file-based routing.”",
+    "Rails stays the application boundary. Add the React and TanStack pieces you need without adding a second server tier.",
   stack: ["Rails 8", "React on Rails Pro", "TanStack Router", "TanStack Query", "TanStack Table", "shadcn/ui", "RSC showcase"],
 };
 
@@ -639,9 +539,9 @@ export const onRamps: OnRamp[] = [
  *  grounded in the public agent-workflows repository's verifiable contents. */
 export const agentCapable = {
   badge: "Agent-ready",
-  title: "The most agent-capable stack",
-  body: "AI agents thrive on convention. Rails' structure, explicit typed JSON contracts, and the starter's AGENTS.md guardrails give an agent a map it can't sprawl outside of, so AI-assisted changes stay reviewable and maintainable instead of turning into slop. Humans remain responsible for review and decisions. In ShakaCode's separate ShakaPerf optimization loop, only optimization changes that ShakaPerf proves faster survive the loop.",
-  proof: "It doesn't stop at writing code: ShakaCode's public agent-workflows repository documents the guardrails and workflows behind this approach.",
+  title: "Built for agents. Reviewed by humans.",
+  body: "Rails conventions, typed contracts, and the starter's AGENTS.md give coding agents clear boundaries. Humans still own review and product decisions.",
+  proof: "ShakaPerf closes the loop: optimization changes survive only when the evidence shows they are faster.",
 };
 
 export const railsGoodness: string[] = [
@@ -681,4 +581,4 @@ export const perfMatrix: CmpRow[] = [
 ];
 
 export const perfNote =
-  "React on Rails Pro requires its Node renderer for streaming and RSC. React on Rails Pro 17.0.0+ supports push, pull, and mixed async-props modes.";
+  "React on Rails Pro requires its Node renderer for streaming and RSC. React on Rails Pro 17.0.0 supports push, pull, and mixed async-props modes.";

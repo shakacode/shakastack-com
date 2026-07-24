@@ -92,7 +92,10 @@ test.describe("mobile navigation", () => {
 
     await expect(page.getByRole("button", { name: "Open navigation menu" })).toBeHidden();
     await expect(page.locator(".nav-links").getByRole("link", { name: "Why" })).toBeVisible();
-    await expect(page.locator(".nav-cta").getByRole("link", { name: "Book a free call" })).toBeVisible();
+    await expect(page.locator(".nav-cta").getByRole("link", { name: "Try the starter" })).toHaveAttribute(
+      "href",
+      "https://starter.reactonrails.com"
+    );
   });
 
   test("moves focus to visible navigation when resizing to desktop", async ({ page }) => {
@@ -153,7 +156,7 @@ test.describe("mobile navigation", () => {
     await page.goto("/");
 
     await page.getByRole("button", { name: "Open navigation menu" }).click();
-    const galleryFilter = page.getByRole("button", { name: /^E2E on Rails/ });
+    const galleryFilter = page.getByRole("button", { name: /^React on Rails/ });
     await galleryFilter.focus();
     await page.keyboard.press("Escape");
 
@@ -168,9 +171,9 @@ test.describe("mobile navigation", () => {
     await page.getByRole("button", { name: "Open navigation menu" }).click();
 
     const menu = page.getByLabel("Mobile navigation");
-    const bookLink = menu.getByRole("link", { name: "Book a free call" });
-    await bookLink.scrollIntoViewIfNeeded();
-    await expect(bookLink).toBeVisible();
+    const starterLink = menu.getByRole("link", { name: "Try the starter" });
+    await starterLink.scrollIntoViewIfNeeded();
+    await expect(starterLink).toBeVisible();
     await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(320);
   });
 
@@ -183,26 +186,58 @@ test.describe("mobile navigation", () => {
     const menu = page.getByLabel("Mobile navigation");
     await expect(menu).toHaveCSS("overflow-y", "auto");
     await expect(menu.evaluate((element) => element.scrollHeight > element.clientHeight)).resolves.toBe(true);
-    const bookLink = menu.getByRole("link", { name: "Book a free call" });
-    await bookLink.scrollIntoViewIfNeeded();
-    await expect(bookLink).toBeVisible();
+    const starterLink = menu.getByRole("link", { name: "Try the starter" });
+    await starterLink.scrollIntoViewIfNeeded();
+    await expect(starterLink).toBeVisible();
     await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(568);
   });
 });
 
 test.describe("home page IA", () => {
-  test("labels the ShakaPerf footer link as the repository source license", async ({ page }) => {
+  test("leads with the starter and removes the licensing taxonomy", async ({ page }) => {
     await page.goto("/");
 
-    await expect(
-      page.getByRole("link", { name: "ShakaPerf repository source license", exact: true })
-    ).toHaveAttribute(
-      "href",
-      "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/LICENSE.md"
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+      "content",
+      /Explore ShakaCode projects/
     );
+    const hero = page.locator("#top");
     await expect(
-      page.getByRole("link", { name: "ShakaPerf license", exact: true })
-    ).toHaveCount(0);
+      hero.getByRole("heading", {
+        name: "Build a faster Rails + React app. Prove every improvement.",
+      })
+    ).toBeVisible();
+    await expect(hero.getByRole("link", { name: "Try the live starter" })).toHaveAttribute(
+      "href",
+      "https://starter.reactonrails.com"
+    );
+
+    const starter = page.locator("#starter");
+    await expect(starter.getByRole("heading", { name: "Try the official starter." })).toBeVisible();
+    await expect(starter.getByRole("link", { name: "Try the live starter" })).toHaveAttribute(
+      "href",
+      "https://starter.reactonrails.com"
+    );
+    await expect(starter.getByRole("link", { name: "Get the code" })).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/react-on-rails-starter-tanstack"
+    );
+
+    const sectionIds = await page
+      .locator("main > section[id], main > header[id]")
+      .evaluateAll((elements) => elements.map((element) => element.id));
+    expect(sectionIds.indexOf("starter")).toBeLessThan(sectionIds.indexOf("stack"));
+
+    for (const removedCopy of [
+      "ShakaPerf repository source and exact package records",
+      "Community path",
+      "Commercial path",
+      "Newer proof layer",
+      "Project maturity snapshot",
+      "ShakaPerf by artifact",
+    ]) {
+      await expect(page.locator("body")).not.toContainText(removedCopy);
+    }
   });
 
   test("documents the legacy tutorial capture as historical", async () => {
@@ -216,12 +251,12 @@ test.describe("home page IA", () => {
     expect(readme.toLowerCase()).not.toContain(["react", "rails.com"].join(""));
   });
 
-  test("surfaces the stack structure and official starter guides", async ({ page }) => {
+  test("surfaces the project plan and official starter guides", async ({ page }) => {
     await page.goto("/");
 
     await expect(page.locator("#stakes")).toHaveCount(0);
     await expect(
-      page.getByText("Four phases, four open-source projects", { exact: false })
+      page.getByRole("heading", { name: "Pick the project you need. Keep the rest optional." })
     ).toBeVisible();
     await expect(page.getByRole("link", { name: "TanStack Router guide" })).toHaveAttribute(
       "href",
@@ -237,19 +272,30 @@ test.describe("home page IA", () => {
     );
   });
 
-  test("shows the ShakaPerf command and artifact-specific license records", async ({ page }) => {
+  test("uses React on Rails 17.0.0 and recent public evidence", async ({ page }) => {
     await page.goto("/");
 
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
-      "content",
-      /ShakaPerf repository source and exact package records/
+    await expect(page.locator("body")).not.toContainText("16.6.0");
+    await expect(
+      page.getByRole("link", { name: "July 2026 release" })
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/shakacode/react_on_rails/releases/tag/v17.0.0"
     );
-    await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
-      "content",
-      /ShakaPerf repository source and exact package records/
-    );
-    await expect(page.locator("body")).not.toContainText(/source-available ShakaPerf/i);
+    await expect(page.getByText("Current stable React on Rails release")).toBeVisible();
+    await expect(page.getByText("React on Rails GitHub stars")).toBeVisible();
 
+    const reactOnRailsTab = page.getByRole("tab", { name: /React on Rails/ });
+    await reactOnRailsTab.scrollIntoViewIfNeeded();
+    await reactOnRailsTab.click();
+    await expect(page.getByRole("tabpanel")).toContainText("React on Rails 17.0.0");
+    await expect(page.getByRole("tabpanel")).toContainText(
+      "supported GA React Server Components"
+    );
+  });
+
+  test("keeps ShakaPerf honest and sends product links to ShakaPerf.com", async ({ page }) => {
+    await page.goto("/");
     const shakaPerfTab = page.getByRole("tab", { name: /ShakaPerf/ });
     const stackExplorer = shakaPerfTab.locator("xpath=ancestor::astro-island");
 
@@ -260,191 +306,27 @@ test.describe("home page IA", () => {
     const panel = page.getByRole("tabpanel");
     await expect(panel.getByText("yarn shaka-perf compare", { exact: true })).toBeVisible();
     await expect(
-      panel.getByRole("link", { name: "Repository source · ShakaPerf License" })
-    ).toHaveAttribute(
-      "href",
-      "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/LICENSE.md"
-    );
-    await expect(page.getByRole("heading", { name: "ShakaPerf by artifact" })).toBeVisible();
-    await expect(
-      page.getByText("The repository source uses the ShakaPerf License.", { exact: false })
-    ).toBeVisible();
-    await expect(
-      page.getByText(
-        "npm registry JSON metadata for shaka-perf 0.1.3 and shaka-bundle-size 0.0.12 reports MIT.",
-        { exact: false }
-      )
-    ).toBeVisible();
-    await expect(page.getByRole("link", { name: "shaka-perf 0.1.3 registry JSON" })).toHaveAttribute(
-      "href",
-      "https://registry.npmjs.org/shaka-perf/0.1.3"
-    );
-    await expect(
-      page.getByRole("link", { name: "shaka-bundle-size 0.0.12 registry JSON" })
-    ).toHaveAttribute(
-      "href",
-      "https://registry.npmjs.org/shaka-bundle-size/0.0.12"
-    );
-  });
-
-  test("shows the statically curated maturity snapshot and primary records", async ({ page }) => {
-    await page.goto("/");
-
-    const snapshot = page.locator(".maturity-snapshot");
-    await expect(snapshot.getByText("2026-07-15 UTC", { exact: true })).toBeVisible();
-
-    const expectedProjects = [
-      {
-        id: "ror",
-        name: "React on Rails",
-        version: "v16.6.0 stable",
-        release: "https://github.com/shakacode/react_on_rails/releases/tag/v16.6.0",
-        stars: "5,190 stars",
-        since: "Public repo since 2015",
-        metadata: "https://api.github.com/repos/shakacode/react_on_rails",
-      },
-      {
-        id: "shakapacker",
-        name: "Shakapacker",
-        version: "v10.3.0",
-        release: "https://github.com/shakacode/shakapacker/releases/tag/v10.3.0",
-        stars: "490 stars",
-        since: "Public repo since 2017",
-        metadata: "https://api.github.com/repos/shakacode/shakapacker",
-      },
-      {
-        id: "e2e",
-        name: "E2E on Rails",
-        version: "v1.20.1",
-        release:
-          "https://github.com/shakacode/cypress-playwright-on-rails/releases/tag/v1.20.1",
-        stars: "453 stars",
-        since: "Public repo since 2017",
-        metadata:
-          "https://api.github.com/repos/shakacode/cypress-playwright-on-rails",
-      },
-      {
-        id: "shakaperf",
-        name: "ShakaPerf",
-        version: "shaka-perf@0.1.3 package record",
-        release: "https://registry.npmjs.org/shaka-perf/0.1.3",
-        stars: "0 stars",
-        since: "Public repo since 2026",
-        metadata: "https://api.github.com/repos/shakacode/shakaperf",
-      },
-      {
-        id: "cpflow",
-        name: "Control Plane Flow",
-        version: "v5.2.0",
-        release:
-          "https://github.com/shakacode/control-plane-flow/releases/tag/v5.2.0",
-        stars: "51 stars",
-        since: "Public repo since 2022",
-        metadata: "https://api.github.com/repos/shakacode/control-plane-flow",
-      },
-    ];
-
-    await expect(snapshot.locator(".maturity-snapshot-card")).toHaveCount(5);
-    for (const project of expectedProjects) {
-      const card = snapshot.locator(`[data-project="${project.id}"]`);
-      await expect(card.getByRole("heading", { name: project.name })).toBeVisible();
-      await expect(card.getByRole("link", { name: project.version })).toHaveAttribute(
-        "href",
-        project.release
-      );
-      const metadataEvidence = card.getByRole("link", {
-        name: `${project.stars} · ${project.since} GitHub repository metadata JSON`,
-        exact: true,
-      });
-      await expect(metadataEvidence).toHaveAttribute(
-        "href",
-        project.metadata
-      );
-      await expect(
-        card.locator(`.maturity-snapshot-facts a[href="${project.metadata}"]`)
-      ).toHaveCount(1);
-    }
-
-    const shakapacker = snapshot.locator('[data-project="shakapacker"]');
-    await expect(
-      shakapacker.getByRole("link", { name: "Official Webpacker successor" })
-    ).toHaveAttribute(
-      "href",
-      "https://github.com/shakacode/shakapacker/blob/5485afe290d8f489f973c78420470c1b72dcd10c/README.md"
-    );
-    await expect(
-      snapshot.locator('[data-project="shakaperf"]').getByRole("link", {
-        name: "New public repository",
-        exact: true,
-      })
+      panel.getByRole("link", { name: "New public repo · 0 GitHub stars" })
     ).toHaveAttribute("href", "https://github.com/shakacode/shakaperf");
     await expect(
-      snapshot.locator('[data-project="shakaperf"] .maturity-snapshot-facts small')
-    ).toHaveCSS("font-size", "12px");
-  });
-
-  test("filters to the public ShakaPerf report proof", async ({ page }) => {
-    await page.goto("/");
-
-    const demoCard = page.getByRole("article").filter({
-      has: page.getByRole("heading", { name: "Marketplace" }),
-    });
+      panel.getByRole("link", { name: "Source available" })
+    ).toHaveAttribute(
+      "href",
+      "https://shakaperf.com/license"
+    );
     await expect(
-      demoCard.getByRole("img", {
-        name: "React on Rails Performance Demo landing page with the headline Make Your Rails App 2x Faster",
-      })
-    ).toHaveAttribute("src", "/examples/marketplace.webp");
-    const demoLink = demoCard.getByRole("link", { name: "Live demo" });
-    await expect(demoLink).toHaveClass("live");
-    await expect(demoLink.locator("svg path")).toHaveAttribute(
-      "d",
-      "M6 4l14 8-14 8V4z"
-    );
-
-    const evidence = page.locator(".maturity-card-perf");
-    await expect(evidence.getByRole("link", { name: "Report snapshot" })).toHaveAttribute(
+      panel.getByRole("link", { name: "Visit shakaperf.com" })
+    ).toHaveAttribute("href", "https://shakaperf.com");
+    await expect(panel.getByRole("link", { name: "Docs" })).toHaveAttribute(
       "href",
-      "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results/client__01-overview.png"
+      "https://shakaperf.com/docs/"
     );
-    await expect(evidence.getByRole("link", { name: "Report gallery" })).toHaveAttribute(
+    await expect(panel.getByRole("link", { name: "Methodology" })).toHaveAttribute(
       "href",
-      "https://github.com/shakacode/shakaperf/tree/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results"
+      "https://shakaperf.com/docs/"
     );
-
-    const filter = page.getByRole("button", { name: /^ShakaPerf/ });
-    const galleryIsland = filter.locator("xpath=ancestor::astro-island");
-    await filter.scrollIntoViewIfNeeded();
-    await expect(galleryIsland).not.toHaveAttribute("ssr", "");
-    await expect(filter.locator(".ct")).toHaveText("1");
-    await filter.click();
-
-    const proofCard = page.getByRole("article").filter({
-      has: page.getByRole("heading", { name: "ShakaPerf audit report" }),
-    });
-    await expect(proofCard).toBeVisible();
-    const proofPreview = proofCard.getByRole("img", {
-      name: "ShakaPerf audit report pinned public proof",
-    });
-    await expect(proofPreview).toBeVisible();
-    await expect(proofPreview.getByText("Pinned public proof", { exact: true })).toBeVisible();
-    await expect(
-      proofPreview.getByText("View report snapshot below", { exact: true })
-    ).toBeVisible();
-    await expect(proofPreview).not.toContainText(/unavailable/i);
-    const artifactLink = proofCard.getByRole("link", { name: "View report snapshot" });
-    await expect(artifactLink).toHaveAttribute(
-      "href",
-      "https://github.com/shakacode/shakaperf/blob/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results/client__01-overview.png"
-    );
-    await expect(artifactLink).toHaveClass("live");
-    await expect(artifactLink.locator("svg path")).toHaveAttribute(
-      "d",
-      "M7 17L17 7M9 7h8v8"
-    );
-    await expect(proofCard.getByRole("link", { name: "Source" })).toHaveAttribute(
-      "href",
-      "https://github.com/shakacode/shakaperf/tree/f054e87b5d2712b78ed5e352ee31c6b44ea7e712/integration-tests/snapshots/audit-results"
-    );
+    await expect(page.getByRole("button", { name: /^ShakaPerf/ })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "ShakaPerf audit report" })).toHaveCount(0);
   });
 
   test("keeps the legacy tutorial source without claiming a live demo", async ({ page }) => {
@@ -554,19 +436,21 @@ test.describe("home page IA", () => {
 
     await expect(
       page.getByRole("heading", {
-        name: "Modern React on Rails is harder than it should be.",
+        name: "Getting maximum React performance from Rails takes too much work.",
       })
     ).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Build → test → prove → deploy." })).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Live demos & starters, with source." })
+      page.getByRole("heading", { name: "Pick the project you need. Keep the rest optional." })
     ).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Start from a working app, not a slide deck." })
+      page.getByRole("heading", { name: "See what the projects can build." })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Try the official starter." })
     ).toBeVisible();
     await expect(page.locator(".nav-cta").getByRole("link", { name: "GitHub" })).toBeVisible();
     await expect(
-      page.locator(".nav-cta").getByRole("link", { name: "Book a free call" })
+      page.locator(".nav-cta").getByRole("link", { name: "Try the starter" })
     ).toBeVisible();
     await expect(page.locator(".nav-toggle")).toBeHidden();
     await expect(page.locator(".mobile-navigation")).toBeHidden();
@@ -587,7 +471,7 @@ test.describe("home page IA", () => {
 
       await expect(page.locator(".nav-cta").getByRole("link", { name: "GitHub" })).toBeVisible();
       await expect(
-        page.locator(".nav-cta").getByRole("link", { name: "Book a free call" })
+        page.locator(".nav-cta").getByRole("link", { name: "Try the starter" })
       ).toBeVisible();
       await expect(page.evaluate(() => document.documentElement.scrollWidth)).resolves.toBe(width);
 
@@ -599,7 +483,7 @@ test.describe("home page IA", () => {
     await page.goto("/");
 
     const allFilter = page.getByRole("button", { name: /^All/ });
-    const filter = page.getByRole("button", { name: /^E2E on Rails/ });
+    const filter = page.getByRole("button", { name: /^Shakapacker/ });
     const galleryIsland = filter.locator("xpath=ancestor::astro-island");
 
     await filter.scrollIntoViewIfNeeded();
@@ -612,8 +496,6 @@ test.describe("home page IA", () => {
     await expect(filter).toHaveClass(/active/);
     await expect(allFilter).toHaveAttribute("aria-pressed", "false");
     await expect(filter).toHaveAttribute("aria-pressed", "true");
-    await expect(
-      page.getByText("More E2E on Rails demos are on the way.", { exact: false })
-    ).toBeVisible();
+    await expect(page.locator(".cards .card")).toHaveCount(2);
   });
 });

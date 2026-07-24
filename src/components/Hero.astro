@@ -1,7 +1,11 @@
 ---
 import Icon from "./Icon.astro";
 import HeroStackCard from "./islands/HeroStackCard.tsx";
-import { projects, BOOK_A_CALL, popmenuEvidence } from "../data/shaka";
+import {
+  projects,
+  popmenuEvidence,
+  STARTER_DEMO,
+} from "../data/shaka";
 ---
 
 <header class="hero" id="top">
@@ -9,26 +13,20 @@ import { projects, BOOK_A_CALL, popmenuEvidence } from "../data/shaka";
   <div class="hero-grain"></div>
   <div class="wrap hero-inner">
     <div class="hero-copy">
-      <span class="eyebrow hero-eyebrow">Open source at the core</span>
-      <h1>Ship modern React in Rails - <span class="grad">fast</span>, and prove it.</h1>
+      <span class="eyebrow hero-eyebrow">Rails + React, without the split</span>
+      <h1>Build a <span class="grad">faster</span> Rails + React app. Prove every improvement.</h1>
       <p class="hero-sub">
-        ShakaStack connects four open-source ShakaCode projects,
-        ShakaPerf repository source and exact package records, and an optional commercially licensed
-        React on Rails Pro tier. Build, test, measure, and deploy without
-        splitting Rails from a separate frontend app.
+        Choose the ShakaCode project that solves today's problem: add React to
+        Rails, bundle it, test real browser flows, prove performance changes,
+        or deploy it. Start with one project or try the official starter.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-white" href="#stack">
-          Explore the stack <Icon name="arrow" />
+        <a class="btn btn-white" href={STARTER_DEMO} target="_blank" rel="noreferrer">
+          Try the live starter <Icon name="arrowUR" />
         </a>
-        <a class="btn btn-light" href={BOOK_A_CALL} target="_blank" rel="noreferrer">
-          Book a free call
+        <a class="btn btn-light" href="#stack">
+          Explore the projects <Icon name="arrow" />
         </a>
-      </div>
-      <div class="hero-meta">
-        <div class="stat"><b>4 OSS</b><span>plus ShakaPerf by artifact</span></div>
-        <div class="stat"><b>MIT</b><span>React on Rails core</span></div>
-        <div class="stat"><b>Pro</b><span>optional RSC &amp; advanced rendering</span></div>
       </div>
     </div>
 

@@ -95,6 +95,16 @@ export default function StackExplorer({ projects }: Props) {
             <a href={p.license.href} target="_blank" rel="noreferrer" className="license-badge">
               {p.license.label}
             </a>
+            {p.repoStatus && (
+              <a
+                href={p.repoStatus.href}
+                target="_blank"
+                rel="noreferrer"
+                className="repo-status"
+              >
+                {p.repoStatus.label}
+              </a>
+            )}
           </div>
           <h3>{p.name}</h3>
           <p className="se-detail-tag">{p.tagline}</p>
