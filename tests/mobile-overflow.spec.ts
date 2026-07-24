@@ -237,7 +237,11 @@ test.describe("home page IA", () => {
     const sectionIds = await page
       .locator("main > section[id], main > header[id]")
       .evaluateAll((elements) => elements.map((element) => element.id));
-    expect(sectionIds.indexOf("starter")).toBeLessThan(sectionIds.indexOf("stack"));
+    const starterIndex = sectionIds.indexOf("starter");
+    const stackIndex = sectionIds.indexOf("stack");
+    expect(starterIndex).toBeGreaterThanOrEqual(0);
+    expect(stackIndex).toBeGreaterThanOrEqual(0);
+    expect(starterIndex).toBeLessThan(stackIndex);
 
     for (const removedCopy of [
       "ShakaPerf repository source and exact package records",
@@ -339,10 +343,7 @@ test.describe("home page IA", () => {
       "href",
       "https://shakaperf.com/docs/"
     );
-    await expect(panel.getByRole("link", { name: "Methodology" })).toHaveAttribute(
-      "href",
-      "https://shakaperf.com/docs/"
-    );
+    await expect(panel.getByRole("link", { name: "Methodology" })).toHaveCount(0);
     await expect(page.getByRole("button", { name: /^ShakaPerf/ })).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "ShakaPerf audit report" })).toHaveCount(0);
   });

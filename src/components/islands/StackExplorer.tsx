@@ -29,7 +29,7 @@ export default function StackExplorer({ projects }: Props) {
   const github = p.links.find((l) => l[0] === "GitHub");
   const docs = p.links.find((l) => l[0] === "Docs");
   const evidence = p.links.find(
-    (l) => l[0] === "v17.0.0" || l[0] === "Methodology" || l[0] === "OSS vs Pro"
+    (l) => l[0] === "v17.0.0" || l[0] === "OSS vs Pro"
   );
 
   // Group consecutive projects by phase so the visible order follows the stack.

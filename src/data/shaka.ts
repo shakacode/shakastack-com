@@ -109,7 +109,6 @@ export const ROR_PRO = "https://reactonrails.com/pro/";
 export const ROR_SUPPORT =
   "https://reactonrails.com/docs/deployment/troubleshooting/";
 export const SHAKAPERF_LICENSE = "https://shakaperf.com/license";
-export const SHAKAPERF_METHOD = "https://shakaperf.com/docs/";
 
 export const popmenuEvidence = {
   title: "Measured at Popmenu",
@@ -260,7 +259,6 @@ export const projects: Project[] = [
       ["Website", "https://shakaperf.com"],
       ["Docs", "https://shakaperf.com/docs/"],
       ["GitHub", "https://github.com/shakacode/shakaperf"],
-      ["Methodology", SHAKAPERF_METHOD],
       ["License", SHAKAPERF_LICENSE],
     ],
   },
