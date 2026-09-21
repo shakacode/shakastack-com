@@ -1,0 +1,37 @@
+---
+import Icon from "./Icon.astro";
+import { pricingCards, pricingFootnote, pricingIntro } from "../data/shaka";
+---
+
+<section class="section pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">{pricingIntro.eyebrow}</span>
+      <h2>{pricingIntro.heading}</h2>
+      <p>{pricingIntro.body}</p>
+    </div>
+
+    <div class="price-cards reveal">
+      {
+        pricingCards.map((card) => (
+          <article class={`price-card price-card-${card.kind}`}>
+            <span class="price-card-eyebrow">{card.eyebrow}</span>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+            <ul class="price-links">
+              {card.links.map((link) => (
+                <li>
+                  <a class="link-arrow" href={link.href} target="_blank" rel="noreferrer">
+                    {link.label} <Icon name="arrowUR" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="price-footnote reveal">{pricingFootnote}</p>
+  </div>
+</section>

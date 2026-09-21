@@ -106,9 +106,12 @@ export const CONTROL_PLANE_FLOW_LICENSE =
 export const ROR_OSS_VS_PRO =
   "https://reactonrails.com/docs/getting-started/oss-vs-pro/";
 export const ROR_PRO = "https://reactonrails.com/pro/";
+// TODO: switch to https://reactonrails.com/pricing/ once that page is live
+export const ROR_PRO_PRICING = "https://pro.reactonrails.com/";
 export const ROR_SUPPORT =
   "https://reactonrails.com/docs/deployment/troubleshooting/";
 export const SHAKAPERF_LICENSE = "https://shakaperf.com/license";
+export const SHAKAPERF_PRICING = "https://shakaperf.com/pricing";
 
 export const popmenuEvidence = {
   title: "Measured at Popmenu",
@@ -437,6 +440,58 @@ export const roads: Road[] = [
   },
 ];
 
+export interface PricingCard {
+  kind: "mit" | "trust";
+  eyebrow: string;
+  title: string;
+  body: string;
+  links: { label: string; href: string }[];
+}
+
+export const pricingIntro = {
+  eyebrow: "What it costs",
+  heading: "Free to build. Paid only when a larger company runs Pro in production.",
+  body: "Every piece of the stack is free to read, install, and evaluate. Two products carry a trust-based commercial license; the rest is MIT.",
+};
+
+export const pricingCards: PricingCard[] = [
+  {
+    kind: "mit",
+    eyebrow: "MIT, free forever",
+    title: "React on Rails, Shakapacker, E2E on Rails, Control Plane Flow",
+    body: "Open source under MIT. Use them anywhere, at any organization size.",
+    links: [
+      { label: "React on Rails license", href: ROR_LICENSE },
+      { label: "Shakapacker license", href: SHAKAPACKER_LICENSE },
+      { label: "E2E on Rails license", href: E2E_ON_RAILS_LICENSE },
+      { label: "Control Plane Flow license", href: CONTROL_PLANE_FLOW_LICENSE },
+    ],
+  },
+  {
+    kind: "trust",
+    eyebrow: "Trust-based",
+    title: "React on Rails Pro",
+    body: "Free in development, test, CI, and staging for everyone, and free in production for organizations under 10 people, $1M revenue, and $1M raised, plus charities, schools, and hospitals at any size. Larger organizations subscribe: $1,800 per year covers the whole organization, every app and developer. No license key is needed to run it.",
+    links: [
+      { label: "React on Rails Pro pricing", href: ROR_PRO_PRICING },
+      { label: "The React on Rails Pro License", href: ROR_PRO_LICENSE },
+    ],
+  },
+  {
+    kind: "trust",
+    eyebrow: "Trust-based",
+    title: "ShakaPerf",
+    body: "Free for small organizations and free uses, including CI, PR checks, and coding-agent workflows. Larger organizations subscribe for production use.",
+    links: [
+      { label: "ShakaPerf pricing", href: SHAKAPERF_PRICING },
+      { label: "The ShakaPerf License", href: SHAKAPERF_LICENSE },
+    ],
+  },
+];
+
+export const pricingFootnote =
+  "No keys, no activation, nothing phones home. Whether you owe a subscription is a good-faith call your organization makes, and terms never tighten on a version you already have.";
+
 /** "TanStack" is two different things - keep them separate. */
 export const tanstackSplit: { kind: "embrace" | "substitute"; title: string; body: string }[] = [
   {
@@ -474,6 +529,10 @@ export const vsNextjsFaq: Faq[] = [
   {
     q: "When is Next.js (or TanStack Start) the right call?",
     a: "Choose Next.js when a separately deployed frontend, reusable APIs, independent team ownership, or its caching, prefetching, Partial Prerendering, and static-delivery ecosystem are product requirements. Choose TanStack Start when you want its full-stack JavaScript model rather than a Rails-owned application.",
+  },
+  {
+    q: "What does it cost compared with Inertia or Next.js?",
+    a: "React on Rails and Inertia Rails are both MIT. The only paid part of this stack is React on Rails Pro, and only in production at organizations above the small-organization line (under 10 people, $1M revenue, and $1M raised stay free, as do charities, schools, and hospitals). That subscription buys what Inertia Rails does not have today: React Server Components, streaming SSR with selective hydration, and fragment caching. Next.js is MIT too; its cost is the separate frontend deployment and the second application boundary.",
   },
 ];
 

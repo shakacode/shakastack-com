@@ -683,3 +683,23 @@ img { max-width: 100%; display: block; }
   .onramps { grid-template-columns: 1fr; }
   .agent { padding: 26px 22px 28px; }
 }
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing { background: var(--sand-2); }
+.price-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.price-card { min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 30px 28px 32px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+.price-card-eyebrow { font-family: var(--ff-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-deep); }
+.price-card-mit .price-card-eyebrow { color: var(--cpflow-deep); }
+.price-card h3 { font-size: 23px; margin: 8px 0 0; }
+.price-card > p { color: var(--ink-2); font-size: 15.5px; margin-top: 12px; text-wrap: pretty; }
+.price-links { list-style: none; margin: auto 0 0; padding: 24px 0 0; display: flex; flex-direction: column; align-items: flex-start; gap: 11px; }
+.price-links li { min-width: 0; }
+.price-links .link-arrow { max-width: 100%; }
+.price-links .link-arrow svg { flex: 0 0 auto; }
+.price-footnote { color: var(--ink-3); font-size: 14px; margin-top: 28px; max-width: 900px; text-wrap: pretty; }
+
+@media (max-width: 940px) {
+  .price-cards { grid-template-columns: 1fr; }
+}
