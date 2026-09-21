@@ -106,8 +106,7 @@ export const CONTROL_PLANE_FLOW_LICENSE =
 export const ROR_OSS_VS_PRO =
   "https://reactonrails.com/docs/getting-started/oss-vs-pro/";
 export const ROR_PRO = "https://reactonrails.com/pro/";
-// TODO: switch to https://reactonrails.com/pricing/ once that page is live
-export const ROR_PRO_PRICING = "https://pro.reactonrails.com/";
+export const ROR_PRO_PRICING = "https://reactonrails.com/pricing/";
 export const ROR_SUPPORT =
   "https://reactonrails.com/docs/deployment/troubleshooting/";
 export const SHAKAPERF_LICENSE = "https://shakaperf.com/license";
