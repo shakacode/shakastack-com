@@ -158,7 +158,7 @@ export const projects: Project[] = [
       ["Upgrade when it earns its place", "Add Pro for GA RSC, streaming, caching, and advanced rendering when your application needs them."],
     ],
     license: {
-      label: "MIT core · Pro EULA",
+      label: "MIT core · Pro License",
       href: ROR_LICENSE,
     },
     install: "bundle exec rails generate react_on_rails:install",
@@ -450,16 +450,17 @@ export interface PricingCard {
 
 export const pricingIntro = {
   eyebrow: "What it costs",
-  heading: "Free to build. Paid only when a larger company runs Pro in production.",
-  body: "Every piece of the stack is free to read, install, and evaluate. Two products carry a trust-based commercial license; the rest is MIT.",
+  heading:
+    "Free to build. Paid only when a larger company runs Pro or ShakaPerf in production.",
+  body: "Every piece of the stack is free to read, install, and evaluate. Two products carry a trust-based commercial license; the rest is open source.",
 };
 
 export const pricingCards: PricingCard[] = [
   {
     kind: "mit",
-    eyebrow: "MIT, free forever",
+    eyebrow: "Open source, free forever",
     title: "React on Rails, Shakapacker, E2E on Rails, Control Plane Flow",
-    body: "Open source under MIT. Use them anywhere, at any organization size.",
+    body: "React on Rails, Shakapacker, and E2E on Rails are MIT. Control Plane Flow is LGPL 3.0. Use them anywhere, at any organization size.",
     links: [
       { label: "React on Rails license", href: ROR_LICENSE },
       { label: "Shakapacker license", href: SHAKAPACKER_LICENSE },
@@ -532,7 +533,7 @@ export const vsNextjsFaq: Faq[] = [
   },
   {
     q: "What does it cost compared with Inertia or Next.js?",
-    a: "React on Rails and Inertia Rails are both MIT. The only paid part of this stack is React on Rails Pro, and only in production at organizations above the small-organization line (under 10 people, $1M revenue, and $1M raised stay free, as do charities, schools, and hospitals). That subscription buys what Inertia Rails does not have today: React Server Components, streaming SSR with selective hydration, and fragment caching. Next.js is MIT too; its cost is the separate frontend deployment and the second application boundary.",
+    a: "React on Rails and Inertia Rails are both MIT. The paid parts of this stack are React on Rails Pro and ShakaPerf, and only in production at organizations above the small-organization line (under 10 people, $1M revenue, and $1M raised stay free, as do charities, schools, and hospitals). That subscription buys what Inertia Rails does not have today: React Server Components, streaming SSR with selective hydration, and fragment caching. Next.js is MIT too; its cost is the separate frontend deployment and the second application boundary.",
   },
 ];
 
