@@ -471,7 +471,7 @@ export const pricingCards: PricingCard[] = [
     kind: "trust",
     eyebrow: "ShakaStack Pro",
     title: "React on Rails Pro, ShakaPerf and Slack support",
-    body: "Free in development, test, CI and staging for everyone, and free in production for organizations under 10 people, $1M revenue and $1M raised, plus charities, schools and hospitals at any size. Larger organizations subscribe: $1,800 per year per organization covers React on Rails Pro, ShakaPerf and Slack support from the maintainers, for every app and developer. No license key is needed to run either product.",
+    body: "React on Rails Pro is free in development, test, CI and staging for everyone. Both products are free in production for organizations under 10 people, $1M revenue and $1M raised, plus charities, schools and hospitals at any size. Larger organizations subscribe: $1,800 per year per organization covers React on Rails Pro, ShakaPerf (for organizations under 250 people and under $10M revenue) and Slack support from the maintainers, for every app and developer. No license key is needed to run either product.",
     links: [
       { label: "Free & Pro on reactonrails.com", href: ROR_PRO_PRICING },
       { label: "Subscribe at pro.reactonrails.com", href: ROR_PRO_SUBSCRIBE },
