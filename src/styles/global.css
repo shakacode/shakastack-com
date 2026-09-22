@@ -688,7 +688,7 @@ img { max-width: 100%; display: block; }
    PRICING
    ============================================================ */
 .pricing { background: var(--sand-2); }
-.price-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.price-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 .price-card { min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 30px 28px 32px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
 .price-card-eyebrow { font-family: var(--ff-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-deep); }
 .price-card-mit .price-card-eyebrow { color: var(--cpflow-deep); }
