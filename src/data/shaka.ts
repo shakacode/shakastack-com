@@ -107,6 +107,7 @@ export const ROR_OSS_VS_PRO =
   "https://reactonrails.com/docs/getting-started/oss-vs-pro/";
 export const ROR_PRO = "https://reactonrails.com/pro/";
 export const ROR_PRO_PRICING = "https://reactonrails.com/pricing/";
+export const ROR_PRO_SUBSCRIBE = "https://pro.reactonrails.com/";
 export const ROR_SUPPORT =
   "https://reactonrails.com/docs/deployment/troubleshooting/";
 export const SHAKAPERF_LICENSE = "https://shakaperf.com/license";
@@ -448,10 +449,9 @@ export interface PricingCard {
 }
 
 export const pricingIntro = {
-  eyebrow: "What it costs",
-  heading:
-    "Free to build. Paid only when a larger company runs Pro or ShakaPerf in production.",
-  body: "Every piece of the stack is free to read, install, and evaluate. Two products carry a trust-based commercial license; the rest is open source.",
+  eyebrow: "Free & Pro",
+  heading: "Free for most teams. ShakaStack Pro for the rest.",
+  body: "Every piece of the stack is free to read, install and evaluate, and the whole stack runs free in production for small organizations. Larger organizations subscribe to ShakaStack Pro.",
 };
 
 export const pricingCards: PricingCard[] = [
@@ -469,21 +469,14 @@ export const pricingCards: PricingCard[] = [
   },
   {
     kind: "trust",
-    eyebrow: "Trust-based",
-    title: "React on Rails Pro",
-    body: "Free in development, test, CI, and staging for everyone, and free in production for organizations under 10 people, $1M revenue, and $1M raised, plus charities, schools, and hospitals at any size. Larger organizations subscribe: $1,800 per year covers the whole organization, every app and developer. No license key is needed to run it.",
+    eyebrow: "ShakaStack Pro",
+    title: "React on Rails Pro, ShakaPerf and Slack support",
+    body: "Free in development, test, CI and staging for everyone, and free in production for organizations under 10 people, $1M revenue and $1M raised, plus charities, schools and hospitals at any size. Larger organizations subscribe: $1,800 per year per organization covers React on Rails Pro, ShakaPerf and Slack support from the maintainers, for every app and developer. No license key is needed to run either product.",
     links: [
-      { label: "React on Rails Pro pricing", href: ROR_PRO_PRICING },
-      { label: "The React on Rails Pro License", href: ROR_PRO_LICENSE },
-    ],
-  },
-  {
-    kind: "trust",
-    eyebrow: "Trust-based",
-    title: "ShakaPerf",
-    body: "Free for small organizations and free uses, including CI, PR checks, and coding-agent workflows. Larger organizations subscribe for production use.",
-    links: [
+      { label: "Free & Pro on reactonrails.com", href: ROR_PRO_PRICING },
+      { label: "Subscribe at pro.reactonrails.com", href: ROR_PRO_SUBSCRIBE },
       { label: "ShakaPerf pricing", href: SHAKAPERF_PRICING },
+      { label: "The React on Rails Pro License", href: ROR_PRO_LICENSE },
       { label: "The ShakaPerf License", href: SHAKAPERF_LICENSE },
     ],
   },
@@ -532,7 +525,7 @@ export const vsNextjsFaq: Faq[] = [
   },
   {
     q: "What does it cost compared with Inertia or Next.js?",
-    a: "React on Rails and Inertia Rails are both MIT. The paid parts of this stack are React on Rails Pro and ShakaPerf, and only in production at organizations above the small-organization line (under 10 people, $1M revenue, and $1M raised stay free, as do charities, schools, and hospitals). That subscription buys what Inertia Rails does not have today: React Server Components, streaming SSR with selective hydration, and fragment caching. Next.js is MIT too; its cost is the separate frontend deployment and the second application boundary.",
+    a: "React on Rails and Inertia Rails are both MIT. The paid part of this stack is ShakaStack Pro (React on Rails Pro, ShakaPerf and Slack support, $1,800 per year per organization), and only in production at organizations above the small-organization line: under 10 people, $1M revenue and $1M raised stay free, as do charities, schools and hospitals. That subscription buys what Inertia Rails does not have today: React Server Components, streaming SSR with selective hydration, and fragment caching. Next.js is MIT too; its cost is the separate frontend deployment and the second application boundary.",
   },
 ];
 
