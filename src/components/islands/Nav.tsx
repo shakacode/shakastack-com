@@ -82,6 +82,7 @@ export default function Nav() {
           <a href="/#stack">The Stack</a>
           <a href="/vs-nextjs">vs Next.js</a>
           <a href="/#examples">Examples</a>
+          <a href="/#pricing">Free & Pro</a>
         </div>
         <div className="nav-cta">
           <a
@@ -124,6 +125,7 @@ export default function Nav() {
             <a href="/#stack" onClick={closeMenu}>The Stack</a>
             <a href="/vs-nextjs" onClick={closeMenu}>vs Next.js</a>
             <a href="/#examples" onClick={closeMenu}>Examples</a>
+            <a href="/#pricing" onClick={closeMenu}>Free & Pro</a>
           </div>
           <div className="mobile-navigation-cta">
             <a
