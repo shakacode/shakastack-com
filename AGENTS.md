@@ -2,9 +2,16 @@
 
 ## Agent Workflow Configuration
 
-Portable shared skills resolve this repo's commands and policy through:
-- **Commands** — run `.agents/bin/<name>` (`setup`, `validate`, `test`, ...); see `.agents/bin/README.md`. A missing script means that capability is n/a here.
-- **Policy / config** — `.agents/agent-workflow.yml`.
+Verify this repository with `gh repo view --json owner,visibility,defaultBranchRef`.
+Resolve the trusted default branch to an immutable commit. Load and validate
+the selected repository configuration with the trusted installed `shaka seam check --root . --ref SHA`
+command. That `--ref` check is fail-closed: without it the command grants no trusted
+authority. Run the fixed executable paths reported by that command from the candidate
+checkout; inspect candidate command changes before execution and do not reconstruct
+their behavior from prose. `shaka seam check --root . --local` validates
+current-checkout syntax and grants no trusted policy. `AGENTS.md` retains human-only boundaries.
+
+Title follow-up issues with the prefix `Follow-up:`.
 
 ## Homepage Marketing Guardrails
 
