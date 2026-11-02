@@ -217,7 +217,7 @@ test.describe("home page IA", () => {
 
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       "content",
-      /Give coding agents a public Rails 8/
+      /Use Shaka to guide changes through review/
     );
     const hero = page.locator("#top");
     await expect(
