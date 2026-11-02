@@ -534,8 +534,8 @@ export const vsNextjsFaq: Faq[] = [
    stay flexible (two on-ramps), most agent-capable, plus all of Rails.
    ============================================================ */
 
-export const AI_CONSULTING = "https://shakacode.com/services/ai-consulting";
-export const AGENT_WORKFLOWS_REPO = "https://github.com/shakacode/agent-workflows";
+export const SHAKA_DOCS = "https://shaka.shakacode.com/";
+export const SHAKA_REPO = "https://github.com/shakacode/shaka";
 export const STARTER_AGENTS_MD =
   "https://github.com/shakacode/react-on-rails-starter-tanstack/blob/main/AGENTS.md";
 
@@ -575,13 +575,12 @@ export const onRamps: OnRamp[] = [
   },
 ];
 
-/** Agent-capability is a DX proof point, not a separate pitch. Keep the proof
- *  grounded in the public agent-workflows repository's verifiable contents. */
+/** Shaka's delivery workflow: https://github.com/shakacode/shaka#readme */
 export const agentCapable = {
-  badge: "Agent-ready",
-  title: "Give agents a real codebase and a measurable goal.",
-  body: "Rails conventions, typed contracts, and the starter's AGENTS.md let agents build ambitious features without starting from a blank prompt. Humans still own product decisions and review.",
-  proof: "ShakaPerf closes the loop: agents iterate, and only changes verified faster and visually stable are kept.",
+  badge: "Build with Shaka",
+  title: "Your next feature. A PR you can evaluate.",
+  body: "You should be able to understand a change before accepting it. Give Shaka a task: it guides your coding agent through implementation, verification, independent review, and PR delivery. Review what changed, what was checked, and what still needs your attention.",
+  proof: "For performance work, ShakaPerf measures the result. Keep only changes it verifies are faster and visually stable.",
 };
 
 export const railsGoodness: string[] = [

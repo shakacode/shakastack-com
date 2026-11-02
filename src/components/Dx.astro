@@ -4,9 +4,6 @@ import {
   onRamps,
   agentCapable,
   railsGoodness,
-  STARTER_AGENTS_MD,
-  AGENT_WORKFLOWS_REPO,
-  AI_CONSULTING,
 } from "../data/shaka";
 ---
 
@@ -46,14 +43,8 @@ import {
         <p>{agentCapable.body}</p>
         <p class="agent-proof">{agentCapable.proof}</p>
         <div class="agent-actions">
-          <a class="link-arrow" href={STARTER_AGENTS_MD} target="_blank" rel="noreferrer">
-            See the starter's AGENTS.md <Icon name="arrowUR" />
-          </a>
-          <a class="link-arrow" href={AGENT_WORKFLOWS_REPO} target="_blank" rel="noreferrer">
-            See the agent-workflows repo <Icon name="arrowUR" />
-          </a>
-          <a class="link-arrow" href={AI_CONSULTING} target="_blank" rel="noreferrer">
-            AI consulting <Icon name="arrowUR" />
+          <a class="link-arrow" href="/shaka">
+            See how Shaka guides your first change <Icon name="arrow" />
           </a>
         </div>
       </div>

@@ -77,7 +77,7 @@ export default function Nav() {
           <span>ShakaStack</span>
         </a>
         <div className="nav-links">
-          <a href="/#problem">Why</a>
+          <a href="/shaka">Shaka skill</a>
           <a href="/#starter">Starter</a>
           <a href="/#stack">The Stack</a>
           <a href="/vs-nextjs">vs Next.js</a>
@@ -120,7 +120,7 @@ export default function Nav() {
       >
         <div className="wrap mobile-navigation-inner">
           <div className="mobile-navigation-links">
-            <a href="/#problem" onClick={closeMenu}>Why</a>
+            <a href="/shaka" onClick={closeMenu}>Shaka skill</a>
             <a href="/#starter" onClick={closeMenu}>Starter</a>
             <a href="/#stack" onClick={closeMenu}>The Stack</a>
             <a href="/vs-nextjs" onClick={closeMenu}>vs Next.js</a>
