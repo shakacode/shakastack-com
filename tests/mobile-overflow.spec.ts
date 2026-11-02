@@ -10,6 +10,7 @@ const phoneViewports = [
 const routes = [
   { name: "home page", path: "/" },
   { name: "Next.js comparison page", path: "/vs-nextjs" },
+  { name: "Shaka feature page", path: "/shaka" },
 ];
 
 test.describe("mobile layout", () => {
@@ -91,7 +92,7 @@ test.describe("mobile navigation", () => {
     await page.goto("/");
 
     await expect(page.getByRole("button", { name: "Open navigation menu" })).toBeHidden();
-    await expect(page.locator(".nav-links").getByRole("link", { name: "Why" })).toBeVisible();
+    await expect(page.locator(".nav-links").getByRole("link", { name: "Shaka skill" })).toBeVisible();
     await expect(page.locator(".nav-cta").getByRole("link", { name: "Clone the starter" })).toHaveAttribute(
       "href",
       "https://github.com/shakacode/react-on-rails-starter-tanstack"
@@ -103,7 +104,7 @@ test.describe("mobile navigation", () => {
     await page.goto("/");
 
     await page.getByRole("button", { name: "Open navigation menu" }).click();
-    await page.getByLabel("Mobile navigation").getByRole("link", { name: "Why" }).focus();
+    await page.getByLabel("Mobile navigation").getByRole("link", { name: "Shaka skill" }).focus();
     await page.setViewportSize({ width: 1200, height: 800 });
 
     await expect(page.getByRole("link", { name: "ShakaStack home" }).first()).toBeFocused();
@@ -116,7 +117,7 @@ test.describe("mobile navigation", () => {
 
     const menuButton = page.getByRole("button", { name: "Open navigation menu" });
     await menuButton.click();
-    await page.getByLabel("Mobile navigation").getByRole("link", { name: "Why" }).focus();
+    await page.getByLabel("Mobile navigation").getByRole("link", { name: "Starter", exact: true }).focus();
     await page.keyboard.press("Enter");
 
     await expect(page.getByLabel("Mobile navigation")).toBeHidden();
@@ -194,12 +195,29 @@ test.describe("mobile navigation", () => {
 });
 
 test.describe("home page IA", () => {
+  test("connects Shaka's workflow to the starter and an inspectable handoff", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("link", { name: "See how Shaka guides your first change" }).click();
+    await expect(page).toHaveURL(/\/shaka$/);
+    const hero = page.locator(".shaka-hero");
+    await expect(hero.getByRole("link", { name: "Clone the starter" })).toHaveAttribute(
+      "href", "https://github.com/shakacode/react-on-rails-starter-tanstack"
+    );
+    await expect(hero.getByRole("link", { name: "Read the Shaka setup guide" })).toHaveAttribute(
+      "href", "https://shaka.shakacode.com/"
+    );
+    await expect(page.getByText("Illustrative example", { exact: true })).toBeVisible();
+    await page.getByText("See your decision at the checkpoint", { exact: true }).click();
+    await expect(page.locator("details")).toHaveAttribute("open", "");
+    await expect(page.locator("details")).toContainText("Merge behavior follows your configured policy");
+  });
+
   test("leads with the starter and removes the licensing taxonomy", async ({ page }) => {
     await page.goto("/");
 
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       "content",
-      /Give coding agents a public Rails 8/
+      /Use Shaka to guide changes through review/
     );
     const hero = page.locator("#top");
     await expect(

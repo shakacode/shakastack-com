@@ -1,0 +1,136 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/islands/Nav.tsx";
+import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
+import { SHAKA_DOCS, SHAKA_REPO, STARTER_REPO, STARTER_DEMO } from "../data/shaka";
+
+const title = "Shaka: From an Idea to a Reviewable PR | ShakaStack";
+const description = "Build your Rails + React idea with Shaka. Guide your coding agent through implementation, verification, independent review, and a PR you can evaluate.";
+const plan = [
+  { title: "Start with a working app", body: "Clone the Rails + React starter. Explore the live demo and pick one small feature to make it yours." },
+  { title: "Give Shaka a task", body: "Follow the setup guide, then describe an outcome or share an issue. Shaka guides your agent through the work and your repository's checks." },
+  { title: "Review the evidence", body: "Read the intent, verification, and remaining questions. Approve the change, request revisions, or resolve what is still open." },
+];
+---
+
+<Layout title={title} description={description}>
+  <Nav client:load />
+  <main id="top">
+    <header class="shaka-hero">
+      <div class="wrap shaka-split">
+        <div>
+          <span class="eyebrow">Build with the Shaka skill</span>
+          <h1>Move your idea to a PR you can evaluate.</h1>
+          <p class="shaka-lead">Build the Rails + React app you have in mind. Shaka guides your coding agent through implementation, verification, independent review, and a clear handoff.</p>
+          <div class="shaka-actions">
+            <a class="btn btn-primary" href={STARTER_REPO} target="_blank" rel="noreferrer">Clone the starter <Icon name="arrowUR" /></a>
+            <a class="link-arrow" href={SHAKA_DOCS} target="_blank" rel="noreferrer">Read the Shaka setup guide <Icon name="arrowUR" /></a>
+          </div>
+        </div>
+        <aside class="shaka-pr" aria-labelledby="pr-preview-title">
+          <div class="shaka-pr-top"><span>Pull request preview</span><span>Illustrative example</span></div>
+          <h2 id="pr-preview-title">Add saved searches</h2>
+          <dl>
+            <div><dt>Intent</dt><dd>Let people return to a useful search.</dd></div>
+            <div><dt>Verification</dt><dd>Check results, commands, and any unproven claims.</dd></div>
+            <div><dt>UI evidence</dt><dd>Before-and-after captures for visible changes.</dd></div>
+            <div><dt>Review</dt><dd>Findings, their resolution, and remaining questions.</dd></div>
+          </dl>
+          <details>
+            <summary>See your decision at the checkpoint</summary>
+            <p>Review the intent and evidence, then decide what happens next. Merge behavior follows your configured policy; consequential changes need human review.</p>
+          </details>
+        </aside>
+      </div>
+    </header>
+
+    <section class="section shaka-problem" aria-labelledby="shaka-problem-title">
+      <div class="wrap shaka-split">
+        <div><span class="eyebrow">The code is only part of the work</span><h2 id="shaka-problem-title">Know what you're being asked to accept.</h2></div>
+        <div><p>Missing checks create uncertainty. Chasing an agent for explanations takes focus. A handoff without context leaves you reconstructing the work before you can review it.</p><p>You should be able to understand a change and its limits before it ships.</p></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="shaka-plan-title">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Your guide: ShakaCode</span>
+          <h2 id="shaka-plan-title">You bring the idea.<br />We bring the path.</h2>
+          <p>Connecting Rails, React, tests, and delivery takes work. From the maintainers of React on Rails and Shakapacker, Shaka gives your agent a repeatable process using your repository's tools.</p>
+        </div>
+        <ol class="shaka-plan">
+          {plan.map((step, index) => <li><span class="shaka-step">0{index + 1}</span><h3>{step.title}</h3><p>{step.body}</p></li>)}
+        </ol>
+        <div class="shaka-prompt">
+          <div><span class="eyebrow">After installing Shaka</span><code>$shaka Add a saved-search button, with tests for saving and removing a search.</code></div>
+          <p>Example Codex prompt. Use <code>/shaka</code> in Claude Code, Cursor, or OpenCode. Start with a small change you can evaluate.</p>
+        </div>
+        <a class="link-arrow" href={SHAKA_REPO} target="_blank" rel="noreferrer">Inspect Shaka's source and workflow <Icon name="arrowUR" /></a>
+      </div>
+    </section>
+
+    <section class="section shaka-proof" aria-labelledby="shaka-proof-title">
+      <div class="wrap shaka-split">
+        <div><span class="eyebrow">A clear handoff, with limits in view</span><h2 id="shaka-proof-title">More context for your judgment.</h2><p>Spend less time piecing together the agent's work. A clear PR helps you focus on the decisions and code that need your attention.</p></div>
+        <div class="shaka-performance"><h3>Making a performance change?</h3><p>Shaka guides delivery. ShakaPerf measures performance and visual stability. Let agents iterate and keep only changes ShakaPerf verifies are faster and visually stable.</p><a class="link-arrow" href="https://shakaperf.com" target="_blank" rel="noreferrer">Explore ShakaPerf verification <Icon name="arrowUR" /></a></div>
+      </div>
+    </section>
+
+    <section class="section shaka-start" aria-labelledby="shaka-start-title">
+      <div class="wrap">
+        <span class="eyebrow">Start with one small change</span>
+        <h2 id="shaka-start-title">Make the starter yours.</h2>
+        <p>Explore the running app, clone the source, and choose your first feature.</p>
+        <div class="shaka-actions">
+          <a class="btn btn-primary" href={STARTER_REPO} target="_blank" rel="noreferrer">Clone the starter <Icon name="arrowUR" /></a>
+          <a class="link-arrow" href={STARTER_DEMO} target="_blank" rel="noreferrer">View the live demo <Icon name="arrowUR" /></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .shaka-hero { padding: 96px 0 72px; background: linear-gradient(135deg, var(--sand-2), var(--sand)); }
+  .shaka-split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+  h1 { font-size: clamp(38px, 4.4vw, 62px); margin-top: 20px; max-width: 650px; }
+  h2 { font-size: clamp(30px, 3.3vw, 44px); margin-top: 18px; }
+  .shaka-lead { font-size: 20px; color: var(--ink-2); margin-top: 24px; }
+  .shaka-actions { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; margin-top: 28px; }
+  .shaka-pr { background: white; border: 1px solid var(--line); border-radius: var(--r); padding: 30px; box-shadow: var(--shadow); min-width: 0; }
+  .shaka-pr-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: var(--ink-2); font-size: 12px; }
+  .shaka-pr h2 { font-size: 26px; margin: 24px 0; }
+  dl { margin: 0; }
+  dl div { display: grid; grid-template-columns: 105px 1fr; gap: 16px; border-top: 1px solid var(--line); padding: 16px 0; font-size: 14px; }
+  dt { font-weight: 700; } dd { margin: 0; color: var(--ink-2); }
+  details { border-top: 1px solid var(--line); padding-top: 18px; font-size: 14px; }
+  summary { color: var(--accent); cursor: pointer; font-weight: 600; }
+  details p { color: var(--ink-2); margin-top: 14px; }
+  .shaka-problem, .shaka-proof { background: var(--sand-2); }
+  .shaka-problem p, .shaka-proof p { color: var(--ink-2); margin-top: 16px; }
+  .shaka-plan { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin: 44px 0 36px; padding: 0; list-style: none; }
+  .shaka-plan li { border-top: 1px solid var(--line-2); padding-top: 24px; }
+  .shaka-step { font: 14px var(--ff-mono); color: var(--accent); }
+  .shaka-plan h3 { font-size: 23px; margin-top: 18px; }
+  .shaka-plan p { color: var(--ink-2); margin-top: 14px; font-size: 16px; }
+  .shaka-prompt { background: var(--ink); color: var(--sand); padding: 28px; border-radius: var(--r); margin-bottom: 24px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; }
+  .shaka-prompt .eyebrow { color: oklch(0.85 0.09 48); }
+  .shaka-prompt code { display: block; font: 14px/1.7 var(--ff-mono); margin-top: 16px; overflow-wrap: anywhere; }
+  .shaka-prompt p { margin: 0; color: var(--sand-3); font-size: 14px; align-self: center; }
+  .shaka-prompt p code { display: inline; margin: 0; }
+  .shaka-performance { border-left: 3px solid var(--accent); padding-left: 28px; }
+  .shaka-performance h3 { font-size: 25px; }
+  .shaka-performance .link-arrow { margin-top: 18px; }
+  .shaka-start { text-align: center; }
+  .shaka-start p { color: var(--ink-2); margin-top: 20px; }
+  .shaka-start .shaka-actions { justify-content: center; }
+  @media (max-width: 940px) { .shaka-split { grid-template-columns: 1fr; gap: 36px; } .shaka-hero { padding: 60px 0; } }
+  @media (max-width: 600px) {
+    .shaka-plan, .shaka-prompt { grid-template-columns: 1fr; gap: 24px; }
+    .shaka-pr { padding: 22px; } dl div { grid-template-columns: 1fr; gap: 5px; }
+    .shaka-actions { align-items: flex-start; flex-direction: column; }
+    .shaka-start .shaka-actions { align-items: center; }
+  }
+</style>
