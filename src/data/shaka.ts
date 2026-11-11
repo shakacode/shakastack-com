@@ -454,8 +454,8 @@ export interface PricingCard {
 
 export const pricingIntro = {
   eyebrow: "Free & Pro",
-  heading: "Free & Pro for your whole organization.",
-  body: "Explore the stack and build with its open source projects. ShakaStack Pro brings React on Rails Pro, ShakaPerf, and Inertia Rails SSR Cache to your whole organization for $1,800 per year, with no limit on headcount or revenue.",
+  heading: "Open source for everyone. ShakaStack Pro for your organization.",
+  body: "Explore the stack and build with its open source projects. One ShakaStack Pro subscription brings React on Rails Pro, ShakaPerf, and Inertia Rails SSR Cache to your whole organization for $1,800 per year.",
 };
 
 export const pricingCards: PricingCard[] = [
@@ -475,7 +475,7 @@ export const pricingCards: PricingCard[] = [
     kind: "trust",
     eyebrow: "ShakaStack Pro",
     title: "React on Rails Pro, ShakaPerf, Inertia Rails SSR Cache, and Slack support",
-    body: "ShakaStack Pro covers your whole organization: every affiliate, application, environment, repository, and developer. No limit on headcount or revenue. $1,800 per year per organization. All three products are free when your whole organization, counting affiliates, has fewer than 10 people, under $1M revenue in the last twelve months, and under $1M raised ever. Charities, educational institutions, and hospitals are free at any size. React on Rails Pro and Inertia Rails SSR Cache are free in development, test, CI, and staging for everyone. Above the free line, their production use that serves real users or supports a live application needs a subscription. Ongoing ShakaPerf work, including CI, needs ShakaStack Pro after a 45 day evaluation. Qualifying public open source work stays free.",
+    body: "One subscription covers your whole organization, with no limit on headcount or revenue, at $1,800 per year. All three products are free when your whole organization, counting affiliates, has fewer than 10 people, under $1M revenue in the last twelve months, and under $1M raised ever. Charities, educational institutions, and hospitals are free at any size. React on Rails Pro and Inertia Rails SSR Cache are free in development, test, CI, and staging for everyone. Above the free line, their production use needs a subscription. Above the free line, ongoing ShakaPerf work, including CI, needs ShakaStack Pro after a 45 day evaluation.",
     links: [
       { label: "Free & Pro on reactonrails.com", href: ROR_PRO_PRICING },
       { label: "Subscribe at pro.reactonrails.com", href: ROR_PRO_SUBSCRIBE },
@@ -488,7 +488,12 @@ export const pricingCards: PricingCard[] = [
 ];
 
 export const pricingFootnote =
-  "Already subscribed to React on Rails Pro? Your subscription counts as ShakaStack Pro while active. No keys, no activation, nothing phones home. A release keeps the terms it shipped with.";
+  "Already subscribed to React on Rails Pro? Your subscription counts as ShakaStack Pro while active. Qualifying public open source ShakaPerf work stays free; publishing a result does not make private work free. No keys or activation. A release keeps the terms it shipped with.";
+
+export const pricingNotice = {
+  label: "See the ShakaStack Pro coverage notice",
+  href: SHAKASTACK_PRO_COVERAGE_NOTICE,
+};
 
 /** "TanStack" is two different things - keep them separate. */
 export const tanstackSplit: { kind: "embrace" | "substitute"; title: string; body: string }[] = [
