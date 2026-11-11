@@ -1,6 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-import { pricingCards, pricingFootnote, pricingIntro } from "../data/shaka";
+import { pricingCards, pricingFootnote, pricingIntro, SHAKASTACK_PRO_COVERAGE_NOTICE } from "../data/shaka";
 ---
 
 <section class="section pricing" id="pricing">
@@ -32,6 +32,8 @@ import { pricingCards, pricingFootnote, pricingIntro } from "../data/shaka";
       }
     </div>
 
-    <p class="price-footnote reveal">{pricingFootnote}</p>
+    <p class="price-footnote reveal">
+      {pricingFootnote} See the <a href={SHAKASTACK_PRO_COVERAGE_NOTICE} target="_blank" rel="noreferrer">ShakaStack Pro coverage notice</a>.
+    </p>
   </div>
 </section>
