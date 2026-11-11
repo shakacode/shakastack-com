@@ -112,6 +112,8 @@ export const ROR_SUPPORT =
   "https://reactonrails.com/docs/deployment/troubleshooting/";
 export const SHAKAPERF_LICENSE = "https://shakaperf.com/license";
 export const SHAKAPERF_PRICING = "https://shakaperf.com/pricing";
+export const INERTIA_RAILS_SSR_CACHE_SOURCE =
+  "https://github.com/shakacode/inertia_rails_ssr_cache";
 export const SHAKASTACK_PRO_COVERAGE_NOTICE =
   "https://github.com/shakacode/commercial-licensing/blob/main/license/notices/2026-11-shakastack-pro-coverage.md";
 
@@ -478,6 +480,7 @@ export const pricingCards: PricingCard[] = [
       { label: "Free & Pro on reactonrails.com", href: ROR_PRO_PRICING },
       { label: "Subscribe at pro.reactonrails.com", href: ROR_PRO_SUBSCRIBE },
       { label: "Free & Pro on ShakaPerf.com", href: SHAKAPERF_PRICING },
+      { label: "Inertia Rails SSR Cache source", href: INERTIA_RAILS_SSR_CACHE_SOURCE },
       { label: "The React on Rails Pro License", href: ROR_PRO_LICENSE },
       { label: "The ShakaPerf License", href: SHAKAPERF_LICENSE },
     ],
@@ -527,7 +530,7 @@ export const vsNextjsFaq: Faq[] = [
   },
   {
     q: "What does it cost compared with Inertia or Next.js?",
-    a: "React on Rails core and Inertia Rails are MIT. Inertia Rails SSR Cache is a separate commercial product. ShakaStack Pro covers React on Rails Pro, ShakaPerf, and Inertia Rails SSR Cache for $1,800 per year per organization. The free line asks whether your whole organization, counting affiliates, has fewer than 10 people, under $1M revenue in the last twelve months, and under $1M raised ever; charities, educational institutions, and hospitals are free at any size. Above that line, React on Rails Pro and Inertia Rails SSR Cache need a subscription for production use, while ongoing ShakaPerf work, including CI, needs one after a 45 day evaluation. Qualifying public open source work stays free. React on Rails Pro adds React Server Components and streaming SSR; Inertia Rails SSR Cache adds fragment caching. Next.js is MIT too; its cost is the separate frontend deployment and second application boundary.",
+    a: "React on Rails core and Inertia Rails are MIT. Inertia Rails SSR Cache is a separate commercial product. ShakaStack Pro covers React on Rails Pro, ShakaPerf, and Inertia Rails SSR Cache for $1,800 per year per organization. The free line asks whether your whole organization, counting affiliates, has fewer than 10 people, under $1M revenue in the last twelve months, and under $1M raised ever; charities, educational institutions, and hospitals are free at any size. Above that line, React on Rails Pro and Inertia Rails SSR Cache need a subscription for production use, while ongoing ShakaPerf work, including CI, needs one after a 45 day evaluation. Qualifying public open source work stays free. React on Rails Pro adds React Server Components, streaming SSR, and fragment caching. Inertia Rails SSR Cache warms Inertia's native SSR cache after deploy. Next.js is MIT too; its cost is the separate frontend deployment and second application boundary.",
   },
 ];
 
